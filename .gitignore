@@ -42,3 +42,12 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Project Description
+/description_project.md
+/architecture.md
+/ticket2.md
+
+# json-server Mock Database
+/db.json
+
