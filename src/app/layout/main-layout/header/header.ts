@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './header.html',
 })
-export class Header implements OnInit {
+export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
