@@ -10,9 +10,10 @@ export class AccountingService {
 
   constructor() { }
 
-  // Simule la récupération de la liste des écritures comptables
+  /*
+   * recupere toutes les operations d'un tenant
+  */
   getEntries(): Observable<JournalEntry[]> {
-    // 'of()' transforme notre tableau en un flux Observable (comme si ça venait d'une API http.get)
     return of(MOCK_JOURNAL_ENTRIES);
   }
 }
