@@ -1,0 +1,42 @@
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-slate-200 mt-6">
+  <h2 class="text-2xl font-bold text-slate-800 mb-6">Nouvelle Facture</h2>
+  
+  <form [formGroup]="invoiceForm" class="space-y-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="form-group">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Montant HT</label>
+        <div class="relative">
+          <input type="number" formControlName="montantHT" 
+                 class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                 placeholder="0.00">
+          <span class="absolute right-3 top-2 text-slate-400">FCFA</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">Saisi par le commercial</p>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-sm font-medium text-slate-700 mb-2">Taux TVA (%)</label>
+        <input type="number" formControlName="tva" 
+               class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-slate-100">
+      <div class="bg-slate-50 p-4 rounded-md border border-slate-200">
+        <label class="block text-sm font-bold text-slate-700 mb-2">Montant TTC</label>
+        <div class="relative">
+          <input type="number" formControlName="montantTTC" readonly 
+                 class="w-full px-4 py-3 bg-slate-100 border-none rounded-md text-xl font-bold text-slate-900 cursor-not-allowed">
+          <span class="absolute right-3 top-3 font-bold text-slate-500">FCFA</span>
+        </div>
+        <p class="text-xs text-slate-500 mt-1">Calculé automatiquement</p>
+      </div>
+    </div>
+    
+    <div class="flex justify-end pt-4">
+      <button type="button" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm">
+        Enregistrer la facture
+      </button>
+    </div>
+  </form>
+</div>
