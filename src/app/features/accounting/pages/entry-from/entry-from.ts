@@ -1,7 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AccountService } from '../../services/account.service';
+import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
 
+// 1. NOTRE VALIDATEUR METIER (Custom Validator)
 // Il vérifie que la somme des débits = somme des crédits.
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;
@@ -22,7 +27,7 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
     return { desequilibre: true }; 
   }
 
-  return null;
+  return null; // Tout est OK
 }
 
 @Component({
@@ -31,10 +36,15 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './entry-from.html'
 })
-export class EntryFormComponent {
+export class EntryFormComponent implements OnInit {
   private fb = inject(FormBuilder);
+  private accountService = inject(AccountService);
+  private route = inject(ActivatedRoute);
 
-  // On attache notre validateur à l'objet racine pour qu'il surveille tout
+  comptes$!: Observable<CompteOHADA[]>;
+  tenantId: string = 'tenant-1';
+
+  // 2. LE FORMULAIRE RACINE
   entryForm = this.fb.group({
     libelle: ['', Validators.required],
     date: ['', Validators.required],
@@ -46,6 +56,18 @@ export class EntryFormComponent {
     return this.entryForm.get('lignesEcriture') as FormArray;
   }
 
+  ngOnInit() {
+    // Récupération dynamique du tenantId depuis l'URL parente (ex: /tenant/tenant-1/accounting)
+    const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
+    if (urlTenantId) {
+      this.tenantId = urlTenantId;
+    }
+
+    // Chargement des comptes via le service
+    this.comptes$ = this.accountService.getAccounts(this.tenantId);
+  }
+
+  // 3. METHODES DYNAMIQUES
   addLigne() {
     // Création d'une ligne d'écriture (un nouveau FormGroup)
     const ligneForm = this.fb.group({
