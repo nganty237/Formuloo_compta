@@ -1,75 +1,73 @@
-<div class="overflow-x-auto bg-white rounded-lg shadow-sm border border-gray-200">
+<div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-slate-200">
 
-    @if (isLoading) {
-    <div class="py-10">
-        <app-spinner message="Chargement des écritures..."></app-spinner>
+  @if (isLoading) {
+    <div class="py-12">
+      <app-spinner message="Chargement des données comptables..."></app-spinner>
     </div>
-    }
+  }
 
-    @if (!isLoading) {
+  @if (!isLoading) {
     <table class="w-full text-left border-collapse">
+      
+      <thead>
+        <tr class="bg-slate-50 border-b border-slate-200">
+          @for (col of columns; track col.key) {
+            <th class="px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-500">
+              {{ col.label }}
+            </th>
+          }
+        </tr>
+      </thead>
 
-        <thead>
-            <tr class="bg-gray-50 border-b border-gray-200">
-                @for (col of columns; track col.key) {
-                <th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
-                    {{ col.label }}
-                </th>
-                }
-            </tr>
-        </thead>
+      <tbody class="divide-y divide-slate-100">
+        
+        @if (data.length === 0) {
+          <tr>
+            <td [attr.colspan]="columns.length" class="px-6 py-12 text-center text-sm text-slate-400 font-medium">
+              Aucune donnée disponible pour le moment.
+            </td>
+          </tr>
+        }
 
-        <tbody class="divide-y divide-gray-100">
+        @for (row of data; track row) {
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            
+            @for (col of columns; track col.key) {
+              <td class="px-6 py-4 text-sm text-slate-600">
 
-            @if (data.length === 0) {
-            <tr>
-                <td [attr.colspan]="columns.length" class="px-6 py-10 text-center text-gray-400">
-                    Aucune donnée disponible.
-                </td>
-            </tr>
-            }
-
-            @for (row of data; track row) {
-            <tr class="hover:bg-gray-50 transition-colors">
-
-                @for (col of columns; track col.key) {
-                <td class="px-6 py-4 text-sm text-gray-700">
-
-                    @if (col.type === 'currency') {
-                    <span class="font-semibold text-gray-900">
-                        {{ row[col.key] | number:'1.0-0' }} FCFA
-                    </span>
-                    }
-
-                    @if (col.type === 'date') {
-                    <span>{{ row[col.key] | date:'dd/MM/yyyy' }}</span>
-                    }
-                    @if (col.type === 'status') {
-                    @if (row[col.key] === 'validated') {
-                    <span
-                        class="px-2.5 py-1 rounded-full text-xs font-semibold border bg-green-50 text-green-700 border-green-200">
-                        ✓ Validé
-                    </span>
-                    } @else {
-                    <span
-                        class="px-2.5 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-700 border-amber-200">
-                        ✎ Brouillon
-                    </span>
-                    }
-                    }
-
-                    @if (!col.type || col.type === 'text') {
-                    <span>{{ row[col.key] }}</span>
-                    }
-
-                </td>
+                @if (col.type === 'currency') {
+                  <span class="font-semibold text-slate-900">
+                    {{ row[col.key] | number:'1.0-0' }} XOF
+                  </span>
                 }
 
-            </tr>
+                @if (col.type === 'date') {
+                  <span class="text-slate-500">{{ row[col.key] | date:'dd/MM/yyyy' }}</span>
+                }
+
+                @if (col.type === 'status') {
+                  @if (row[col.key] === 'validated') {
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      ✓ Validé
+                    </span>
+                  } @else {
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                      ✎ Brouillon
+                    </span>
+                  }
+                }
+
+                @if (!col.type || col.type === 'text') {
+                  <span>{{ row[col.key] }}</span>
+                }
+
+              </td>
             }
 
-        </tbody>
+          </tr>
+        }
+
+      </tbody>
     </table>
-    }
-
+  }
 </div>
