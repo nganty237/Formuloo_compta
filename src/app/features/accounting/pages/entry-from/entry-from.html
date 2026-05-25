@@ -31,8 +31,12 @@
             
             <div class="flex-1">
               <label class="block text-xs font-medium text-slate-500 mb-1">Compte</label>
-              <input type="text" formControlName="compte" placeholder="Ex: 521"
-                     class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-blue-500">
+              <select formControlName="compte" class="w-full px-3 py-2 border border-slate-300 rounded-md text-sm outline-none focus:ring-1 focus:ring-blue-500">
+                <option value="">Sélectionner un compte...</option>
+                @for (c of comptesOHADA; track c.id) {
+                <option [value]="c.id">{{ c.numero }} - {{ c.intitule }}</option>
+                }
+              </select>
             </div>
             
             <div class="flex-1">

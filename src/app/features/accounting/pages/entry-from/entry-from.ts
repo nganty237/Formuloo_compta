@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MOCK_ACCOUNTS } from '../../../../core/mocks/mock-accounts';
+import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 
 // Il vérifie que la somme des débits = somme des crédits.
@@ -32,7 +34,9 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
   templateUrl: './entry-from.html'
 })
 export class EntryFormComponent {
+  
   private fb = inject(FormBuilder);
+  comptesOHADA: CompteOHADA[] = MOCK_ACCOUNTS;
 
   // On attache notre validateur à l'objet racine pour qu'il surveille tout
   entryForm = this.fb.group({
