@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../spinner/spinner';
 
 export interface TableColumn {
   key: string;
@@ -10,7 +11,7 @@ export interface TableColumn {
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpinnerComponent],
   templateUrl: './table.html'
 })
 export class TableComponent {
