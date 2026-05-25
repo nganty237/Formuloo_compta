@@ -1,50 +1,85 @@
-<aside class="h-full flex flex-col bg-slate-900 text-white relative border-r border-slate-800">
+<aside class="h-full flex flex-col bg-slate-900 text-slate-300 relative border-r border-slate-800 transition-all duration-300 shadow-xl"
+       [class.w-64]="!isCollapsed"
+       [class.w-20]="isCollapsed">
 
-    <div
-        class="p-4 font-bold tracking-wider text-blue-400 flex items-center justify-between border-b border-slate-800 h-16">
-
+    <div class="h-16 flex items-center justify-center border-b border-slate-800 px-4 shrink-0">
         @if (!isCollapsed) {
-        <span class="text-xl transition-all duration-300">Formuloo Compta</span>
+            <div class="flex items-center gap-3 w-full">
+                <div class="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold shrink-0 shadow-sm">
+                    FC
+                </div>
+                <span class="text-lg font-bold text-white tracking-wide truncate">Formuloo</span>
+            </div>
         } @else {
-        <span class="text-xl mx-auto transition-all duration-300">FC</span>
+            <div class="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold shrink-0 shadow-sm">
+                FC
+            </div>
         }
     </div>
 
-    <nav class="flex-1 px-3 space-y-2 mt-4">
-        <a [routerLink]="['/tenant', tenantId, 'dashboard']" routerLinkActive="bg-slate-800 text-white"
-            class="flex items-center gap-3 px-3 py-2 rounded text-slate-300 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 text-blue-400" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" />
+    <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-2">
+        
+        <a [routerLink]="['/tenant', tenantId, 'dashboard']" 
+           routerLinkActive="bg-slate-800 text-white border-blue-500" 
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
             </svg>
             @if (!isCollapsed) {
-            <span class="text-sm font-medium">Tableau de Bord</span>
+                <span class="text-sm font-medium whitespace-nowrap">Tableau de bord</span>
             }
         </a>
 
-        <a [routerLink]="['/tenant', tenantId, 'accounting']" routerLinkActive="bg-slate-800 text-white"
-            class="flex items-center gap-3 px-3 py-2 rounded text-slate-300 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer no-underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 text-blue-400" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+        <a [routerLink]="['/tenant', tenantId, 'accounting']" 
+           [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="bg-slate-800 text-white border-blue-500"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
             @if (!isCollapsed) {
-            <span class="text-sm font-medium">Comptabilité</span>
+                <span class="text-sm font-medium whitespace-nowrap">Comptabilité</span>
             }
         </a>
+
+        <a [routerLink]="['/tenant', tenantId, 'accounting', 'entry']" 
+           routerLinkActive="bg-slate-800 text-white border-blue-500"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            @if (!isCollapsed) {
+                <span class="text-sm font-medium whitespace-nowrap">Saisie d'écriture</span>
+            }
+        </a>
+
+        <a [routerLink]="['/tenant', tenantId, 'invoicing']" 
+           routerLinkActive="bg-slate-800 text-white border-blue-500"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            @if (!isCollapsed) {
+                <span class="text-sm font-medium whitespace-nowrap">Facturation</span>
+            }
+        </a>
+
     </nav>
 
-    <div class="p-3 border-t border-slate-800 flex justify-center">
-        <button (click)="onToggle()"
-            class="w-full flex items-center justify-center p-2 rounded text-slate-400 hover:bg-slate-800 hover:text-white transition-colors cursor-pointer"
-            title="{{ isCollapsed ? 'Déplier la barre' : 'Replier la barre' }}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-300"
-                [class.rotate-180]="isCollapsed" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+    <div class="p-3 border-t border-slate-800 shrink-0">
+        <button (click)="onToggle()" 
+                class="flex items-center justify-center w-full p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="h-5 w-5 transition-transform duration-300" 
+                 [class.rotate-180]="isCollapsed"
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
             </svg>
+            
+            @if (!isCollapsed) {
+                <span class="ml-3 text-sm font-medium whitespace-nowrap">Réduire le menu</span>
+            }
         </button>
     </div>
+
 </aside>
