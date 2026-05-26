@@ -65,10 +65,6 @@ export class EntryContainerComponent implements OnInit {
   onSaveEntry(entry: Ecriture) {
     // 4. Dispatch de l'action : On demande au Store d'ajouter cette écriture
     this.store.dispatch(addEntry({ entry }));
-    
-    // Le flux NgRx prend le relais :
-    // Action 'addEntry' -> Reducer -> Ajoute à state.entries
-    // Le selector 'selectEntries' émet la nouvelle liste
-    // Le template (entries$ | async) met à jour la table automatiquement
+
   }
 }

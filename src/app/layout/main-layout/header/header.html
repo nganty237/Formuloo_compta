@@ -1,21 +1,7 @@
 <header class="w-full flex justify-between items-center bg-white shadow-sm h-16 px-6">
     <div class="flex items-center gap-6">
-        <!-- Sélecteur de Cabinet (existant) -->
-        <div class="flex items-center gap-3">
-            <label for="tenant-select" class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Cabinet
-                :</label>
-            <select id="tenant-select" #tenantSelect (change)="onTenantChange(tenantSelect.value)"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 font-medium cursor-pointer outline-none">
-                @for (tenant of tenants; track tenant.id) {
-                <option [value]="tenant.id" [selected]="tenant.id === selectedTenantId">
-                    {{ tenant.name }}
-                </option>
-                }
-            </select>
-        </div>
-
         <!-- Sélecteur d'Entreprise (nouveau pour tester TenantContextService) -->
-        <div class="flex items-center gap-3 border-l pl-6 border-gray-200">
+        <div class="flex items-center gap-3">
             <label for="company-select" class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Dossier Actif :</label>
             <select id="company-select" #companySelect (change)="onCompanyChange(companySelect.value)"
                 class="bg-blue-50 border border-blue-200 text-blue-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 font-medium cursor-pointer outline-none">

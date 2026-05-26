@@ -17,20 +17,14 @@ export class HeaderComponent implements OnInit {
   // Observable pour le nom de l'entreprise active (utilisé avec le pipe async dans le template)
   companyName$ = this.tenantContext.companyName$;
 
-  tenants = [
-    { id: '123', name: 'Cabinet Expert & Co' },
-    { id: '456', name: 'Cabinet Alpha Conseil' },
-    { id: '789', name: 'Cabinet Horizon Compta' }
-  ];
-
   // Données mockées pour les entreprises du cabinet (sélecteur statique)
   companies = [
-    { id: 'c-001', name: 'Tech Solutions SAS' },
+    { id: 'tenant-1', name: 'Tech Solutions SAS' },
     { id: 'c-002', name: 'Boulangerie Le Pain Doré' }
   ];
 
   selectedTenantId = '123';
-  selectedCompanyId = 'c-001';
+  selectedCompanyId = 'tenant-1';
 
   ngOnInit() {
     const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
@@ -40,11 +34,6 @@ export class HeaderComponent implements OnInit {
 
     // Initialisation du contexte avec la première entreprise mockée
     this.tenantContext.selectCompany(this.selectedCompanyId, this.companies[0].name, this.selectedTenantId);
-  }
-
-  onTenantChange(newTenantId: string) {
-    this.selectedTenantId = newTenantId;
-    this.router.navigate(['/tenant', newTenantId, 'dashboard']);
   }
 
   // Appelé quand l'utilisateur change d'entreprise dans le sélecteur statique
