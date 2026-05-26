@@ -24,6 +24,18 @@ export const accountingRoutes: Routes = [
       {
         path: 'entry',
         loadComponent: () => import('./pages/entry-from/entry-from').then(m => m.EntryFormComponent)
+      },
+      {
+        path: 'ledger',
+        loadComponent: () => import('./components/ledger/ledger.component').then(m => m.LedgerComponent)
+      },
+      {
+        path: 'balance',
+        loadComponent: () => import('./components/balance/balance.component').then(m => m.BalanceComponent)
+      },
+      {
+        path: 'bilan',
+        loadComponent: () => import('../reports/components/bilan/bilan').then(m => m.BilanComponent)
       }
     ]
   }
