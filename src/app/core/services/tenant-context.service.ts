@@ -6,12 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TenantContextService {
 
-  // BehaviorSubjects privés pour stocker l'état actuel et émettre une valeur initiale
   private currentTenantId = new BehaviorSubject<string | null>(null);
   private currentCompanyId = new BehaviorSubject<string | null>(null);
   private currentCompanyName = new BehaviorSubject<string | null>(null);
 
-  // Observables publics pour que les composants (header, widgets) puissent souscrire aux changements
   public tenantId$ = this.currentTenantId.asObservable();
   public companyId$ = this.currentCompanyId.asObservable();
   public companyName$ = this.currentCompanyName.asObservable();

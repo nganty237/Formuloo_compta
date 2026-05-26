@@ -1,12 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AccountService } from '../../services/account.service';
 import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
+import { Ecriture } from '../../../../core/models/ecriture.model';
 
-// 1. NOTRE VALIDATEUR METIER (Custom Validator)
 // Il vérifie que la somme des débits = somme des crédits.
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;
@@ -22,12 +22,11 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
     totalCredit += Number(ligne.get('credit')?.value) || 0;
   }
 
-  // Si c'est déséquilibré, on retourne une erreur nommée 'desequilibre'
   if (totalDebit !== totalCredit) {
     return { desequilibre: true }; 
   }
 
-  return null; // Tout est OK
+  return null; 
 }
 
 @Component({
@@ -44,20 +43,19 @@ export class EntryFormComponent implements OnInit {
   comptes$!: Observable<CompteOHADA[]>;
   tenantId: string = 'tenant-1';
 
-  // 2. LE FORMULAIRE RACINE
+  @Output() save = new EventEmitter<Ecriture>();
+
   entryForm = this.fb.group({
     libelle: ['', Validators.required],
     date: ['', Validators.required],
-    lignesEcriture: this.fb.array([]) // Un tableau vide au départ
+    lignesEcriture: this.fb.array([])
   }, { validators: partieDoubleValidator });
 
-  // Un "getter" pour simplifier l'accès au tableau dans le HTML et le TS
   get lignesEcriture(): FormArray {
     return this.entryForm.get('lignesEcriture') as FormArray;
   }
 
   ngOnInit() {
-    // Récupération dynamique du tenantId depuis l'URL parente (ex: /tenant/tenant-1/accounting)
     const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
     if (urlTenantId) {
       this.tenantId = urlTenantId;
@@ -82,9 +80,33 @@ export class EntryFormComponent implements OnInit {
     this.lignesEcriture.removeAt(index);
   }
 
-  onSubmit() {
+   onSubmit() {
     if (this.entryForm.valid) {
-      console.log('Ecriture prête pour le LedgerService :', this.entryForm.value);
+      const formValue = this.entryForm.value;
+
+      // Construction de l'objet Ecriture selon l'interface attendue par NgRx
+      const ecriture: Ecriture = {
+        id: `entry-${Date.now()}`,
+        entrepriseId: this.tenantId,
+        journalId: 'OD', 
+        date: formValue.date || '',
+        libelle: formValue.libelle || '',
+        valide: true,
+        lignes: (formValue.lignesEcriture || []).map((ligne: any, index: number) => ({
+          id: `ligne-${Date.now()}-${index}`,
+          ecritureId: '', 
+          compteId: ligne.compte,
+          debit: Number(ligne.debit) || 0,
+          credit: Number(ligne.credit) || 0
+        }))
+      };
+
+      // Émission de l'événement vers le composant parent (EntryContainer)
+      this.save.emit(ecriture);
+      
+      this.entryForm.reset();
+      this.lignesEcriture.clear();
     }
   }
+
 }

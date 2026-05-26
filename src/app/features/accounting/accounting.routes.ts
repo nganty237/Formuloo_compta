@@ -1,16 +1,30 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { accountingReducer } from './store/accounting.reducer';
+import { AccountingEffects } from './store/accounting.effects';
 
 export const accountingRoutes: Routes = [
-    {
+  {
+    path: '',
+    // Les providers déclarés ici sont disponibles pour toutes les routes enfants
+    providers: [
+      provideState({ name: 'accounting', reducer: accountingReducer }),
+      provideEffects(AccountingEffects)
+    ],
+    children: [
+      {
         path: '', 
         loadComponent: () => import('./pages/accounting-home/accounting-home').then(m => m.AccountingHomeComponent)
-    },
-    {
+      },
+      {
         path: 'new-entry',
         loadComponent: () => import('./pages/entry-from/entry-from').then(m => m.EntryFormComponent)
-    },
-    {
+      },
+      {
         path: 'entry',
         loadComponent: () => import('./pages/entry-from/entry-from').then(m => m.EntryFormComponent)
-    }
+      }
+    ]
+  }
 ];
