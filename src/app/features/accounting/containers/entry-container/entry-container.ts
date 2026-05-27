@@ -45,13 +45,10 @@ import { selectLoading, selectSaved } from '../../store/accounting.selectors';
 export class InvoiceContainerComponent {
   private store = inject(Store);
 
-  // On s'abonne aux sélecteurs du Store via l'async pipe dans le template
   loading$ = this.store.select(selectLoading);
   saved$ = this.store.select(selectSaved);
 
   onSaveInvoice(formData: any) {
-    // 1. Logique métier : Génération d'une écriture équilibrée (Débit = Crédit)
-    // TTC (Débit 411) = HT (Crédit 7) + TVA (Crédit 443)
     const entryId = crypto.randomUUID();
     const newEntry = {
       id: entryId,
@@ -59,38 +56,36 @@ export class InvoiceContainerComponent {
       journalId: 'VEN',
       date: new Date().toISOString(),
       libelle: `Facture client ${formData.clientId}`,
-      valide: false, // Brouillon par défaut
+      valide: false,
       lignes: [
         {
           id: crypto.randomUUID(),
           ecritureId: entryId,
-          compteId: '411000', // Client (Actif qui augmente -> Débit)
+          compteId: '411000',
           debit: formData.montantTTC,
           credit: 0
         },
         {
           id: crypto.randomUUID(),
           ecritureId: entryId,
-          compteId: formData.compteProduitId, // Produit (Produit qui augmente -> Crédit)
+          compteId: formData.compteProduitId,
           debit: 0,
           credit: formData.montantHT
         },
         {
           id: crypto.randomUUID(),
           ecritureId: entryId,
-          compteId: '443000', // TVA Facturée (Passif qui augmente -> Crédit)
+          compteId: '443000', 
           debit: 0,
           credit: formData.montantTVA
         }
       ]
     };
 
-    // 2. Envoi de l'action : déclenche le spinner, puis l'effect, puis met saved à true
     this.store.dispatch(addEntry({ entry: newEntry }));
   }
 
   closeModal() {
-    // 3. Réinitialise le Store pour fermer la modale proprement
     this.store.dispatch(resetSavedState());
   }
 }

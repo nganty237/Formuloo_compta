@@ -49,6 +49,7 @@ import { switchMap, of } from 'rxjs';
     </div>
   `
 })
+//  ce composant permet d'afficher les ecritures du grand livre
 export class LedgerComponent implements OnInit {
   private tenantContext = inject(TenantContextService);
   private ledgerService = inject(LedgerService);
