@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,11 @@ export class TenantContextService {
   private currentCompanyId = new BehaviorSubject<string | null>(null);
   private currentCompanyName = new BehaviorSubject<string | null>(null);
 
-  public tenantId$ = this.currentTenantId.asObservable();
-  public companyId$ = this.currentCompanyId.asObservable();
-  public companyName$ = this.currentCompanyName.asObservable();
+  // Sécurité supplémentaire : distinctUntilChanged() garantit que le composant 
+  // ne sera pas notifié si la valeur émise est consécutivement la même.
+  public tenantId$ = this.currentTenantId.asObservable().pipe(distinctUntilChanged());
+  public companyId$ = this.currentCompanyId.asObservable().pipe(distinctUntilChanged());
+  public companyName$ = this.currentCompanyName.asObservable().pipe(distinctUntilChanged());
 
   /**
    * Met à jour le contexte avec les informations de l'entreprise sélectionnée.
@@ -20,8 +22,12 @@ export class TenantContextService {
    * @param companyName Le nom de l'entreprise (pour affichage dans le Header)
    * @param tenantId L'ID du tenant (optionnel, le cabinet d'expertise comptable)
    */
-
   selectCompany(companyId: string, companyName: string, tenantId?: string): void {
+    // LE GARDE-FOU : On bloque la mise à jour si l'entreprise est déjà celle active
+    if (this.currentCompanyId.value === companyId) {
+      return; 
+    }
+
     this.currentCompanyId.next(companyId);
     this.currentCompanyName.next(companyName);
     if (tenantId) {

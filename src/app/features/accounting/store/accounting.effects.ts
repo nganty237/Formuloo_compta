@@ -18,7 +18,7 @@ export class AccountingEffects {
       withLatestFrom(this.tenantContext.companyId$),
       mergeMap(([action, companyId]) =>
         this.entryService.getAll(companyId || 'tenant-1').pipe(
-          delay(1000),
+          delay(300),
           map(entries => AccountingActions.entriesLoaded({ entries })),
           catchError(error =>
             of({ type: '[Accounting] Load Entries Failure', error })
@@ -27,4 +27,15 @@ export class AccountingEffects {
       )
     )
   );
+  addEntry$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AccountingActions.addEntry),
+    mergeMap(({ entry }) =>
+      this.entryService.create(entry).pipe(
+        map(created => AccountingActions.addEntrySuccess({ entry: created })),
+        catchError(error => of({ type: '[Accounting] Add Entry Failure', error }))
+      )
+    )
+  )
+);
 }

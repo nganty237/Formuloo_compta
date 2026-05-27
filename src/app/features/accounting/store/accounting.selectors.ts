@@ -17,3 +17,7 @@ export const selectError = createSelector(
   selectAccountingState,
   (state: AccountingState) => state.error
 );
+export const selectSaved = createSelector(
+  selectAccountingState,
+  (state: AccountingState) => state.saved
+);

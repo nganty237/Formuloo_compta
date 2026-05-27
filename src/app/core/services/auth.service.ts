@@ -15,9 +15,9 @@ export interface User {
 export class AuthService {
   // Simule un utilisateur connecté (par défaut : Comptable)
   private currentUserSubject = new BehaviorSubject<User>({ 
-    id: 'u1', 
-    name: 'Jean Comptable', 
-    role: 'COMPTABLE' 
+    id: 'u1',
+    name: 'Jean Comptable',
+    role: 'COMPTABLE'
   });
   
   public currentUser$ = this.currentUserSubject.asObservable();
