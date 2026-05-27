@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
-import { BalanceService, LigneBalance } from '../../services/balance.service'; // Utilise votre service et interface existante
+import { BalanceService, LigneBalance } from '../../services/balance.service';
 import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
 import { switchMap, of } from 'rxjs';
 
