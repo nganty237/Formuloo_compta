@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 import { AccountService } from '../../services/account.service';
 import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
 import { Ecriture } from '../../../../core/models/ecriture.model';
 
-// Il vérifie que la somme des débits = somme des crédits.
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;
   const lignes = formGroup.get('lignesEcriture') as FormArray;
   
-  if (!lignes) return null;
+  if (!lignes || lignes.length === 0) return null;
 
   let totalDebit = 0;
   let totalCredit = 0;
@@ -22,7 +22,7 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
     totalCredit += Number(ligne.get('credit')?.value) || 0;
   }
 
-  if (totalDebit !== totalCredit) {
+  if (Math.abs(totalDebit - totalCredit) > 0.001) {
     return { desequilibre: true }; 
   }
 
@@ -43,12 +43,16 @@ export class EntryFormComponent implements OnInit {
   comptes$!: Observable<CompteOHADA[]>;
   tenantId: string = 'tenant-1';
 
+  totalDebit: number = 0;
+  totalCredit: number = 0;
+  isBalanced: boolean = true;
+
   @Output() save = new EventEmitter<Ecriture>();
 
   entryForm = this.fb.group({
     libelle: ['', Validators.required],
-    date: ['', Validators.required],
-    lignesEcriture: this.fb.array([])
+    date: [new Date().toISOString().split('T')[0], Validators.required],
+    lignesEcriture: this.fb.array([], Validators.minLength(2))
   }, { validators: partieDoubleValidator });
 
   get lignesEcriture(): FormArray {
@@ -61,17 +65,35 @@ export class EntryFormComponent implements OnInit {
       this.tenantId = urlTenantId;
     }
 
-    // Chargement des comptes via le service
     this.comptes$ = this.accountService.getAccounts(this.tenantId);
+
+    // Suivi des totaux en temps réel
+    this.entryForm.valueChanges.pipe(
+      startWith(this.entryForm.value)
+    ).subscribe(value => {
+      this.calculateTotals(value.lignesEcriture);
+    });
+
+    // Ajouter deux lignes par défaut pour faciliter la saisie
+    if (this.lignesEcriture.length === 0) {
+      this.addLigne();
+      this.addLigne();
+    }
   }
 
-  // 3. METHODES DYNAMIQUES
+  calculateTotals(lignes: any[] | undefined) {
+    if (!lignes) return;
+    
+    this.totalDebit = lignes.reduce((sum, current) => sum + (Number(current.debit) || 0), 0);
+    this.totalCredit = lignes.reduce((sum, current) => sum + (Number(current.credit) || 0), 0);
+    this.isBalanced = Math.abs(this.totalDebit - this.totalCredit) < 0.001;
+  }
+
   addLigne() {
-    // Création d'une ligne d'écriture (un nouveau FormGroup)
     const ligneForm = this.fb.group({
       compte: ['', Validators.required],
-      debit: [0, Validators.min(0)],
-      credit: [0, Validators.min(0)]
+      debit: [0, [Validators.min(0)]],
+      credit: [0, [Validators.min(0)]]
     });
     this.lignesEcriture.push(ligneForm);
   }
@@ -80,11 +102,10 @@ export class EntryFormComponent implements OnInit {
     this.lignesEcriture.removeAt(index);
   }
 
-   onSubmit() {
-    if (this.entryForm.valid) {
+  onSubmit() {
+    if (this.entryForm.valid && this.isBalanced && this.lignesEcriture.length >= 2) {
       const formValue = this.entryForm.value;
 
-      // Construction de l'objet Ecriture selon l'interface attendue par NgRx
       const ecriture: Ecriture = {
         id: `entry-${Date.now()}`,
         entrepriseId: this.tenantId,
@@ -101,12 +122,24 @@ export class EntryFormComponent implements OnInit {
         }))
       };
 
-      // Émission de l'événement vers le composant parent (EntryContainer)
       this.save.emit(ecriture);
       
-      this.entryForm.reset();
-      this.lignesEcriture.clear();
+      // Réinitialisation complète et propre
+      this.entryForm.reset({
+        date: formValue.date, // On garde la date pour enchaîner les saisies
+        libelle: ''
+      });
+      
+      // On vide le FormArray et on recrée les deux lignes par défaut
+      while (this.lignesEcriture.length !== 0) {
+        this.lignesEcriture.removeAt(0);
+      }
+      this.addLigne();
+      this.addLigne();
+
+      this.calculateTotals([]);
+    } else {
+      this.entryForm.markAllAsTouched();
     }
   }
-
 }
