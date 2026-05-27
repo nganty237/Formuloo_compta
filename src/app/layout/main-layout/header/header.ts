@@ -1,12 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ProfileDropdownComponent } from '../../../shared/profile-dropdown/profile-dropdown';
 import { TenantContextService } from '../../../core/services/tenant-context.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ CommonModule],
+  imports: [ CommonModule,ProfileDropdownComponent],
   templateUrl: './header.html',
 })
 export class HeaderComponent implements OnInit {
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   private tenantContext = inject(TenantContextService);
 
   companyName$ = this.tenantContext.companyName$;
+  isProfileMenuOpen = signal<boolean>(false);
 
   companies = [
     { id: 'tenant-1', name: 'Tech Solutions SAS' },
@@ -30,17 +32,25 @@ export class HeaderComponent implements OnInit {
       this.selectedTenantId = urlTenantId;
     }
 
-    // Initialisation du contexte avec la première entreprise mockée
     this.tenantContext.selectCompany(this.selectedCompanyId, this.companies[0].name, this.selectedTenantId);
   }
 
-  // Appelé quand l'utilisateur change d'entreprise dans le sélecteur statique
   onCompanyChange(newCompanyId: string) {
     this.selectedCompanyId = newCompanyId;
     const company = this.companies.find(c => c.id === newCompanyId);
     if (company) {
-      // Mise à jour de l'état global via le service RxJS
       this.tenantContext.selectCompany(company.id, company.name, this.selectedTenantId);
     }
+  }
+
+  toggleProfileMenu(event: Event): void {
+    event.stopPropagation(); 
+    this.isProfileMenuOpen.update(prev => !prev);
+  }
+
+  handleLogout(): void {
+    this.isProfileMenuOpen.set(false);
+    // this.authService.logout();
+    this.router.navigate(['/auth/login']);
   }
 }
