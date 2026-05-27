@@ -4,37 +4,46 @@ import * as AccountingActions from './accounting.actions';
 
 export const accountingReducer = createReducer(
   initialState,
+  
   on(AccountingActions.loadEntries, (state) => ({
     ...state,
     loading: true,
     error: null
   })),
+
   on(AccountingActions.entriesLoaded, (state, { entries }) => ({
     ...state,
     entries,
     loading: false,
     error: null
   })),
-  on(AccountingActions.addEntry, (state, { entry }) => ({
+
+  on(AccountingActions.addEntry, (state) => ({
     ...state,
-    entries: [...state.entries, entry]
+    loading: true,
+    saved: false,
+    error: null
   })),
+
+  on(AccountingActions.addEntrySuccess, (state, { entry }) => ({
+    ...state,
+    entries: [entry, ...state.entries],
+    loading: false,
+    saved: true
+  })),
+
   on(AccountingActions.updateEntry, (state, { entry }) => ({
     ...state,
     entries: state.entries.map((e) => (e.id === entry.id ? entry : e))
   })),
+
   on(AccountingActions.deleteEntry, (state, { entryId }) => ({
     ...state,
     entries: state.entries.filter((e) => e.id !== entryId)
   })),
-  on(AccountingActions.addEntry, (state) => ({ ...state, loading: true, saved: false })),
 
-on(AccountingActions.addEntrySuccess, (state, { entry }) => ({
-  ...state,
-  entries: [...state.entries, entry],
-  loading: false,
-  saved: true
-})),
-
-on(AccountingActions.resetSavedState, (state) => ({ ...state, saved: false }))
+  on(AccountingActions.resetSavedState, (state) => ({
+    ...state,
+    saved: false
+  }))
 );

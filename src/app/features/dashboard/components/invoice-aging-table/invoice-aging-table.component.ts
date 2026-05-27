@@ -1,0 +1,38 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
+import { InvoiceAging } from '../../models/dashboard.model';
+
+@Component({
+  selector: 'app-invoice-aging-table',
+  standalone: true,
+  imports: [CommonModule, TableComponent],
+  template: `
+    <div class="bg-white rounded-xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-slate-100">
+        <h3 class="text-base font-semibold text-slate-900">Créances Clients</h3>
+        <p class="text-xs text-slate-400 font-medium">Analyse chronologique des retards de facturation clients</p>
+      </div>
+      <div class="p-2">
+        <app-table 
+          [data]="data" 
+          [columns]="columns"
+          [isLoading]="isLoading">
+        </app-table>
+      </div>
+    </div>
+  `
+})
+export class InvoiceAgingTableComponent {
+  @Input({ required: true }) data: InvoiceAging[] = [];
+  @Input() isLoading: boolean = false;
+
+  public columns: TableColumn[] = [
+    { key: 'customer', label: 'Client', type: 'text' },
+    { key: 'invoice', label: 'N° Facture', type: 'text' },
+    { key: 'date', label: 'Date d\'Émission', type: 'date' },
+    { key: 'amount', label: 'Montant Dû', type: 'currency' },
+    // Correction ici : 'text' au lieu de 'number' pour respecter ton composant générique
+    { key: 'delay', label: 'Jours de Retard', type: 'text' } 
+  ];
+}

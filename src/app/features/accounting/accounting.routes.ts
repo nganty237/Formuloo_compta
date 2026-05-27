@@ -19,11 +19,11 @@ export const accountingRoutes: Routes = [
       },
       {
         path: 'new-entry',
-        loadComponent: () => import('./pages/entry-from/entry-from').then(m => m.EntryFormComponent)
+        loadComponent: () => import('./containers/entry-container/entry-container').then(m => m.EntryContainerComponent)
       },
       {
         path: 'entry',
-        loadComponent: () => import('./pages/entry-from/entry-from').then(m => m.EntryFormComponent)
+        loadComponent: () => import('./containers/entry-container/entry-container').then(m => m.EntryContainerComponent)
       },
       {
         path: 'ledger',
