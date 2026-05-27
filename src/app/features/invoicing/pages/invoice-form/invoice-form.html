@@ -1,42 +1,82 @@
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-slate-200 mt-6">
-  <h2 class="text-2xl font-bold text-slate-800 mb-6">Nouvelle Facture</h2>
+<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" class="space-y-6 bg-white p-6 rounded-lg border border-slate-200">
   
-  <form [formGroup]="invoiceForm" class="space-y-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="form-group">
-        <label class="block text-sm font-medium text-slate-700 mb-2">Montant HT</label>
-        <div class="relative">
-          <input type="number" formControlName="montantHT" 
-                 class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-                 placeholder="0.00">
-          <span class="absolute right-3 top-2 text-slate-400">FCFA</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-1">Saisi par le commercial</p>
-      </div>
-
-      <div class="form-group">
-        <label class="block text-sm font-medium text-slate-700 mb-2">Taux TVA (%)</label>
-        <input type="number" formControlName="tva" 
-               class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all">
-      </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="form-group">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Client (Compte 411)</label>
+      <select formControlName="clientId" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="" disabled>-- Sélectionner un client --</option>
+        @for (client of clients; track client.id) {
+          <option [value]="client.id">{{ client.nom }} ({{ client.compte }})</option>
+        }
+      </select>
     </div>
 
-    <div class="pt-4 border-t border-slate-100">
-      <div class="bg-slate-50 p-4 rounded-md border border-slate-200">
-        <label class="block text-sm font-bold text-slate-700 mb-2">Montant TTC</label>
-        <div class="relative">
-          <input type="number" formControlName="montantTTC" readonly 
-                 class="w-full px-4 py-3 bg-slate-100 border-none rounded-md text-xl font-bold text-slate-900 cursor-not-allowed">
-          <span class="absolute right-3 top-3 font-bold text-slate-500">FCFA</span>
-        </div>
-        <p class="text-xs text-slate-500 mt-1">Calculé automatiquement</p>
-      </div>
+    <div class="form-group">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Compte Produit (Classe 7)</label>
+      <select formControlName="compteProduitId" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="" disabled>-- Sélectionner un compte --</option>
+        @for (compte of comptesProduit; track compte.id) {
+          <option [value]="compte.id">{{ compte.id }} - {{ compte.intitule }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+    <div class="form-group">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Montant HT</label>
+      <input type="number" formControlName="montantHT" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="form-group">
+      <label class="block text-sm font-medium text-slate-700 mb-2">Taux TVA (%)</label>
+      <input type="number" formControlName="tauxTVA" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="form-group">
+      <label class="block text-sm font-bold text-slate-700 mb-2">Montant TTC</label>
+      <input type="number" formControlName="montantTTC" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-md font-bold text-slate-900 cursor-not-allowed">
+    </div>
+  </div>
+
+  <div class="flex justify-end pt-4">
+    <button type="submit" [disabled]="invoiceForm.invalid"
+            class="px-6 py-2 cursor-pointer bg-slate-800 text-white rounded-md hover:bg-slate-900 disabled:opacity-50 transition-colors">
+      Valider et comptabiliser
+    </button>
+  </div>
+</form>
+
+<app-modal 
+  [isOpen]="isModalOpen" 
+  [title]="'Confirmation de validation'"
+  (closed)="isModalOpen = false">
+  
+  <div class="p-6">
+    <div class="flex items-center mb-4 text-amber-600">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span class="font-bold">Action irréversible</span>
     </div>
     
-    <div class="flex justify-end pt-4">
-      <button type="button" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm">
-        Enregistrer la facture
+    <p class="text-slate-600 mb-6">
+      Voulez-vous vraiment valider cette facture ? Cette action générera automatiquement les écritures comptables dans le journal des ventes.
+    </p>
+    
+    <div class="flex justify-end gap-3">
+      <button 
+        type="button"
+        (click)="isModalOpen = false"
+        class="px-4 py-2 text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 transition-colors">
+        Annuler
+      </button>
+      <button 
+        type="button"
+        (click)="confirmValidation()"
+        class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-900 transition-colors">
+        Confirmer la validation
       </button>
     </div>
-  </form>
-</div>
+  </div>
+</app-modal>

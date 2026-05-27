@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TenantContextService } from '../../../core/services/tenant-context.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [ CommonModule],
   templateUrl: './header.html',
 })
 export class HeaderComponent implements OnInit {
@@ -14,10 +14,8 @@ export class HeaderComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private tenantContext = inject(TenantContextService);
 
-  // Observable pour le nom de l'entreprise active (utilisé avec le pipe async dans le template)
   companyName$ = this.tenantContext.companyName$;
 
-  // Données mockées pour les entreprises du cabinet (sélecteur statique)
   companies = [
     { id: 'tenant-1', name: 'Tech Solutions SAS' },
     { id: 'c-002', name: 'Boulangerie Le Pain Doré' }

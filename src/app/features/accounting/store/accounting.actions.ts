@@ -24,3 +24,10 @@ export const deleteEntry = createAction(
   '[Accounting] Delete Entry',
   props<{ entryId: string }>()
 );
+export const addEntrySuccess = createAction(
+  '[Accounting] Add Entry Success', props<{ entry: any }>()
+);
+// Action vitale pour fermer la modale
+export const resetSavedState = createAction(
+  '[Accounting] Reset Saved State'
+  );

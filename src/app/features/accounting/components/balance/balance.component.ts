@@ -46,7 +46,7 @@ export class BalanceComponent implements OnInit {
   dateFin = new Date().toISOString().split('T')[0];
   isLoading = false;
   
-  displayData: LigneBalance[] = []; // Utilise votre type existant
+  displayData: LigneBalance[] = [];
   totalDebit = 0;
   totalCredit = 0;
   isBalanced = false;

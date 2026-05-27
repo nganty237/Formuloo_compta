@@ -26,5 +26,15 @@ export const accountingReducer = createReducer(
   on(AccountingActions.deleteEntry, (state, { entryId }) => ({
     ...state,
     entries: state.entries.filter((e) => e.id !== entryId)
-  }))
+  })),
+  on(AccountingActions.addEntry, (state) => ({ ...state, loading: true, saved: false })),
+
+on(AccountingActions.addEntrySuccess, (state, { entry }) => ({
+  ...state,
+  entries: [...state.entries, entry],
+  loading: false,
+  saved: true
+})),
+
+on(AccountingActions.resetSavedState, (state) => ({ ...state, saved: false }))
 );

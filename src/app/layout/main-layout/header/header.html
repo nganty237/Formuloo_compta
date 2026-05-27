@@ -1,31 +1,61 @@
-<header class="w-full flex justify-between items-center bg-white shadow-sm h-16 px-6">
-    <div class="flex items-center gap-6">
-        <!-- Sélecteur d'Entreprise (nouveau pour tester TenantContextService) -->
+<header class="w-full flex justify-between items-center bg-white border-b border-gray-200 h-16 px-6">
+    
+    <div class="flex items-center gap-4">
         <div class="flex items-center gap-3">
-            <label for="company-select" class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Dossier Actif :</label>
-            <select id="company-select" #companySelect (change)="onCompanyChange(companySelect.value)"
-                class="bg-blue-50 border border-blue-200 text-blue-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 font-medium cursor-pointer outline-none">
-                @for (company of companies; track company.id) {
-                <option [value]="company.id" [selected]="company.id === selectedCompanyId">
-                    {{ company.name }}
-                </option>
-                }
-            </select>
+            <label for="company-select" class="text-sm font-medium text-gray-500">Dossier :</label>
+            <div class="relative">
+                <select id="company-select" #companySelect (change)="onCompanyChange(companySelect.value)"
+                    class="block w-48 pl-3 pr-10 py-1.5 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 appearance-none bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
+                    @for (company of companies; track company.id) {
+                    <option [value]="company.id" [selected]="company.id === selectedCompanyId">
+                        {{ company.name }}
+                    </option>
+                    }
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
+
+        <div class="hidden sm:block h-5 w-px bg-gray-300 mx-2"></div>
+
+        @if (companyName$ | async; as cName) {
+        <div class="hidden sm:flex items-center gap-2">
+            <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            <span class="text-sm font-medium text-slate-700">
+                {{ cName }}
+            </span>
+        </div>
+        }
     </div>
 
     <div class="flex items-center gap-4">
-        <!-- Affichage dynamique du nom de l'entreprise via RxJS et pipe async -->
-        @if (companyName$ | async; as cName) {
-        <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold mr-4 transition-all">
-            Traitement: {{ cName }}
-        </span>
-        }
+        <button type="button" class="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none rounded-full p-1 hover:bg-gray-100">
+            <span class="sr-only">Voir les notifications</span>
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+        </button>
 
-        <span class="text-sm text-gray-500">Anicet Nganty</span> 
-        <a routerLink="/login"
-            class="px-4 py-2 bg-red-50 text-red-600 rounded hover:bg-red-100 text-sm font-medium transition-colors cursor-pointer no-underline">
-            Déconnexion
-        </a>
+        <div class="h-5 w-px bg-gray-300"></div>
+
+        <button class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-1.5 rounded-md transition-colors text-left focus:outline-none">
+            <div class="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-white text-sm font-medium">
+                AN
+            </div>
+            <div class="hidden md:flex flex-col">
+                <span class="text-sm font-medium text-gray-900 leading-none">Anicet Nganty</span>
+                <span class="text-[11px] text-gray-500 mt-1">Expert Comptable</span>
+            </div>
+            <svg class="hidden md:block h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </button>
     </div>
 </header>
