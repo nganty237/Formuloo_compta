@@ -7,6 +7,7 @@ import { startWith, map } from 'rxjs/operators';
 import { AccountService } from '../../services/account.service';
 import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
 import { Ecriture } from '../../../../core/models/ecriture.model';
+import { ButtonComponent } from '../../../../shared/components/button/button';
 
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;
@@ -32,7 +33,7 @@ function partieDoubleValidator(control: AbstractControl): ValidationErrors | nul
 @Component({
   selector: 'app-entry-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonComponent],
   templateUrl: './entry-from.html'
 })
 export class EntryFormComponent implements OnInit {

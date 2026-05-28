@@ -4,4 +4,6 @@ export interface LigneEcriture {
     compteId: string;
     debit: number;
     credit: number;
+    libelle?: string;
+    referenceCompte?: string;
 }

@@ -2,11 +2,11 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { BalanceService, LigneBalance } from '../../accounting/services/balance.service';
 import { EntryService } from '../../accounting/services/entry.service';
-import { 
-  KPI, 
-  CashFlowPoint, 
-  ExpenseCategory, 
-  InvoiceAging 
+import {
+  KPI,
+  CashFlowPoint,
+  ExpenseCategory,
+  InvoiceAging
 } from '../models/dashboard.model';
 import { MOCK_ACCOUNTS } from '../../../core/mocks/mock-accounts';
 import { Ecriture } from '../../../core/models/ecriture.model';
@@ -19,12 +19,11 @@ export class DashboardApiService {
   private entryService = inject(EntryService);
 
   /**
-   * Récupère les indicateurs clés de performance
-   * @param entrepriseId ID de l'entreprise
+   * Get revenue, cash, expenses and profit KPIs from account balances
    */
   getKPIs(entrepriseId: string): Observable<KPI[]> {
     const today = new Date().toISOString().split('T')[0];
-    
+
     return this.balanceService.getBalance(entrepriseId, today).pipe(
       map(balances => {
         const ca = balances
@@ -49,9 +48,8 @@ export class DashboardApiService {
   }
 
   /**
-   * Récupère l'évolution mensuelle des flux de trésorerie
+   * Get monthly cash flow evolution (inflows/outflows) for a given year
    */
-
   getCashFlow(entrepriseId: string, annee: number): Observable<CashFlowPoint[]> {
     return this.entryService.getAll(entrepriseId).pipe(
       map(entries => {
@@ -66,7 +64,7 @@ export class DashboardApiService {
           const entryDate = new Date(entry.date);
           if (entryDate.getFullYear() === annee) {
             const monthIdx = entryDate.getMonth();
-            
+
             entry.lignes.forEach(ligne => {
               const compte = MOCK_ACCOUNTS.find(a => a.id === ligne.compteId);
               if (compte?.numero.startsWith('5')) {
@@ -83,12 +81,11 @@ export class DashboardApiService {
   }
 
   /**
-   * Récupère la structure des charges par catégorie (Sous-classes de 6)
+   * Get expense breakdown by category (account class 6)
    */
-  
   getExpenseStructure(entrepriseId: string): Observable<ExpenseCategory[]> {
     const today = new Date().toISOString().split('T')[0];
-    
+
     return this.balanceService.getBalance(entrepriseId, today).pipe(
       map(balances => {
         const categoriesMap = new Map<string, number>();
@@ -111,9 +108,8 @@ export class DashboardApiService {
   }
 
   /**
-   * Récupère les créances clients non soldées
+   * Get aged customer invoices (account 411) overdue by more than 30 days
    */
-
   getInvoiceAging(entrepriseId: string): Observable<InvoiceAging[]> {
     return this.entryService.getAll(entrepriseId).pipe(
       map(entries => {

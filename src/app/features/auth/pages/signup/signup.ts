@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { ButtonComponent } from '../../../../shared/components/button/button';
 
 // Custom Validator : Vérifie que le mot de passe et sa confirmation sont identiques
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -19,7 +20,7 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, ButtonComponent],
   templateUrl: './signup.html'
 })
 export class SignupComponent {

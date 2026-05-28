@@ -1,0 +1,27 @@
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+  <div [class]="headerClasses">{{ title }}</div>
+
+  <table class="w-full text-left text-sm">
+    <tbody>
+      @if (rows.length === 0) {
+        <tr>
+          <td class="p-3 text-slate-500" colspan="2">Aucune ligne disponible.</td>
+        </tr>
+      }
+
+      @for (row of rows; track row.id) {
+        <tr class="border-b border-slate-100 last:border-0">
+          <td class="p-3 text-slate-600">{{ row.label }}</td>
+          <td class="p-3 text-right font-semibold text-slate-800">{{ row.amount | number:'1.0-0' }} XOF</td>
+        </tr>
+      }
+    </tbody>
+
+    <tfoot class="bg-slate-50 font-bold text-slate-900">
+      <tr>
+        <td class="p-3">{{ totalLabel }}</td>
+        <td class="p-3 text-right">{{ total | number:'1.0-0' }} XOF</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

@@ -1,0 +1,69 @@
+import { createAction, props } from '@ngrx/store';
+import { Ecriture, JournalFilter, JournalStats } from '../../../core/models/ecriture.model';
+
+// ✅ Charger le journal complet
+export const loadJournal = createAction(
+  '[Journal] Load Journal',
+  props<{ entrepriseId: string }>()
+);
+
+export const journalLoaded = createAction(
+  '[Journal] Journal Loaded',
+  props<{ entries: Ecriture[] }>()
+);
+
+// ✅ Appliquer un filtre
+export const applyJournalFilter = createAction(
+  '[Journal] Apply Filter',
+  props<{ entrepriseId: string; filter: JournalFilter }>()
+);
+
+export const journalFiltered = createAction(
+  '[Journal] Journal Filtered',
+  props<{ entries: Ecriture[]; stats: JournalStats }>()
+);
+
+// ✅ Rechercher
+export const searchJournal = createAction(
+  '[Journal] Search',
+  props<{ entrepriseId: string; searchTerm: string }>()
+);
+
+// ✅ Valider une écriture
+export const validateEntry = createAction(
+  '[Journal] Validate Entry',
+  props<{ entryId: string }>()
+);
+
+export const entryValidated = createAction(
+  '[Journal] Entry Validated',
+  props<{ entry: Ecriture }>()
+);
+
+// ✅ Supprimer une écriture
+export const deleteEntry = createAction(
+  '[Journal] Delete Entry',
+  props<{ entryId: string }>()
+);
+
+export const entryDeleted = createAction(
+  '[Journal] Entry Deleted',
+  props<{ entryId: string }>()
+);
+
+// ✅ Exporter
+export const exportJournal = createAction(
+  '[Journal] Export',
+  props<{ entrepriseId: string; filter: JournalFilter; format: 'pdf' | 'excel' }>()
+);
+
+export const journalExported = createAction(
+  '[Journal] Journal Exported',
+  props<{ fileName: string }>()
+);
+
+// ✅ Gestion des erreurs
+export const journalError = createAction(
+  '[Journal] Error',
+  props<{ error: string }>()
+);

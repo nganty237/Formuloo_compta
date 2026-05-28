@@ -35,16 +35,16 @@
     </div>
 
     <div class="flex items-center gap-4">
-        <button type="button" class="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none rounded-full p-1 hover:bg-gray-100">
+        <app-button type="button" customClass="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none rounded-full p-1 hover:bg-gray-100" ariaLabel="Voir les notifications">
             <span class="sr-only">Voir les notifications</span>
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
-        </button>
+        </app-button>
 
     <div class="relative">
-        <button (click)="toggleProfileMenu($event)"
-            class="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-1.5 rounded-md transition-colors text-left focus:outline-none">
+        <app-button (clicked)="toggleProfileMenu($event)"
+            customClass="flex items-center gap-3 cursor-pointer hover:bg-gray-50 p-1.5 rounded-md transition-colors text-left focus:outline-none">
             <div class="h-8 w-8 rounded-full bg-slate-800 text-white flex items-center justify-center font-medium text-sm shadow-sm">
                 AN
             </div>
@@ -56,7 +56,7 @@
                 [class.rotate-180]="isProfileMenuOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
-        </button>
+        </app-button>
 
         @if (isProfileMenuOpen()) {
             <app-profile-dropdown 
