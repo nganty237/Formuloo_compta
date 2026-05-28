@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { HasRoleDirective } from '../../../shared/directives/has-role.directive';
+import { ButtonComponent } from '../../../shared/components/button/button';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, HasRoleDirective],
+  imports: [RouterLink, RouterLinkActive, HasRoleDirective, ButtonComponent],
   templateUrl: './sidebar.html',
   styles: ``,
 })

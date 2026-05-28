@@ -3,11 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProfileDropdownComponent } from '../../../shared/profile-dropdown/profile-dropdown';
 import { TenantContextService } from '../../../core/services/tenant-context.service';
+import { ButtonComponent } from '../../../shared/components/button/button';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ CommonModule,ProfileDropdownComponent],
+  imports: [CommonModule, ProfileDropdownComponent, ButtonComponent],
   templateUrl: './header.html',
 })
 export class HeaderComponent implements OnInit {

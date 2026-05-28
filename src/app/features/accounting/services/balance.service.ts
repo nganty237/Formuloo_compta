@@ -34,7 +34,7 @@ export class BalanceService {
             });
         });
 
-        //permet de parcourir les opérations et cumuler les mouvements
+        // Accumulate debits and credits for each account
         MOCK_ENTRIES.filter(e => e.entrepriseId === entrepriseId && e.date <= dateFin).forEach(ecriture => {
             ecriture.lignes.forEach(ligne => {
                 const balanceLine = mapBalance.get(ligne.compteId);
@@ -45,7 +45,7 @@ export class BalanceService {
             });
         });
 
-        //permet de calculer les soldes finaux de chaque compte
+        // Calculate final balances for each account
         const balances = Array.from(mapBalance.values()).map(b => {
             if (b.totalDebit > b.totalCredit) {
                 b.soldeDebit = b.totalDebit - b.totalCredit;
@@ -55,7 +55,7 @@ export class BalanceService {
             return b;
         });
 
-        // permet de garder seulement les comptes qui ont eu du mouvement
+        // Filter only accounts with transactions
         const balancesActives = balances.filter(b => b.totalDebit > 0 || b.totalCredit > 0);
 
         return of(balancesActives).pipe(delay(700));

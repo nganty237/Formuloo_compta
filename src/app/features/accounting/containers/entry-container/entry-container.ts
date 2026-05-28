@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { EntryFormComponent } from '../../pages/entry-from/entry-from';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
+import { ButtonComponent } from '../../../../shared/components/button/button';
 import { addEntry, resetSavedState } from '../../store/accounting.actions';
 import { selectLoading, selectSaved } from '../../store/accounting.selectors';
 import { Ecriture } from '../../../../core/models/ecriture.model';
@@ -11,7 +12,7 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
 @Component({
   selector: 'app-entry-container',
   standalone: true,
-  imports: [CommonModule, EntryFormComponent, ModalComponent, SpinnerComponent],
+  imports: [CommonModule, EntryFormComponent, ModalComponent, SpinnerComponent, ButtonComponent],
   template: `
     <div class="relative min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       
@@ -66,14 +67,12 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
           </div>
           
           <div class="flex gap-3 w-full">
-            <button (click)="addNewEntry()" 
-                    class="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm transition-all shadow-sm active:scale-95">
+            <app-button (clicked)="addNewEntry()" customClass="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm transition-all shadow-sm active:scale-95">
               Nouvelle écriture
-            </button>
-            <button (click)="closeModal()" 
-                    class="flex-1 px-4 py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium text-sm transition-all active:scale-95">
+            </app-button>
+            <app-button (clicked)="closeModal()" customClass="flex-1 px-4 py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium text-sm transition-all active:scale-95">
               Consulter le journal
-            </button>
+            </app-button>
           </div>
         </div>
       </app-modal>

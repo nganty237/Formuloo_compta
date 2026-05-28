@@ -2,58 +2,33 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
 import { BalanceService, LigneBalance } from '../../../accounting/services/balance.service';
+import { StatementTableComponent, StatementTableRow } from '../../../../shared/components/statement-table/statement-table';
 import { switchMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-bilan',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, StatementTableComponent],
   template: `
     <div class="p-6">
       <h2 class="text-2xl font-bold mb-6 text-slate-800">Bilan au {{ today | date:'dd/MM/yyyy' }}</h2>
       
       <div class="grid grid-cols-2 gap-6">
-        <!-- ACTIF -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div class="bg-blue-50 px-4 py-3 border-b border-blue-100 font-bold text-blue-900">ACTIF (Possessions)</div>
-          <table class="w-full text-left text-sm">
-            <tbody>
-              @for (acc of actifs; track acc.compteId) {
-                <tr class="border-b border-slate-100 last:border-0">
-                  <td class="p-3 text-slate-600">{{ acc.numeroCompte }} - {{ acc.intituleCompte }}</td>
-                  <td class="p-3 text-right font-semibold text-slate-800">{{ acc.soldeDebit | number:'1.0-0' }} XOF</td>
-                </tr>
-              }
-            </tbody>
-            <tfoot class="bg-slate-50 font-bold text-slate-900">
-              <tr>
-                <td class="p-3">Total Actif</td>
-                <td class="p-3 text-right">{{ totalActif | number:'1.0-0' }} XOF</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+        <app-statement-table
+          title="ACTIF (Possessions)"
+          totalLabel="Total Actif"
+          tone="blue"
+          [rows]="actifRows"
+          [total]="totalActif">
+        </app-statement-table>
 
-        <!-- PASSIF -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-          <div class="bg-amber-50 px-4 py-3 border-b border-amber-100 font-bold text-amber-900">PASSIF (Dettes & Capitaux)</div>
-          <table class="w-full text-left text-sm">
-            <tbody>
-              @for (acc of passifs; track acc.compteId) {
-                <tr class="border-b border-slate-100 last:border-0">
-                  <td class="p-3 text-slate-600">{{ acc.numeroCompte }} - {{ acc.intituleCompte }}</td>
-                  <td class="p-3 text-right font-semibold text-slate-800">{{ acc.soldeCredit | number:'1.0-0' }} XOF</td>
-                </tr>
-              }
-            </tbody>
-            <tfoot class="bg-slate-50 font-bold text-slate-900">
-              <tr>
-                <td class="p-3">Total Passif</td>
-                <td class="p-3 text-right">{{ totalPassif | number:'1.0-0' }} XOF</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+        <app-statement-table
+          title="PASSIF (Dettes & Capitaux)"
+          totalLabel="Total Passif"
+          tone="amber"
+          [rows]="passifRows"
+          [total]="totalPassif">
+        </app-statement-table>
       </div>
     </div>
   `
@@ -65,6 +40,8 @@ export class BilanComponent implements OnInit {
   today = new Date();
   actifs: LigneBalance[] = [];
   passifs: LigneBalance[] = [];
+  actifRows: StatementTableRow[] = [];
+  passifRows: StatementTableRow[] = [];
   
   totalActif = 0;
   totalPassif = 0;
@@ -93,6 +70,16 @@ export class BilanComponent implements OnInit {
       
       this.totalActif = this.actifs.reduce((sum, acc) => sum + acc.soldeDebit, 0);
       this.totalPassif = this.passifs.reduce((sum, acc) => sum + acc.soldeCredit, 0);
+      this.actifRows = this.actifs.map(acc => ({
+        id: acc.compteId,
+        label: `${acc.numeroCompte} - ${acc.intituleCompte}`,
+        amount: acc.soldeDebit
+      }));
+      this.passifRows = this.passifs.map(acc => ({
+        id: acc.compteId,
+        label: `${acc.numeroCompte} - ${acc.intituleCompte}`,
+        amount: acc.soldeCredit
+      }));
     });
   }
 }

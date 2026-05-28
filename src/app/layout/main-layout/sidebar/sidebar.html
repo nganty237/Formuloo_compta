@@ -18,9 +18,9 @@
     </div>
 
     <nav class="flex-1 overflow-y-auto py-6 px-3 space-y-2">
-        
-        <a [routerLink]="['/tenant', tenantId, 'dashboard']" 
-           routerLinkActive="bg-slate-800 text-white border-blue-500" 
+
+        <a [routerLink]="['/tenant', tenantId, 'dashboard']"
+           routerLinkActive="bg-slate-800 text-white border-blue-500"
            class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
@@ -31,7 +31,7 @@
         </a>
 
         <ng-container *appHasRole="['ADMIN', 'COMPTABLE']">
-            <a [routerLink]="['/tenant', tenantId, 'accounting']" 
+            <a [routerLink]="['/tenant', tenantId, 'accounting']"
                [routerLinkActiveOptions]="{exact: true}"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
@@ -43,7 +43,7 @@
                 }
             </a>
 
-            <a [routerLink]="['/tenant', tenantId, 'accounting', 'entry']" 
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'entry']"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,7 +54,7 @@
                 }
             </a>
 
-            <a [routerLink]="['/tenant', tenantId, 'accounting', 'ledger']" 
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'ledger']"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -65,7 +65,18 @@
                 }
             </a>
 
-            <a [routerLink]="['/tenant', tenantId, 'accounting', 'balance']" 
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'journal']"
+               routerLinkActive="bg-slate-800 text-white border-blue-500"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                @if (!isCollapsed) {
+                    <span class="text-sm font-medium whitespace-nowrap">Journal Comptable</span>
+                }
+            </a>
+
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'balance']"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,7 +87,7 @@
                 }
             </a>
 
-            <a [routerLink]="['/tenant', tenantId, 'invoicing']" 
+            <a [routerLink]="['/tenant', tenantId, 'invoicing']"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,7 +99,7 @@
             </a>
         </ng-container>
 
-        <a [routerLink]="['/tenant', tenantId, 'accounting', 'bilan']" 
+        <a [routerLink]="['/tenant', tenantId, 'accounting', 'bilan']"
            routerLinkActive="bg-slate-800 text-white border-blue-500"
            class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,10 +113,10 @@
     </nav>
 
     <div class="p-3 border-t border-slate-800 shrink-0">
-        <button (click)="onToggle()" 
-                class="flex items-center justify-center w-full p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-                 class="h-5 w-5 transition-transform duration-300" 
+        <app-button (clicked)="onToggle()"
+                customClass="flex items-center justify-center w-full p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors group outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-5 w-5 transition-transform duration-300"
                  [class.rotate-180]="isCollapsed"
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
@@ -114,7 +125,7 @@
             @if (!isCollapsed) {
                 <span class="ml-3 text-sm font-medium whitespace-nowrap">Réduire le menu</span>
             }
-        </button>
+        </app-button>
     </div>
 
 </aside>

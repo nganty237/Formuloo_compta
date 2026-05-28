@@ -53,29 +53,16 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM6 20a9 9 0 0118 0v2H6v-2z" />
         </svg>
-        <h2 class="text-lg font-bold text-slate-900">Informations Client</h2>
+        <h2 class="text-lg font-bold text-slate-900">Dossier facturé</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="form-group">
-          <label class="block text-sm font-semibold text-slate-700 mb-2">
-            Client <span class="text-red-600">*</span>
-          </label>
-          <select 
-            formControlName="clientId" 
-            [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('clientId')}"
-            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white cursor-pointer font-medium">
-            <option value="" disabled selected>-- Sélectionner un client --</option>
-            @for (client of clients; track client.id) {
-              <option [value]="client.id">{{ client.nom }} ({{ client.compte }})</option>
-            }
-          </select>
-          @if (hasFieldError('clientId')) {
-            <p class="text-xs text-red-600 font-medium mt-1.5">{{ getFieldErrorMessage('clientId') }}</p>
-          }
-          @if (getClientName()) {
-            <p class="text-xs text-emerald-600 font-medium mt-1.5">✓ {{ getClientName() }} sélectionné</p>
-          }
+          <p class="block text-sm font-semibold text-slate-700 mb-2">Client actif</p>
+          <div class="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-slate-50 font-semibold text-slate-800">
+            {{ getClientName() }}
+          </div>
+          <p class="text-xs text-slate-500 mt-1.5">Ce client vient du dossier selectionne dans le header.</p>
         </div>
 
         <div class="form-group">
@@ -194,21 +181,21 @@
     </div>
 
     <div class="flex gap-3 pt-6 border-t border-slate-200">
-      <button 
+      <app-button 
         type="reset"
-        (click)="resetForm()"
-        class="flex-1 px-6 py-3 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500">
+        (clicked)="resetForm()"
+        customClass="flex-1 px-6 py-3 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500">
         Réinitialiser
-      </button>
-      <button 
+      </app-button>
+      <app-button 
         type="submit"
-        [disabled]="invoiceForm.invalid"
-        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
+        [disabled]="invoiceForm.invalid || !selectedCompanyId"
+        customClass="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
         </svg>
-        <span>{{ invoiceForm.invalid ? 'Remplissez tous les champs obligatoires' : 'Valider et comptabiliser' }}</span>
-      </button>
+        <span>{{ !selectedCompanyId ? 'Sélectionnez un dossier dans le header' : (invoiceForm.invalid ? 'Remplissez tous les champs obligatoires' : 'Valider et comptabiliser') }}</span>
+      </app-button>
     </div>
   </form>
 
@@ -246,21 +233,21 @@
       </div>
 
       <div class="flex gap-3 pt-4">
-        <button 
+        <app-button 
           type="button"
-          (click)="isModalOpen = false"
-          class="flex-1 px-4 py-2.5 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all">
+          (clicked)="isModalOpen = false"
+          customClass="flex-1 px-4 py-2.5 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all">
           Annuler
-        </button>
-        <button 
+        </app-button>
+        <app-button 
           type="button"
-          (click)="confirmValidation()"
-          class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
+          (clicked)="confirmValidation()"
+          customClass="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
           <span>Confirmer la validation</span>
-        </button>
+        </app-button>
       </div>
     </div>
   </app-modal>

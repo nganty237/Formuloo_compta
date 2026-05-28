@@ -1,8 +1,11 @@
-import { Component, OnInit, inject, Output, EventEmitter } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
+import { ButtonComponent } from '../../../../shared/components/button/button';
+import { TenantContextService } from '../../../../core/services/tenant-context.service';
 
 function validInvoiceAmountsValidator(control: AbstractControl): ValidationErrors | null {
   const ht = control.get('montantHT')?.value;
@@ -25,10 +28,24 @@ interface InvoiceValidationResult {
   warnings: string[];
 }
 
+interface InvoiceFormData {
+  compteProduitId: string | null;
+  montantHT: number | null;
+  tauxTVA: number | null;
+  montantTVA: number | null;
+  montantTTC: number | null;
+  description: string | null;
+  clientId: string;
+  clientName: string;
+  numeroFacture: string;
+  dateCreation: string;
+  statut: 'brouillon';
+}
+
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent],
   templateUrl: './invoice-form.html',
   animations: [
     trigger('slideIn', [
@@ -40,19 +57,17 @@ interface InvoiceValidationResult {
   ]
 })
 export class InvoiceFormComponent implements OnInit {
+  private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
+  private tenantContext = inject(TenantContextService);
   
-  @Output() save = new EventEmitter<any>();
+  @Output() save = new EventEmitter<InvoiceFormData>();
   
   isModalOpen = false;
   validationErrors: string[] = [];
   validationWarnings: string[] = [];
-
-  clients = [
-    { id: 'CLI-001', compte: '411100', nom: 'Entreprise Alpha SARL' },
-    { id: 'CLI-002', compte: '411200', nom: 'Consulting Beta' },
-    { id: 'CLI-003', compte: '411300', nom: 'Tech Solutions SAS' }
-  ];
+  selectedCompanyId = '';
+  selectedCompanyName = '';
 
   comptesProduit = [
     { id: '701000', intitule: 'Ventes de marchandises' },
@@ -67,7 +82,6 @@ export class InvoiceFormComponent implements OnInit {
   };
 
   invoiceForm = this.fb.group({
-    clientId: ['', Validators.required],
     compteProduitId: ['', Validators.required],
     montantHT: [0, [Validators.required, Validators.min(0.01)]],
     tauxTVA: [18, [Validators.required, Validators.min(0), Validators.max(100)]],
@@ -77,7 +91,21 @@ export class InvoiceFormComponent implements OnInit {
   }, { validators: validInvoiceAmountsValidator });
 
   ngOnInit() {
-    this.invoiceForm.valueChanges.subscribe(() => {
+    this.tenantContext.companyId$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(companyId => {
+      this.selectedCompanyId = companyId ?? '';
+    });
+
+    this.tenantContext.companyName$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(companyName => {
+      this.selectedCompanyName = companyName ?? '';
+    });
+
+    this.invoiceForm.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
       this.updateInvoiceAmounts();
     });
 
@@ -104,13 +132,12 @@ export class InvoiceFormComponent implements OnInit {
     const errors: string[] = [];
     const warnings: string[] = [];
 
-    const client = this.invoiceForm.get('clientId')?.value;
     const compte = this.invoiceForm.get('compteProduitId')?.value;
     const ht = this.invoiceForm.get('montantHT')?.value;
     const tva = this.invoiceForm.get('montantTVA')?.value;
     const ttc = this.invoiceForm.get('montantTTC')?.value;
 
-    if (!client) errors.push('Le client est obligatoire');
+    if (!this.selectedCompanyId) errors.push('Aucun dossier actif n\'est sélectionné');
     if (!compte) errors.push('Le compte produit est obligatoire');
     if (!ht || ht <= 0) errors.push('Le montant HT doit être > 0');
     if (ttc && ttc < 100) warnings.push('Montant très faible : vérifiez le montant HT');
@@ -153,8 +180,10 @@ export class InvoiceFormComponent implements OnInit {
   confirmValidation(): void {
     this.isModalOpen = false;
     
-    const formData = {
+    const formData: InvoiceFormData = {
       ...this.invoiceForm.getRawValue(),
+      clientId: this.selectedCompanyId,
+      clientName: this.selectedCompanyName,
       numeroFacture: this.generateInvoiceNumber(),
       dateCreation: new Date().toISOString().split('T')[0],
       statut: 'brouillon'
@@ -168,7 +197,6 @@ export class InvoiceFormComponent implements OnInit {
     this.invoiceForm.reset({
       montantHT: 0,
       tauxTVA: 18,
-      clientId: '',
       compteProduitId: '',
       description: '',
       montantTVA: 0,
@@ -190,8 +218,7 @@ export class InvoiceFormComponent implements OnInit {
   }
 
   getClientName(): string {
-    const clientId = this.invoiceForm.get('clientId')?.value;
-    return this.clients.find(c => c.id === clientId)?.nom || '';
+    return this.selectedCompanyName || 'Aucun dossier sélectionné';
   }
 
   /**
