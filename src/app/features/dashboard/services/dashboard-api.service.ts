@@ -38,10 +38,10 @@ export class DashboardApiService {
           .reduce((acc, b) => acc + (b.soldeDebit - b.soldeCredit), 0);
 
         return [
-          { title: 'Chiffre d\'Affaires', value: ca, trend: 'up', icon: 'payments' },
-          { title: 'Trésorerie disponible', value: tresorerie, trend: 'up', icon: 'account_balance_wallet' },
-          { title: 'Charges d\'exploitation', value: charges, trend: 'down', icon: 'trending_down' },
-          { title: 'Résultat net (estimé)', value: ca - charges, trend: 'up', icon: 'assessment' }
+          { title: 'Chiffre d\'Affaires', value: ca, trend: 'up', icon: 'banknote' },
+          { title: 'Trésorerie disponible', value: tresorerie, trend: 'up', icon: 'wallet' },
+          { title: 'Charges d\'exploitation', value: charges, trend: 'down', icon: 'trending-down' },
+          { title: 'Résultat net (estimé)', value: ca - charges, trend: 'up', icon: 'chart-no-axes-column-increasing' }
         ] as KPI[];
       })
     );

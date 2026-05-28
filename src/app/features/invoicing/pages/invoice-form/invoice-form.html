@@ -10,9 +10,7 @@
     @if (validationErrors.length > 0) {
       <div @slideIn class="p-4 rounded-lg border-l-4 border-red-500 bg-red-50 space-y-2">
         <div class="flex items-start gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
+          <app-icon name="triangle-alert" className="text-red-600 flex-shrink-0 mt-0.5"></app-icon>
           <div class="flex-1">
             <p class="font-semibold text-red-900 text-sm">Erreurs détectées</p>
             <ul class="text-red-800 text-xs space-y-1 mt-2">
@@ -31,9 +29,7 @@
     @if (validationWarnings.length > 0) {
       <div @slideIn class="p-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 space-y-2">
         <div class="flex items-start gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+          <app-icon name="circle-alert" className="text-amber-600 flex-shrink-0 mt-0.5"></app-icon>
           <div class="flex-1">
             <p class="font-semibold text-amber-900 text-sm">Points à vérifier</p>
             <ul class="text-amber-800 text-xs space-y-1 mt-2">
@@ -50,9 +46,7 @@
     }
     <div class="space-y-4">
       <div class="flex items-center gap-3 border-b-2 border-blue-500 pb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM6 20a9 9 0 0118 0v2H6v-2z" />
-        </svg>
+        <app-icon name="users" className="text-blue-600"></app-icon>
         <h2 class="text-lg font-bold text-slate-900">Dossier facturé</h2>
       </div>
 
@@ -98,9 +92,7 @@
 
     <div class="space-y-4">
       <div class="flex items-center gap-3 border-b-2 border-emerald-500 pb-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+        <app-icon name="circle-dollar-sign" className="text-emerald-600"></app-icon>
         <h2 class="text-lg font-bold text-slate-900">Détails Financiers</h2>
       </div>
 
@@ -191,9 +183,7 @@
         type="submit"
         [disabled]="invoiceForm.invalid || !selectedCompanyId"
         customClass="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-        </svg>
+        <app-icon name="send"></app-icon>
         <span>{{ !selectedCompanyId ? 'Sélectionnez un dossier dans le header' : (invoiceForm.invalid ? 'Remplissez tous les champs obligatoires' : 'Valider et comptabiliser') }}</span>
       </app-button>
     </div>
@@ -206,9 +196,7 @@
     
     <div class="space-y-6">
       <div class="flex gap-3 p-4 rounded-lg bg-amber-50 border border-amber-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
+        <app-icon name="triangle-alert" size="lg" className="text-amber-600 flex-shrink-0"></app-icon>
         <div>
           <p class="font-bold text-amber-900">Action irréversible</p>
           <p class="text-sm text-amber-800 mt-1">Cette action générera automatiquement les écritures comptables en partie double dans le journal des ventes.</p>
@@ -243,9 +231,7 @@
           type="button"
           (clicked)="confirmValidation()"
           customClass="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
+          <app-icon name="check"></app-icon>
           <span>Confirmer la validation</span>
         </app-button>
       </div>
