@@ -19,6 +19,15 @@ export interface CashFlowPoint {
 }
 
 /**
+ * Interface pour les mouvements comptables mensuels
+ */
+export interface AccountingMovementPoint {
+  month: string;
+  debit: number;
+  credit: number;
+}
+
+/**
  * Interface pour la répartition des charges par catégorie
  */
 export interface ExpenseCategory {
@@ -43,6 +52,7 @@ export interface InvoiceAging {
 export interface DashboardData {
   kpis: KPI[];
   cashFlow: CashFlowPoint[];
+  accountingMovements: AccountingMovementPoint[];
   expenseStructure: ExpenseCategory[];
   invoiceAging: InvoiceAging[];
 }

@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { BalanceService, LigneBalance } from '../../accounting/services/balance.service';
+import { BalanceService } from '../../accounting/services/balance.service';
 import { EntryService } from '../../accounting/services/entry.service';
 import {
   KPI,
+  AccountingMovementPoint,
   CashFlowPoint,
   ExpenseCategory,
   InvoiceAging
 } from '../models/dashboard.model';
 import { MOCK_ACCOUNTS } from '../../../core/mocks/mock-accounts';
-import { Ecriture } from '../../../core/models/ecriture.model';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +76,36 @@ export class DashboardApiService {
         });
 
         return cashFlowData;
+      })
+    );
+  }
+
+  /**
+   * Get all accounting debit/credit movements by month for a given year
+   */
+  getAccountingMovements(entrepriseId: string, annee: number): Observable<AccountingMovementPoint[]> {
+    return this.entryService.getAll(entrepriseId).pipe(
+      map(entries => {
+        const months = this.getMonthLabels();
+        const movementData: AccountingMovementPoint[] = months.map(month => ({
+          month,
+          debit: 0,
+          credit: 0
+        }));
+
+        entries.forEach(entry => {
+          const entryDate = new Date(entry.date);
+          if (entryDate.getFullYear() === annee) {
+            const monthIdx = entryDate.getMonth();
+
+            entry.lignes.forEach(ligne => {
+              movementData[monthIdx].debit += ligne.debit;
+              movementData[monthIdx].credit += ligne.credit;
+            });
+          }
+        });
+
+        return movementData;
       })
     );
   }
@@ -156,5 +186,9 @@ export class DashboardApiService {
       '69': 'Impôts Bénéfices'
     };
     return labels[subClass] || `Autres (${subClass})`;
+  }
+
+  private getMonthLabels(): string[] {
+    return ['Jan', 'FÃ©v', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'AoÃ»', 'Sep', 'Oct', 'Nov', 'DÃ©c'];
   }
 }

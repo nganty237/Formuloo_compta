@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EntryFormComponent } from '../../pages/entry-from/entry-from';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
@@ -67,7 +68,7 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
             <app-button (clicked)="addNewEntry()" customClass="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium text-sm transition-all shadow-sm active:scale-95">
               Nouvelle écriture
             </app-button>
-            <app-button (clicked)="closeModal()" customClass="flex-1 px-4 py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium text-sm transition-all active:scale-95">
+            <app-button (clicked)="goToJournal()" customClass="flex-1 px-4 py-2.5 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 font-medium text-sm transition-all active:scale-95">
               Consulter le journal
             </app-button>
           </div>
@@ -78,6 +79,8 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
 })
 export class EntryContainerComponent {
   private store = inject(Store);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   loading$ = this.store.select(selectLoading);
   saved$ = this.store.select(selectSaved);
@@ -98,5 +101,10 @@ export class EntryContainerComponent {
 
   closeModal() {
     this.store.dispatch(resetSavedState());
+  }
+
+  goToJournal() {
+    this.closeModal();
+    this.router.navigate(['../journal'], { relativeTo: this.route });
   }
 }
