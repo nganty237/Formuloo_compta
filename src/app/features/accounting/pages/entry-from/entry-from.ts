@@ -67,14 +67,12 @@ export class EntryFormComponent implements OnInit {
 
     this.comptes$ = this.accountService.getAccounts(this.tenantId);
 
-    // Suivi des totaux en temps réel
     this.entryForm.valueChanges.pipe(
       startWith(this.entryForm.value)
     ).subscribe(value => {
       this.calculateTotals(value.lignesEcriture);
     });
 
-    // Ajouter deux lignes par défaut pour faciliter la saisie
     if (this.lignesEcriture.length === 0) {
       this.addLigne();
       this.addLigne();
@@ -124,13 +122,11 @@ export class EntryFormComponent implements OnInit {
 
       this.save.emit(ecriture);
       
-      // Réinitialisation complète et propre
       this.entryForm.reset({
-        date: formValue.date, // On garde la date pour enchaîner les saisies
+        date: formValue.date,
         libelle: ''
       });
       
-      // On vide le FormArray et on recrée les deux lignes par défaut
       while (this.lignesEcriture.length !== 0) {
         this.lignesEcriture.removeAt(0);
       }

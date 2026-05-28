@@ -1,22 +1,57 @@
 import { Component, OnInit, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
+
+function validInvoiceAmountsValidator(control: AbstractControl): ValidationErrors | null {
+  const ht = control.get('montantHT')?.value;
+  const taux = control.get('tauxTVA')?.value;
+
+  if (ht && ht <= 0) {
+    control.get('montantHT')?.setErrors({ positiveRequired: true });
+  }
+  
+  if (taux !== undefined && taux !== null && taux < 0) {
+    control.get('tauxTVA')?.setErrors({ negativeNotAllowed: true });
+  }
+
+  return null;
+}
+
+interface InvoiceValidationResult {
+  isValid: boolean;
+  errors: string[];
+  warnings: string[];
+}
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ModalComponent],
-  templateUrl: './invoice-form.html'
+  templateUrl: './invoice-form.html',
+  animations: [
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(10px)' }),
+        animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class InvoiceFormComponent implements OnInit {
   private fb = inject(FormBuilder);
+  
   @Output() save = new EventEmitter<any>();
+  
   isModalOpen = false;
+  validationErrors: string[] = [];
+  validationWarnings: string[] = [];
 
   clients = [
     { id: 'CLI-001', compte: '411100', nom: 'Entreprise Alpha SARL' },
-    { id: 'CLI-002', compte: '411200', nom: 'Consulting Beta' }
+    { id: 'CLI-002', compte: '411200', nom: 'Consulting Beta' },
+    { id: 'CLI-003', compte: '411300', nom: 'Tech Solutions SAS' }
   ];
 
   comptesProduit = [
@@ -24,48 +59,164 @@ export class InvoiceFormComponent implements OnInit {
     { id: '706000', intitule: 'Services vendus' }
   ];
 
+  tauxTVAParPays = {
+    'CI': 18,
+    'SN': 18,
+    'BF': 18,
+    'TG': 18
+  };
+
   invoiceForm = this.fb.group({
     clientId: ['', Validators.required],
     compteProduitId: ['', Validators.required],
-    montantHT: [0, [Validators.required, Validators.min(1)]],
-    tauxTVA: [18, [Validators.required, Validators.min(0)]],
-    montantTVA: [{ value: 0, disabled: true }], 
-    montantTTC: [{ value: 0, disabled: true }]  
-  });
+    montantHT: [0, [Validators.required, Validators.min(0.01)]],
+    tauxTVA: [18, [Validators.required, Validators.min(0), Validators.max(100)]],
+    montantTVA: [{ value: 0, disabled: true }],
+    montantTTC: [{ value: 0, disabled: true }],
+    description: ['', [Validators.maxLength(500)]]
+  }, { validators: validInvoiceAmountsValidator });
 
   ngOnInit() {
     this.invoiceForm.valueChanges.subscribe(() => {
-      const ht = this.invoiceForm.get('montantHT')?.value || 0;
-      const taux = this.invoiceForm.get('tauxTVA')?.value || 0;
-
-      const tva = ht * (taux / 100);
-      const ttc = ht + tva;
-
-      // emitEvent: false est OBLIGATOIRE pour éviter une boucle infinie de modifications
-      this.invoiceForm.patchValue({
-        montantTVA: tva,
-        montantTTC: ttc
-      }, { emitEvent: false });
+      this.updateInvoiceAmounts();
     });
+
+    this.updateInvoiceAmounts();
   }
 
-  onSubmit() {
-    if (this.invoiceForm.valid) {
-      this.isModalOpen = true;
-    } else {
-      this.invoiceForm.markAllAsTouched();
+  private updateInvoiceAmounts(): void {
+    const ht = this.invoiceForm.get('montantHT')?.value || 0;
+    const taux = this.invoiceForm.get('tauxTVA')?.value || 0;
+
+    const tva = ht * (taux / 100);
+    const ttc = ht + tva;
+
+    this.invoiceForm.patchValue({
+      montantTVA: parseFloat(tva.toFixed(2)),
+      montantTTC: parseFloat(ttc.toFixed(2))
+    }, { emitEvent: false });
+  }
+
+  /**
+   * Valide la facture avant soumission
+   */
+  private validateInvoice(): InvoiceValidationResult {
+    const errors: string[] = [];
+    const warnings: string[] = [];
+
+    const client = this.invoiceForm.get('clientId')?.value;
+    const compte = this.invoiceForm.get('compteProduitId')?.value;
+    const ht = this.invoiceForm.get('montantHT')?.value;
+    const tva = this.invoiceForm.get('montantTVA')?.value;
+    const ttc = this.invoiceForm.get('montantTTC')?.value;
+
+    if (!client) errors.push('Le client est obligatoire');
+    if (!compte) errors.push('Le compte produit est obligatoire');
+    if (!ht || ht <= 0) errors.push('Le montant HT doit être > 0');
+    if (ttc && ttc < 100) warnings.push('Montant très faible : vérifiez le montant HT');
+    
+    if (ht && ttc) {
+      const ratio = ttc / ht;
+      if (ratio < 1) {
+        errors.push('Le montant TTC est inférieur au montant HT (vérifiez le taux de TVA)');
+      }
     }
+
+    if (tva && !Number.isInteger(tva * 100)) {
+      warnings.push('Arrondi TVA détecté : vérifiez le calcul');
+    }
+
+    return {
+      isValid: errors.length === 0,
+      errors,
+      warnings
+    };
   }
 
-  confirmValidation() {
+  onSubmit(): void {
+    if (this.invoiceForm.invalid) {
+      this.invoiceForm.markAllAsTouched();
+      return;
+    }
+
+    const validation = this.validateInvoice();
+    this.validationErrors = validation.errors;
+    this.validationWarnings = validation.warnings;
+
+    if (!validation.isValid) {
+      return;
+    }
+
+    this.isModalOpen = true;
+  }
+
+  confirmValidation(): void {
     this.isModalOpen = false;
-    // getRawValue() permet d'extraire les données, y compris celles des champs "disabled" (TVA, TTC)
-    this.save.emit(this.invoiceForm.getRawValue());
+    
+    const formData = {
+      ...this.invoiceForm.getRawValue(),
+      numeroFacture: this.generateInvoiceNumber(),
+      dateCreation: new Date().toISOString().split('T')[0],
+      statut: 'brouillon'
+    };
+
+    this.save.emit(formData);
+    this.resetForm();
+  }
+
+  resetForm(): void {
     this.invoiceForm.reset({
       montantHT: 0,
       tauxTVA: 18,
       clientId: '',
-      compteProduitId: ''
+      compteProduitId: '',
+      description: '',
+      montantTVA: 0,
+      montantTTC: 0
     });
+    this.validationErrors = [];
+    this.validationWarnings = [];
+  }
+
+  /**
+   * Génère un numéro de facture unique
+   */
+  private generateInvoiceNumber(): string {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const random = String(Math.floor(Math.random() * 10000)).padStart(5, '0');
+    return `FAC-${year}${month}-${random}`;
+  }
+
+  getClientName(): string {
+    const clientId = this.invoiceForm.get('clientId')?.value;
+    return this.clients.find(c => c.id === clientId)?.nom || '';
+  }
+
+  /**
+   * Obtient le montant total (pour affichage)
+   */
+  getMonthlyTotal(): number {
+    const ttc = this.invoiceForm.get('montantTTC')?.value || 0;
+    return ttc;
+  }
+
+  hasFieldError(fieldName: string): boolean {
+    const field = this.invoiceForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+
+  getFieldErrorMessage(fieldName: string): string {
+    const field = this.invoiceForm.get(fieldName);
+    if (!field || !field.errors) return '';
+
+    if (field.errors['required']) return 'Ce champ est obligatoire';
+    if (field.errors['min']) return 'La valeur minimum n\'est pas atteinte';
+    if (field.errors['max']) return 'La valeur dépasse le maximum autorisé';
+    if (field.errors['positiveRequired']) return 'Le montant doit être positif';
+    if (field.errors['maxlength']) return `Maximum ${field.errors['maxlength'].requiredLength} caractères`;
+
+    return 'Erreur de saisie';
   }
 }
