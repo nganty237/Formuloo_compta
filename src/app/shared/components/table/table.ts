@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from '../spinner/spinner';
 
@@ -12,6 +12,7 @@ export interface TableColumn {
   selector: 'app-table',
   standalone: true,
   imports: [CommonModule, SpinnerComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './table.html'
 })
 export class TableComponent {

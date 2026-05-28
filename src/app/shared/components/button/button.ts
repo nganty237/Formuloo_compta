@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 export type ButtonVariant = 'primary' | 'danger' | 'secondary' | 'success' | 'dark' | 'ghost' | 'ghost-danger' | 'plain';
@@ -8,6 +8,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
   selector: 'app-button',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './button.html',
   host: { class: 'contents' }
 })

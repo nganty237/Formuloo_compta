@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export interface StatementTableRow {
   id: string;
@@ -13,6 +13,7 @@ type StatementTone = 'blue' | 'amber';
   selector: 'app-statement-table',
   standalone: true,
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './statement-table.html'
 })
 export class StatementTableComponent {
