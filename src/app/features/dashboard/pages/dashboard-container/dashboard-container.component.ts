@@ -8,6 +8,7 @@ import { DashboardFacade } from '../../services/dashboard-facade.service';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
 
 import { KpiCardComponent } from '../../components/kpi-card/kpi-card.component';
+import { AccountingMovementsChartComponent } from '../../components/accounting-movements-chart/accounting-movements-chart.component';
 import { CashFlowChartComponent } from '../../components/cash-flow-chart/cash-flow-chart.component';
 import { ExpenseStructureChartComponent } from '../../components/expense-structure-chart/expense-structure-chart.component';
 import { InvoiceAgingTableComponent } from '../../components/invoice-aging-table/invoice-aging-table.component';
@@ -19,6 +20,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
   imports: [
     CommonModule,
     KpiCardComponent,
+    AccountingMovementsChartComponent,
     CashFlowChartComponent,
     ExpenseStructureChartComponent,
     InvoiceAgingTableComponent,
@@ -55,6 +57,12 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
             [data]="(facade.cashFlow$ | async) || []">
           </app-cash-flow-chart>
 
+          <app-accounting-movements-chart
+            [data]="(facade.accountingMovements$ | async) || []">
+          </app-accounting-movements-chart>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <app-expense-structure-chart 
             [data]="(facade.expenseStructure$ | async) || []">
           </app-expense-structure-chart>
