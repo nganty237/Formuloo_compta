@@ -8,7 +8,7 @@
                 <div class="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold shrink-0 shadow-sm">
                     FC
                 </div>
-                <span class="text-lg font-bold text-white tracking-wide truncate">Formuloo</span>
+                <span class="text-lg font-bold text-white tracking-wide truncate">Formuloo Compta</span>
             </div>
         } @else {
             <div class="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold shrink-0 shadow-sm">
@@ -54,7 +54,6 @@
                 }
             </a>
 
-            <!-- NOUVEAU : Grand Livre (uniquement pour Admin & Comptable) -->
             <a [routerLink]="['/tenant', tenantId, 'accounting', 'ledger']" 
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
@@ -66,7 +65,6 @@
                 }
             </a>
 
-            <!-- NOUVEAU : Balance des comptes (uniquement pour Admin & Comptable) -->
             <a [routerLink]="['/tenant', tenantId, 'accounting', 'balance']" 
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
@@ -90,7 +88,6 @@
             </a>
         </ng-container>
 
-        <!-- NOUVEAU : Bilan (Rapports) - Visible par tout le monde (y compris le Client) -->
         <a [routerLink]="['/tenant', tenantId, 'accounting', 'bilan']" 
            routerLinkActive="bg-slate-800 text-white border-blue-500"
            class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
@@ -113,7 +110,7 @@
                  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
             </svg>
-            
+
             @if (!isCollapsed) {
                 <span class="ml-3 text-sm font-medium whitespace-nowrap">Réduire le menu</span>
             }

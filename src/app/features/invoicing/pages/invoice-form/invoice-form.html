@@ -1,82 +1,267 @@
-<form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" class="space-y-6 bg-white p-6 rounded-lg border border-slate-200">
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-    <div class="form-group">
-      <label class="block text-sm font-medium text-slate-700 mb-2">Client (Compte 411)</label>
-      <select formControlName="clientId" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="" disabled>-- Sélectionner un client --</option>
-        @for (client of clients; track client.id) {
-          <option [value]="client.id">{{ client.nom }} ({{ client.compte }})</option>
-        }
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label class="block text-sm font-medium text-slate-700 mb-2">Compte Produit (Classe 7)</label>
-      <select formControlName="compteProduitId" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
-        <option value="" disabled>-- Sélectionner un compte --</option>
-        @for (compte of comptesProduit; track compte.id) {
-          <option [value]="compte.id">{{ compte.id }} - {{ compte.intitule }}</option>
-        }
-      </select>
-    </div>
+<div class="max-w-5xl mx-auto">
+  <div class="bg-gradient-to-r from-blue-700 to-slate-800 rounded-t-xl p-8 text-white">
+    <h1 class="text-3xl font-bold">Créer une Facture</h1>
+    <p class="text-blue-100 mt-2">Saisissez les informations pour générer une facture conforme OHADA</p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
-    <div class="form-group">
-      <label class="block text-sm font-medium text-slate-700 mb-2">Montant HT</label>
-      <input type="number" formControlName="montantHT" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+  <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" 
+        class="bg-white border border-t-0 border-slate-200 p-8 space-y-8">
+
+    @if (validationErrors.length > 0) {
+      <div @slideIn class="p-4 rounded-lg border-l-4 border-red-500 bg-red-50 space-y-2">
+        <div class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <div class="flex-1">
+            <p class="font-semibold text-red-900 text-sm">Erreurs détectées</p>
+            <ul class="text-red-800 text-xs space-y-1 mt-2">
+              @for (error of validationErrors; track $index) {
+                <li class="flex items-start gap-2">
+                  <span class="text-red-600 font-bold">•</span>
+                  <span>{{ error }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (validationWarnings.length > 0) {
+      <div @slideIn class="p-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 space-y-2">
+        <div class="flex items-start gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <div class="flex-1">
+            <p class="font-semibold text-amber-900 text-sm">Points à vérifier</p>
+            <ul class="text-amber-800 text-xs space-y-1 mt-2">
+              @for (warning of validationWarnings; track $index) {
+                <li class="flex items-start gap-2">
+                  <span class="text-amber-600 font-bold">⚠</span>
+                  <span>{{ warning }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    }
+    <div class="space-y-4">
+      <div class="flex items-center gap-3 border-b-2 border-blue-500 pb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.856-1.487M15 10a3 3 0 11-6 0 3 3 0 016 0zM6 20a9 9 0 0118 0v2H6v-2z" />
+        </svg>
+        <h2 class="text-lg font-bold text-slate-900">Informations Client</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Client <span class="text-red-600">*</span>
+          </label>
+          <select 
+            formControlName="clientId" 
+            [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('clientId')}"
+            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white cursor-pointer font-medium">
+            <option value="" disabled selected>-- Sélectionner un client --</option>
+            @for (client of clients; track client.id) {
+              <option [value]="client.id">{{ client.nom }} ({{ client.compte }})</option>
+            }
+          </select>
+          @if (hasFieldError('clientId')) {
+            <p class="text-xs text-red-600 font-medium mt-1.5">{{ getFieldErrorMessage('clientId') }}</p>
+          }
+          @if (getClientName()) {
+            <p class="text-xs text-emerald-600 font-medium mt-1.5">✓ {{ getClientName() }} sélectionné</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Compte Produit (Classe 7) <span class="text-red-600">*</span>
+          </label>
+          <select 
+            formControlName="compteProduitId"
+            [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('compteProduitId')}"
+            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white cursor-pointer font-medium">
+            <option value="" disabled selected>-- Sélectionner un compte --</option>
+            @for (compte of comptesProduit; track compte.id) {
+              <option [value]="compte.id">{{ compte.id }} - {{ compte.intitule }}</option>
+            }
+          </select>
+          @if (hasFieldError('compteProduitId')) {
+            <p class="text-xs text-red-600 font-medium mt-1.5">{{ getFieldErrorMessage('compteProduitId') }}</p>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="block text-sm font-semibold text-slate-700 mb-2">Description (optionnel)</label>
+        <textarea 
+          formControlName="description"
+          placeholder="Ex: Livraison de services de consulting pour le mois de..."
+          rows="3"
+          class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none">
+        </textarea>
+        <p class="text-xs text-slate-500 mt-1">Maximum 500 caractères</p>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label class="block text-sm font-medium text-slate-700 mb-2">Taux TVA (%)</label>
-      <input type="number" formControlName="tauxTVA" class="w-full p-2 border border-slate-300 rounded-md outline-none focus:ring-2 focus:ring-blue-500">
+    <div class="space-y-4">
+      <div class="flex items-center gap-3 border-b-2 border-emerald-500 pb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h2 class="text-lg font-bold text-slate-900">Détails Financiers</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 bg-slate-50 p-6 rounded-lg border border-slate-200">
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Montant HT <span class="text-red-600">*</span>
+          </label>
+          <div class="relative">
+            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">XOF</span>
+            <input 
+              type="number" 
+              formControlName="montantHT"
+              [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('montantHT')}"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              class="w-full pl-12 pr-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all font-semibold">
+          </div>
+          @if (hasFieldError('montantHT')) {
+            <p class="text-xs text-red-600 font-medium mt-1.5">{{ getFieldErrorMessage('montantHT') }}</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Taux TVA (%) <span class="text-red-600">*</span>
+          </label>
+          <div class="relative">
+            <input 
+              type="number" 
+              formControlName="tauxTVA"
+              [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('tauxTVA')}"
+              min="0"
+              max="100"
+              step="0.01"
+              placeholder="18"
+              class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all font-semibold">
+            <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">%</span>
+          </div>
+          @if (hasFieldError('tauxTVA')) {
+            <p class="text-xs text-red-600 font-medium mt-1.5">{{ getFieldErrorMessage('tauxTVA') }}</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">Montant TTC</label>
+          <div class="relative bg-blue-50 rounded-lg border-2 border-blue-200">
+            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-600 font-bold">XOF</span>
+            <input 
+              type="number" 
+              formControlName="montantTTC"
+              
+              readonly
+              placeholder="0.00"
+              class="w-full pl-12 pr-4 py-2.5 bg-blue-50 border-0 rounded-lg font-bold text-blue-900 cursor-not-allowed">
+          </div>
+          <p class="text-xs text-blue-600 font-medium mt-1.5">Calculé automatiquement</p>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-blue-900">Montant HT :</span>
+          <span class="font-semibold text-blue-900">{{ invoiceForm.get('montantHT')?.value || 0 | number:'1.2-2' }} XOF</span>
+        </div>
+        <div class="border-t border-blue-200"></div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-blue-900">TVA ({{ invoiceForm.get('tauxTVA')?.value || 0 }}%) :</span>
+          <span class="font-semibold text-emerald-600">+ {{ invoiceForm.get('montantTVA')?.value || 0 | number:'1.2-2' }} XOF</span>
+        </div>
+        <div class="border-t-2 border-blue-300 pt-2"></div>
+        <div class="flex justify-between items-center">
+          <span class="text-base font-bold text-blue-900">Total TTC :</span>
+          <span class="text-2xl font-bold text-blue-600">{{ getMonthlyTotal() | number:'1.2-2' }} XOF</span>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label class="block text-sm font-bold text-slate-700 mb-2">Montant TTC</label>
-      <input type="number" formControlName="montantTTC" class="w-full p-2 bg-slate-50 border border-slate-200 rounded-md font-bold text-slate-900 cursor-not-allowed">
-    </div>
-  </div>
-
-  <div class="flex justify-end pt-4">
-    <button type="submit" [disabled]="invoiceForm.invalid"
-            class="px-6 py-2 cursor-pointer bg-slate-800 text-white rounded-md hover:bg-slate-900 disabled:opacity-50 transition-colors">
-      Valider et comptabiliser
-    </button>
-  </div>
-</form>
-
-<app-modal 
-  [isOpen]="isModalOpen" 
-  [title]="'Confirmation de validation'"
-  (closed)="isModalOpen = false">
-  
-  <div class="p-6">
-    <div class="flex items-center mb-4 text-amber-600">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-      </svg>
-      <span class="font-bold">Action irréversible</span>
-    </div>
-    
-    <p class="text-slate-600 mb-6">
-      Voulez-vous vraiment valider cette facture ? Cette action générera automatiquement les écritures comptables dans le journal des ventes.
-    </p>
-    
-    <div class="flex justify-end gap-3">
+    <div class="flex gap-3 pt-6 border-t border-slate-200">
       <button 
-        type="button"
-        (click)="isModalOpen = false"
-        class="px-4 py-2 text-slate-700 bg-slate-100 rounded-md hover:bg-slate-200 transition-colors">
-        Annuler
+        type="reset"
+        (click)="resetForm()"
+        class="flex-1 px-6 py-3 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500">
+        Réinitialiser
       </button>
       <button 
-        type="button"
-        (click)="confirmValidation()"
-        class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-900 transition-colors">
-        Confirmer la validation
+        type="submit"
+        [disabled]="invoiceForm.invalid"
+        class="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+        </svg>
+        <span>{{ invoiceForm.invalid ? 'Remplissez tous les champs obligatoires' : 'Valider et comptabiliser' }}</span>
       </button>
     </div>
-  </div>
-</app-modal>
+  </form>
+
+  <app-modal 
+    [isOpen]="isModalOpen" 
+    title="Confirmation de validation"
+    (closed)="isModalOpen = false">
+    
+    <div class="space-y-6">
+      <div class="flex gap-3 p-4 rounded-lg bg-amber-50 border border-amber-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <div>
+          <p class="font-bold text-amber-900">Action irréversible</p>
+          <p class="text-sm text-amber-800 mt-1">Cette action générera automatiquement les écritures comptables en partie double dans le journal des ventes.</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200">
+        <div class="font-semibold text-slate-900">Récapitulatif de la facture :</div>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <div class="text-slate-600">Client :</div>
+          <div class="font-semibold text-slate-900">{{ getClientName() }}</div>
+          
+          <div class="text-slate-600">Montant HT :</div>
+          <div class="font-semibold text-slate-900">{{ invoiceForm.get('montantHT')?.value || 0 | number:'1.2-2' }} XOF</div>
+          
+          <div class="text-slate-600">TVA ({{ invoiceForm.get('tauxTVA')?.value || 0 }}%) :</div>
+          <div class="font-semibold text-emerald-600">{{ invoiceForm.get('montantTVA')?.value || 0 | number:'1.2-2' }} XOF</div>
+          
+          <div class="text-slate-900 font-bold">Total TTC :</div>
+          <div class="font-bold text-blue-600 text-lg">{{ getMonthlyTotal() | number:'1.2-2' }} XOF</div>
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-4">
+        <button 
+          type="button"
+          (click)="isModalOpen = false"
+          class="flex-1 px-4 py-2.5 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all">
+          Annuler
+        </button>
+        <button 
+          type="button"
+          (click)="confirmValidation()"
+          class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Confirmer la validation</span>
+        </button>
+      </div>
+    </div>
+  </app-modal>
+</div>

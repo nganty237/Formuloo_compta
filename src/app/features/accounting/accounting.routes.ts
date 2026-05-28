@@ -27,11 +27,11 @@ export const accountingRoutes: Routes = [
       },
       {
         path: 'ledger',
-        loadComponent: () => import('./components/ledger/ledger.component').then(m => m.LedgerComponent)
+        loadComponent: () => import('./pages/ledger/ledger.component').then(m => m.LedgerComponent)
       },
       {
         path: 'balance',
-        loadComponent: () => import('./components/balance/balance.component').then(m => m.BalanceComponent)
+        loadComponent: () => import('./pages/balance/balance.component').then(m => m.BalanceComponent)
       },
       {
         path: 'bilan',
