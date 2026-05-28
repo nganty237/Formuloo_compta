@@ -13,9 +13,7 @@
                     }
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
+                    <app-icon name="chevron-down" size="sm"></app-icon>
                 </div>
             </div>
         </div>
@@ -37,9 +35,7 @@
     <div class="flex items-center gap-4">
         <app-button type="button" customClass="text-gray-400 hover:text-gray-600 transition-colors focus:outline-none rounded-full p-1 hover:bg-gray-100" ariaLabel="Voir les notifications">
             <span class="sr-only">Voir les notifications</span>
-            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-            </svg>
+            <app-icon name="bell"></app-icon>
         </app-button>
 
     <div class="relative">
@@ -52,10 +48,10 @@
                 <p class="text-sm font-medium text-gray-700 leading-none">Anicet Nganty</p>
                 <p class="text-xs text-gray-400 mt-0.5 leading-none">Comptable Principal</p>
             </div>
-            <svg class="h-4 w-4 text-gray-400 transition-transform duration-200" 
-                [class.rotate-180]="isProfileMenuOpen()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
+            <app-icon
+                name="chevron-down"
+                size="sm"
+                [className]="'text-gray-400 transition-transform duration-200 ' + (isProfileMenuOpen() ? 'rotate-180' : '')"></app-icon>
         </app-button>
 
         @if (isProfileMenuOpen()) {

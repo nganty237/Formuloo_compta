@@ -17,9 +17,7 @@
                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white hover:border-slate-400">
           @if (entryForm.get('libelle')?.invalid && entryForm.get('libelle')?.touched) {
             <p class="text-xs text-red-600 mt-1.5 font-medium flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-              </svg>
+              <app-icon name="circle-alert" size="xs"></app-icon>
               Le libellé est obligatoire
             </p>
           }
@@ -31,9 +29,7 @@
                  class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white hover:border-slate-400">
           @if (entryForm.get('date')?.invalid && entryForm.get('date')?.touched) {
             <p class="text-xs text-red-600 mt-1.5 font-medium flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-              </svg>
+              <app-icon name="circle-alert" size="xs"></app-icon>
               La date est obligatoire
             </p>
           }
@@ -54,9 +50,7 @@
           </p>
         </div>
         <app-button type="button" (clicked)="addLigne()" customClass="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all shadow-sm hover:shadow-md active:scale-95">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
+          <app-icon name="plus"></app-icon>
           Ajouter une ligne
         </app-button>
       </div>
@@ -65,9 +59,7 @@
       <div class="space-y-4">
         @if (lignesEcriture.length === 0) {
           <div class="text-center py-12 bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-slate-400 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
+            <app-icon name="triangle-alert" size="xl" className="text-slate-400 mx-auto mb-3"></app-icon>
             <p class="text-slate-600 font-medium">Aucune ligne d'écriture</p>
             <p class="text-slate-500 text-sm mt-1">L'écriture doit comporter au moins deux lignes pour être valide</p>
           </div>
@@ -114,9 +106,7 @@
                         class="w-full p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all border border-transparent hover:border-red-100" 
                         customClass="w-full p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all border border-transparent hover:border-red-100" 
                         title="Supprimer la ligne" ariaLabel="Supprimer la ligne">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                  </svg>
+                  <app-icon name="trash-2" className="mx-auto"></app-icon>
                 </app-button>
               </div>
             </div>
@@ -169,9 +159,7 @@
     <!-- Alerte de déséquilibre -->
     @if (entryForm.hasError('desequilibre') && lignesEcriture.length > 0) {
       <div class="flex items-center gap-3 p-4 bg-red-50 border border-red-100 rounded-lg text-red-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-        </svg>
+        <app-icon name="circle-alert" className="flex-shrink-0"></app-icon>
         <p class="text-xs font-medium">L'écriture doit être équilibrée avant validation. L'écart doit être de 0 XOF.</p>
       </div>
     }

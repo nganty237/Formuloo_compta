@@ -5,6 +5,7 @@ import { EntryFormComponent } from '../../pages/entry-from/entry-from';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
 import { ButtonComponent } from '../../../../shared/components/button/button';
+import { IconComponent } from '../../../../shared/components/icon/icon';
 import { addEntry, resetSavedState } from '../../store/accounting.actions';
 import { selectLoading, selectSaved } from '../../store/accounting.selectors';
 import { Ecriture } from '../../../../core/models/ecriture.model';
@@ -12,7 +13,7 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
 @Component({
   selector: 'app-entry-container',
   standalone: true,
-  imports: [CommonModule, EntryFormComponent, ModalComponent, SpinnerComponent, ButtonComponent],
+  imports: [CommonModule, EntryFormComponent, ModalComponent, SpinnerComponent, ButtonComponent, IconComponent],
   template: `
     <div class="relative min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
       
@@ -20,9 +21,7 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
       <div class="max-w-4xl mx-auto mb-8">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-200">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
+            <app-icon name="file-text" size="lg" className="text-white"></app-icon>
           </div>
           <div>
             <h1 class="text-3xl font-bold text-slate-900">Saisie d'Écriture</h1>
@@ -53,9 +52,7 @@ import { Ecriture } from '../../../../core/models/ecriture.model';
 
         <div class="text-center py-6 flex flex-col items-center">
           <div class="w-20 h-20 bg-gradient-to-br from-emerald-100 to-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-6 shadow-md">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-            </svg>
+            <app-icon name="circle-check" size="xl"></app-icon>
           </div>
           
           <div class="space-y-2 mb-6">

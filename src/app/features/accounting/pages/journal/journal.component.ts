@@ -1,36 +1,36 @@
-import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil, take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
 import { Ecriture, JournalFilter, JournalStats } from '../../../../core/models/ecriture.model';
 import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
 import { ButtonComponent } from '../../../../shared/components/button/button';
+import { IconComponent } from '../../../../shared/components/icon/icon';
 import * as JournalActions from '../../store/journal.actions';
 import {
+  selectExportLoading,
   selectFilteredEntries,
   selectJournalLoading,
   selectJournalStats,
-  selectExportLoading,
-  selectValidatedEntriesOnly,
-  selectPendingEntriesOnly
 } from '../../store/journal.selectors';
 
 @Component({
   selector: 'app-journal',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableComponent, ButtonComponent],
+  imports: [CommonModule, FormsModule, TableComponent, ButtonComponent, IconComponent],
   template: `
     <div class="p-8">
-      <!-- Header -->
       <div class="bg-gradient-to-r from-blue-700 to-slate-800 rounded-xl p-8 text-white shadow-md mb-8">
-        <h1 class="text-3xl font-bold mb-2">📔 Accounting Journal</h1>
+        <h1 class="text-3xl font-bold mb-2 flex items-center gap-3">
+          <app-icon name="file-text" size="lg"></app-icon>
+          Accounting Journal
+        </h1>
         <p class="text-blue-100">View all recorded entries and validate your transactions.</p>
       </div>
 
-      <!-- Statistics -->
       <ng-container *ngIf="stats$ | async as stats">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
@@ -59,7 +59,7 @@ import {
               Accounting Balance
             </div>
             <div class="text-2xl font-bold mt-2" [ngClass]="stats.isBalanced ? 'text-emerald-600' : 'text-red-600'">
-              {{ stats.isBalanced ? '✓ BALANCED' : '⚠ UNBALANCED' }}
+              {{ stats.isBalanced ? 'BALANCED' : 'UNBALANCED' }}
             </div>
             <div class="text-xs mt-2" [ngClass]="stats.isBalanced ? 'text-emerald-600' : 'text-red-600'">
               Debit = Credit
@@ -68,53 +68,45 @@ import {
         </div>
       </ng-container>
 
-      <!-- Filter section -->
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-8">
         <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M3 3a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707l-5 5V17a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L9 14.586V7.707a1 1 0 01-.293-.707V3z"/>
-          </svg>
+          <app-icon name="funnel"></app-icon>
           Filters
         </h3>
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <!-- Journal type filter -->
           <div>
             <label class="block text-sm font-medium text-slate-600 mb-2">Journal</label>
             <select (change)="onJournalChange($event)" class="w-full border border-slate-300 rounded-lg p-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               <option value="">All journals</option>
-              <option value="ACH">🛒 Purchases (ACH)</option>
-              <option value="VTE">💰 Sales (VTE)</option>
-              <option value="BQ">🏦 Bank (BQ)</option>
-              <option value="OD">📋 Other (OD)</option>
+              <option value="ACH">Purchases (ACH)</option>
+              <option value="VTE">Sales (VTE)</option>
+              <option value="BQ">Bank (BQ)</option>
+              <option value="OD">Other (OD)</option>
             </select>
           </div>
 
-          <!-- Start date -->
           <div>
             <label class="block text-sm font-medium text-slate-600 mb-2">From</label>
             <input type="date" [(ngModel)]="filter.dateDebut" (change)="applyFilter()"
                    class="w-full border border-slate-300 rounded-lg p-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
           </div>
 
-          <!-- End date -->
           <div>
             <label class="block text-sm font-medium text-slate-600 mb-2">To</label>
             <input type="date" [(ngModel)]="filter.dateFin" (change)="applyFilter()"
                    class="w-full border border-slate-300 rounded-lg p-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
           </div>
 
-          <!-- Validation status -->
           <div>
             <label class="block text-sm font-medium text-slate-600 mb-2">Status</label>
             <select (change)="onValidityChange($event)" class="w-full border border-slate-300 rounded-lg p-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
               <option value="">All</option>
-              <option value="valid">✓ Validated</option>
-              <option value="pending">⏳ Pending</option>
+              <option value="valid">Validated</option>
+              <option value="pending">Pending</option>
             </select>
           </div>
 
-          <!-- Search -->
           <div>
             <label class="block text-sm font-medium text-slate-600 mb-2">Search</label>
             <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()"
@@ -124,7 +116,6 @@ import {
         </div>
       </div>
 
-      <!-- Journal entries table -->
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
         <app-table
           [data]="(entries$ | async) || []"
@@ -133,18 +124,19 @@ import {
         </app-table>
       </div>
 
-      <!-- Batch actions -->
       <ng-container *ngIf="(entries$ | async)?.length">
         <div class="mt-8 flex flex-wrap gap-4">
           <app-button (clicked)="exportToPDF()"
                   [disabled]="(exportLoading$ | async) ?? false"
                   variant="danger">
-            📄 Export PDF
+            <app-icon name="file-text" size="sm"></app-icon>
+            Export PDF
           </app-button>
           <app-button (clicked)="exportToExcel()"
                   [disabled]="(exportLoading$ | async) ?? false"
                   variant="success">
-            📊 Export Excel
+            <app-icon name="file-spreadsheet" size="sm"></app-icon>
+            Export Excel
           </app-button>
         </div>
       </ng-container>
@@ -165,11 +157,11 @@ export class JournalComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
 
   columns: TableColumn[] = [
-    { key: 'date', label: '📅 Date', type: 'date' },
-    { key: 'journalId', label: '📔 Journal', type: 'text' },
-    { key: 'libelle', label: '📝 Libellé', type: 'text' },
+    { key: 'date', label: 'Date', type: 'date' },
+    { key: 'journalId', label: 'Journal', type: 'text' },
+    { key: 'libelle', label: 'Libelle', type: 'text' },
     { key: 'id', label: 'ID', type: 'text' },
-    { key: 'valide', label: '✓ Validée', type: 'status' }
+    { key: 'valide', label: 'Validee', type: 'status' }
   ];
 
   ngOnInit() {

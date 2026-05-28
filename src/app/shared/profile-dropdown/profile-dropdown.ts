@@ -2,11 +2,12 @@ import { Component, ElementRef, HostListener, Output, EventEmitter, input } from
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from '../components/button/button';
+import { IconComponent } from '../components/icon/icon';
 
 @Component({
   selector: 'app-profile-dropdown',
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonComponent],
+  imports: [CommonModule, RouterModule, ButtonComponent, IconComponent],
   templateUrl: './profile-dropdown.html',
 })
 export class ProfileDropdownComponent {

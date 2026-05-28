@@ -5,6 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ModalComponent } from '../../../../shared/components/modal/modal';
 import { ButtonComponent } from '../../../../shared/components/button/button';
+import { IconComponent } from '../../../../shared/components/icon/icon';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
 
 function validInvoiceAmountsValidator(control: AbstractControl): ValidationErrors | null {
@@ -45,7 +46,7 @@ interface InvoiceFormData {
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent],
+  imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent, IconComponent],
   templateUrl: './invoice-form.html',
   animations: [
     trigger('slideIn', [
