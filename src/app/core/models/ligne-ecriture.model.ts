@@ -6,4 +6,5 @@ export interface LigneEcriture {
     credit: number;
     libelle?: string;
     referenceCompte?: string;
+    lettrage?: string;
 }

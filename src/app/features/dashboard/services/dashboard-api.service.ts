@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, combineLatest, of } from 'rxjs';
 import { BalanceService } from '../../accounting/services/balance.service';
 import { EntryService } from '../../accounting/services/entry.service';
+import { PlanComptableService } from '../../accounting/services/plan-comptable.service';
 import {
   KPI,
   AccountingMovementPoint,
@@ -9,7 +10,6 @@ import {
   ExpenseCategory,
   InvoiceAging
 } from '../models/dashboard.model';
-import { MOCK_ACCOUNTS } from '../../../core/mocks/mock-accounts';
 
 @Injectable({
   providedIn: 'root'
@@ -17,25 +17,33 @@ import { MOCK_ACCOUNTS } from '../../../core/mocks/mock-accounts';
 export class DashboardApiService {
   private balanceService = inject(BalanceService);
   private entryService = inject(EntryService);
+  private planService = inject(PlanComptableService);
 
   /**
    * Get revenue, cash, expenses and profit KPIs from account balances
    */
   getKPIs(entrepriseId: string): Observable<KPI[]> {
     const today = new Date().toISOString().split('T')[0];
+    const firstDayOfYear = `${new Date().getFullYear()}-01-01`;
 
-    return this.balanceService.getBalance(entrepriseId, today).pipe(
-      map(balances => {
+    return this.balanceService.getBalance(entrepriseId, firstDayOfYear, today).pipe(
+      map(data => {
+        const balances = data.lignes;
+        
+        // CA: Somme des soldes créditeurs de la classe 7
         const ca = balances
           .filter(b => b.numeroCompte.startsWith('7'))
-          .reduce((acc, b) => acc + (b.soldeCredit - b.soldeDebit), 0);
+          .reduce((acc, b) => acc + b.soldeCredit, 0);
+          
+        // Trésorerie: Somme des soldes débiteurs de la classe 5 (moins créditeurs si découvert)
         const tresorerie = balances
           .filter(b => b.numeroCompte.startsWith('5'))
           .reduce((acc, b) => acc + (b.soldeDebit - b.soldeCredit), 0);
 
+        // Charges: Somme des soldes débiteurs de la classe 6
         const charges = balances
           .filter(b => b.numeroCompte.startsWith('6'))
-          .reduce((acc, b) => acc + (b.soldeDebit - b.soldeCredit), 0);
+          .reduce((acc, b) => acc + b.soldeDebit, 0);
 
         return [
           { title: 'Chiffre d\'Affaires', value: ca, trend: 'up', icon: 'banknote' },
@@ -51,9 +59,12 @@ export class DashboardApiService {
    * Get monthly cash flow evolution (inflows/outflows) for a given year
    */
   getCashFlow(entrepriseId: string, annee: number): Observable<CashFlowPoint[]> {
-    return this.entryService.getAll(entrepriseId).pipe(
-      map(entries => {
-        const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+    return combineLatest({
+      entries: this.entryService.getAll(entrepriseId),
+      accounts: this.planService.getAccounts(entrepriseId)
+    }).pipe(
+      map(({ entries, accounts }) => {
+        const months = this.getMonthLabels();
         const cashFlowData: CashFlowPoint[] = months.map(month => ({
           month,
           inflows: 0,
@@ -66,8 +77,8 @@ export class DashboardApiService {
             const monthIdx = entryDate.getMonth();
 
             entry.lignes.forEach(ligne => {
-              const compte = MOCK_ACCOUNTS.find(a => a.id === ligne.compteId);
-              if (compte?.numero.startsWith('5')) {
+              const account = accounts.find(a => a.id === ligne.compteId);
+              if (account?.numero.startsWith('5')) {
                 cashFlowData[monthIdx].inflows += ligne.debit;
                 cashFlowData[monthIdx].outflows += ligne.credit;
               }
@@ -115,9 +126,11 @@ export class DashboardApiService {
    */
   getExpenseStructure(entrepriseId: string): Observable<ExpenseCategory[]> {
     const today = new Date().toISOString().split('T')[0];
+    const firstDayOfYear = `${new Date().getFullYear()}-01-01`;
 
-    return this.balanceService.getBalance(entrepriseId, today).pipe(
-      map(balances => {
+    return this.balanceService.getBalance(entrepriseId, firstDayOfYear, today).pipe(
+      map(data => {
+        const balances = data.lignes;
         const categoriesMap = new Map<string, number>();
 
         balances
@@ -126,13 +139,13 @@ export class DashboardApiService {
             const subClass = b.numeroCompte.substring(0, 2);
             const label = this.getExpenseLabel(subClass);
             const current = categoriesMap.get(label) || 0;
+            // On prend le solde débiteur pour les charges
             categoriesMap.set(label, current + (b.soldeDebit - b.soldeCredit));
           });
 
-        return Array.from(categoriesMap.entries()).map(([category, amount]) => ({
-          category,
-          amount
-        }));
+        return Array.from(categoriesMap.entries())
+          .map(([category, amount]) => ({ category, amount }))
+          .filter(cat => cat.amount > 0);
       })
     );
   }
@@ -141,23 +154,27 @@ export class DashboardApiService {
    * Get aged customer invoices (account 411) overdue by more than 30 days
    */
   getInvoiceAging(entrepriseId: string): Observable<InvoiceAging[]> {
-    return this.entryService.getAll(entrepriseId).pipe(
-      map(entries => {
+    return combineLatest({
+      entries: this.entryService.getAll(entrepriseId),
+      accounts: this.planService.getAccounts(entrepriseId)
+    }).pipe(
+      map(({ entries, accounts }) => {
         const aging: InvoiceAging[] = [];
         const today = new Date();
 
         entries.forEach(entry => {
           entry.lignes.forEach(ligne => {
-            const compte = MOCK_ACCOUNTS.find(a => a.id === ligne.compteId);
-            if (compte?.numero.startsWith('411') && ligne.debit > 0) {
+            const account = accounts.find(a => a.id === ligne.compteId);
+            // On cherche les factures impayées (lettrage vide sur le compte 411)
+            if (account?.numero.startsWith('411') && !ligne.lettrage && ligne.debit > 0) {
               const entryDate = new Date(entry.date);
-              const diffTime = Math.abs(today.getTime() - entryDate.getTime());
+              const diffTime = today.getTime() - entryDate.getTime();
               const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
               if (diffDays > 30) {
                 aging.push({
-                  customer: entry.libelle.split('-')[0].trim() || 'Client Divers',
-                  invoice: `FAC-${entry.id.substring(0, 5)}`,
+                  customer: entry.libelle.split('N°')[0].trim() || 'Client Divers',
+                  invoice: entry.libelle.includes('N°') ? entry.libelle.split('N°')[1].trim() : `ENT-${entry.id.substring(0, 5)}`,
                   date: entry.date,
                   amount: ligne.debit,
                   overdueDays: diffDays
@@ -189,6 +206,6 @@ export class DashboardApiService {
   }
 
   private getMonthLabels(): string[] {
-    return ['Jan', 'FÃ©v', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'AoÃ»', 'Sep', 'Oct', 'Nov', 'DÃ©c'];
+    return ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
   }
 }

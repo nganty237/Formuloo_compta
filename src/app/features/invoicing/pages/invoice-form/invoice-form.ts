@@ -1,5 +1,6 @@
 import { Component, DestroyRef, OnInit, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { trigger, transition, style, animate } from '@angular/animations';
@@ -7,6 +8,8 @@ import { ModalComponent } from '../../../../shared/components/modal/modal';
 import { ButtonComponent } from '../../../../shared/components/button/button';
 import { IconComponent } from '../../../../shared/components/icon/icon';
 import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { Facture } from '../../../../core/models/facture.model';
+import { InvoicingService } from '../../services/invoicing.service';
 
 function validInvoiceAmountsValidator(control: AbstractControl): ValidationErrors | null {
   const ht = control.get('montantHT')?.value;
@@ -15,7 +18,7 @@ function validInvoiceAmountsValidator(control: AbstractControl): ValidationError
   if (ht && ht <= 0) {
     control.get('montantHT')?.setErrors({ positiveRequired: true });
   }
-  
+
   if (taux !== undefined && taux !== null && taux < 0) {
     control.get('tauxTVA')?.setErrors({ negativeNotAllowed: true });
   }
@@ -29,24 +32,12 @@ interface InvoiceValidationResult {
   warnings: string[];
 }
 
-interface InvoiceFormData {
-  compteProduitId: string | null;
-  montantHT: number | null;
-  tauxTVA: number | null;
-  montantTVA: number | null;
-  montantTTC: number | null;
-  description: string | null;
-  clientId: string;
-  clientName: string;
-  numeroFacture: string;
-  dateCreation: string;
-  statut: 'brouillon';
-}
+export type InvoiceFormData = Omit<Facture, 'id'>;
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent, IconComponent],
+  imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent, IconComponent, RouterLink],
   templateUrl: './invoice-form.html',
   animations: [
     trigger('slideIn', [
@@ -61,9 +52,12 @@ export class InvoiceFormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
   private tenantContext = inject(TenantContextService);
-  
+  private invoicingService = inject(InvoicingService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   @Output() save = new EventEmitter<InvoiceFormData>();
-  
+
   isModalOpen = false;
   validationErrors: string[] = [];
   validationWarnings: string[] = [];
@@ -83,6 +77,7 @@ export class InvoiceFormComponent implements OnInit {
   };
 
   invoiceForm = this.fb.group({
+    type: ['FACTURE', Validators.required],
     compteProduitId: ['', Validators.required],
     montantHT: [0, [Validators.required, Validators.min(0.01)]],
     tauxTVA: [18, [Validators.required, Validators.min(0), Validators.max(100)]],
@@ -126,9 +121,6 @@ export class InvoiceFormComponent implements OnInit {
     }, { emitEvent: false });
   }
 
-  /**
-   * Valide la facture avant soumission
-   */
   private validateInvoice(): InvoiceValidationResult {
     const errors: string[] = [];
     const warnings: string[] = [];
@@ -142,7 +134,7 @@ export class InvoiceFormComponent implements OnInit {
     if (!compte) errors.push('Le compte produit est obligatoire');
     if (!ht || ht <= 0) errors.push('Le montant HT doit être > 0');
     if (ttc && ttc < 100) warnings.push('Montant très faible : vérifiez le montant HT');
-    
+
     if (ht && ttc) {
       const ratio = ttc / ht;
       if (ratio < 1) {
@@ -180,22 +172,33 @@ export class InvoiceFormComponent implements OnInit {
 
   confirmValidation(): void {
     this.isModalOpen = false;
-    
+
+    const formValue = this.invoiceForm.getRawValue();
+
     const formData: InvoiceFormData = {
-      ...this.invoiceForm.getRawValue(),
+      entrepriseId: this.selectedCompanyId,
       clientId: this.selectedCompanyId,
-      clientName: this.selectedCompanyName,
-      numeroFacture: this.generateInvoiceNumber(),
-      dateCreation: new Date().toISOString().split('T')[0],
-      statut: 'brouillon'
+      numero: this.generateInvoiceNumber(formValue.type as any),
+      type: formValue.type as any,
+      date: new Date().toISOString().split('T')[0],
+      statut: 'BROUILLON',
+      montantHt: formValue.montantHT ?? 0,
+      tva: formValue.montantTVA ?? 0,
+      montantTtc: formValue.montantTTC ?? 0,
+      compteProduitId: formValue.compteProduitId ?? undefined,
+      description: formValue.description ?? undefined
     };
 
-    this.save.emit(formData);
-    this.resetForm();
+    this.invoicingService.create(formData).subscribe(() => {
+        this.save.emit(formData);
+        this.resetForm();
+        this.router.navigate(['../list'], { relativeTo: this.route });
+    });
   }
 
   resetForm(): void {
     this.invoiceForm.reset({
+      type: 'FACTURE',
       montantHT: 0,
       tauxTVA: 18,
       compteProduitId: '',
@@ -207,24 +210,19 @@ export class InvoiceFormComponent implements OnInit {
     this.validationWarnings = [];
   }
 
-  /**
-   * Génère un numéro de facture unique
-   */
-  private generateInvoiceNumber(): string {
+  private generateInvoiceNumber(type: 'DEVIS' | 'FACTURE' | 'AVOIR'): string {
+    const prefix = type === 'DEVIS' ? 'DEV' : (type === 'AVOIR' ? 'AVR' : 'FAC');
     const date = new Date();
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const random = String(Math.floor(Math.random() * 10000)).padStart(5, '0');
-    return `FAC-${year}${month}-${random}`;
+    return `${prefix}-${year}${month}-${random}`;
   }
 
   getClientName(): string {
     return this.selectedCompanyName || 'Aucun dossier sélectionné';
   }
 
-  /**
-   * Obtient le montant total (pour affichage)
-   */
   getMonthlyTotal(): number {
     const ttc = this.invoiceForm.get('montantTTC')?.value || 0;
     return ttc;

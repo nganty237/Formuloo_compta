@@ -1,10 +1,16 @@
 <div class="max-w-5xl mx-auto">
-  <div class="bg-gradient-to-r from-blue-700 to-slate-800 rounded-t-xl p-8 text-white">
-    <h1 class="text-3xl font-bold">Créer une Facture</h1>
-    <p class="text-blue-100 mt-2">Saisissez les informations pour générer une facture conforme OHADA</p>
+  <div class="bg-gradient-to-r from-blue-700 to-slate-800 rounded-t-xl p-8 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h1 class="text-3xl font-bold">Créer un Document Commercial</h1>
+      <p class="text-blue-100 mt-2">Saisissez les informations pour générer un devis, une facture ou un avoir conforme OHADA</p>
+    </div>
+    <a routerLink="../list" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-medium transition-colors border border-white/20 cursor-pointer">
+      <app-icon name="arrow-left" size="sm"></app-icon>
+      Retour au tableau
+    </a>
   </div>
 
-  <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" 
+  <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()"
         class="bg-white border border-t-0 border-slate-200 p-8 space-y-8">
 
     @if (validationErrors.length > 0) {
@@ -47,10 +53,23 @@
     <div class="space-y-4">
       <div class="flex items-center gap-3 border-b-2 border-blue-500 pb-3">
         <app-icon name="users" className="text-blue-600"></app-icon>
-        <h2 class="text-lg font-bold text-slate-900">Dossier facturé</h2>
+        <h2 class="text-lg font-bold text-slate-900">Informations Générales</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="form-group">
+          <label class="block text-sm font-semibold text-slate-700 mb-2">
+            Type de Document <span class="text-red-600">*</span>
+          </label>
+          <select
+            formControlName="type"
+            class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white cursor-pointer font-medium">
+            <option value="DEVIS">Devis</option>
+            <option value="FACTURE">Facture</option>
+            <option value="AVOIR">Avoir</option>
+          </select>
+        </div>
+
         <div class="form-group">
           <p class="block text-sm font-semibold text-slate-700 mb-2">Client actif</p>
           <div class="w-full px-4 py-2.5 border border-slate-200 rounded-lg bg-slate-50 font-semibold text-slate-800">
@@ -63,7 +82,7 @@
           <label class="block text-sm font-semibold text-slate-700 mb-2">
             Compte Produit (Classe 7) <span class="text-red-600">*</span>
           </label>
-          <select 
+          <select
             formControlName="compteProduitId"
             [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('compteProduitId')}"
             class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-white cursor-pointer font-medium">
@@ -80,12 +99,11 @@
 
       <div class="form-group">
         <label class="block text-sm font-semibold text-slate-700 mb-2">Description (optionnel)</label>
-        <textarea 
+        <textarea
           formControlName="description"
           placeholder="Ex: Livraison de services de consulting pour le mois de..."
           rows="3"
-          class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none">
-        </textarea>
+          class="w-full px-4 py-2.5 border border-slate-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"></textarea>
         <p class="text-xs text-slate-500 mt-1">Maximum 500 caractères</p>
       </div>
     </div>
@@ -103,8 +121,8 @@
           </label>
           <div class="relative">
             <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-500 font-medium">XOF</span>
-            <input 
-              type="number" 
+            <input
+              type="number"
               formControlName="montantHT"
               [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('montantHT')}"
               min="0"
@@ -122,8 +140,8 @@
             Taux TVA (%) <span class="text-red-600">*</span>
           </label>
           <div class="relative">
-            <input 
-              type="number" 
+            <input
+              type="number"
               formControlName="tauxTVA"
               [ngClass]="{'border-red-500 focus:ring-red-500': hasFieldError('tauxTVA')}"
               min="0"
@@ -142,10 +160,10 @@
           <label class="block text-sm font-semibold text-slate-700 mb-2">Montant TTC</label>
           <div class="relative bg-blue-50 rounded-lg border-2 border-blue-200">
             <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-600 font-bold">XOF</span>
-            <input 
-              type="number" 
+            <input
+              type="number"
               formControlName="montantTTC"
-              
+
               readonly
               placeholder="0.00"
               class="w-full pl-12 pr-4 py-2.5 bg-blue-50 border-0 rounded-lg font-bold text-blue-900 cursor-not-allowed">
@@ -173,13 +191,13 @@
     </div>
 
     <div class="flex gap-3 pt-6 border-t border-slate-200">
-      <app-button 
+      <app-button
         type="reset"
         (clicked)="resetForm()"
         customClass="flex-1 px-6 py-3 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all focus:outline-none focus:ring-2 focus:ring-slate-500">
         Réinitialiser
       </app-button>
-      <app-button 
+      <app-button
         type="submit"
         [disabled]="invoiceForm.invalid || !selectedCompanyId"
         customClass="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">
@@ -189,11 +207,11 @@
     </div>
   </form>
 
-  <app-modal 
-    [isOpen]="isModalOpen" 
+  <app-modal
+    [isOpen]="isModalOpen"
     title="Confirmation de validation"
     (closed)="isModalOpen = false">
-    
+
     <div class="space-y-6">
       <div class="flex gap-3 p-4 rounded-lg bg-amber-50 border border-amber-200">
         <app-icon name="triangle-alert" size="lg" className="text-amber-600 flex-shrink-0"></app-icon>
@@ -208,26 +226,26 @@
         <div class="grid grid-cols-2 gap-3 text-sm">
           <div class="text-slate-600">Client :</div>
           <div class="font-semibold text-slate-900">{{ getClientName() }}</div>
-          
+
           <div class="text-slate-600">Montant HT :</div>
           <div class="font-semibold text-slate-900">{{ invoiceForm.get('montantHT')?.value || 0 | number:'1.2-2' }} XOF</div>
-          
+
           <div class="text-slate-600">TVA ({{ invoiceForm.get('tauxTVA')?.value || 0 }}%) :</div>
           <div class="font-semibold text-emerald-600">{{ invoiceForm.get('montantTVA')?.value || 0 | number:'1.2-2' }} XOF</div>
-          
+
           <div class="text-slate-900 font-bold">Total TTC :</div>
           <div class="font-bold text-blue-600 text-lg">{{ getMonthlyTotal() | number:'1.2-2' }} XOF</div>
         </div>
       </div>
 
       <div class="flex gap-3 pt-4">
-        <app-button 
+        <app-button
           type="button"
           (clicked)="isModalOpen = false"
           customClass="flex-1 px-4 py-2.5 border-2 border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-all">
           Annuler
         </app-button>
-        <app-button 
+        <app-button
           type="button"
           (clicked)="confirmValidation()"
           customClass="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-lg shadow-md transition-all active:scale-[0.98]">

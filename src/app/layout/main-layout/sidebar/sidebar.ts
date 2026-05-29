@@ -14,10 +14,10 @@ import { IconComponent } from '../../../shared/components/icon/icon';
 export class Sidebar implements OnInit {
   private route = inject(ActivatedRoute);
 
-  @Input() isCollapsed = false;
+  @Input() isCollapsed: boolean = false;
   @Output() toggleCollapse = new EventEmitter<void>();
 
-  tenantId = 'tenant-123';
+  tenantId: string = 'tenant-123';
 
   ngOnInit() {
     const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');

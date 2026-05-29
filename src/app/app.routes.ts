@@ -22,6 +22,10 @@ export const routes: Routes = [
             {
                 path: 'invoicing',
                 loadChildren: () => import('./features/invoicing/invoicing.routes').then(m => m.invoicingRoutes)
+            },
+            {
+                path: 'companies',
+                loadComponent: () => import('./features/companies/companies-list/companies-list').then(m => m.CompaniesListComponent)
             }
         ]
     },

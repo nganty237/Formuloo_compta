@@ -50,6 +50,26 @@ export const accountingRoutes: Routes = [
         path: 'bilan',
         loadComponent: () =>
           import('../reports/components/bilan/bilan').then(m => m.BilanComponent)
+      },
+      {
+        path: 'resultat',
+        loadComponent: () =>
+          import('../reports/components/compte-resultat/compte-resultat').then(m => m.CompteResultatComponent)
+      },
+      {
+        path: 'plan-comptable',
+        loadComponent: () =>
+          import('./pages/plan-comptable/plan-comptable').then(m => m.PlanComptableComponent)
+      },
+      {
+        path: 'tva',
+        loadComponent: () =>
+          import('./pages/tva-declaration/tva-declaration').then(m => m.TvaDeclarationComponent)
+      },
+      {
+        path: 'lettrage',
+        loadComponent: () =>
+          import('./pages/lettrage/lettrage').then(m => m.LettrageComponent)
       }
     ]
   }

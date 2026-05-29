@@ -75,6 +75,33 @@
                 }
             </a>
 
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'plan-comptable']"
+               routerLinkActive="bg-slate-800 text-white border-blue-500"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+                <app-icon name="book-open" className="shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors"></app-icon>
+                @if (!isCollapsed) {
+                    <span class="text-sm font-medium whitespace-nowrap">Plan Comptable</span>
+                }
+            </a>
+
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'tva']"
+               routerLinkActive="bg-slate-800 text-white border-blue-500"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+                <app-icon name="receipt" className="shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors"></app-icon>
+                @if (!isCollapsed) {
+                    <span class="text-sm font-medium whitespace-nowrap">Déclaration TVA</span>
+                }
+            </a>
+
+            <a [routerLink]="['/tenant', tenantId, 'accounting', 'lettrage']"
+               routerLinkActive="bg-slate-800 text-white border-blue-500"
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+                <app-icon name="link" className="shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors"></app-icon>
+                @if (!isCollapsed) {
+                    <span class="text-sm font-medium whitespace-nowrap">Lettrage</span>
+                }
+            </a>
+
             <a [routerLink]="['/tenant', tenantId, 'invoicing']"
                routerLinkActive="bg-slate-800 text-white border-blue-500"
                class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
@@ -91,6 +118,15 @@
             <app-icon name="chart-column" className="shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors"></app-icon>
             @if (!isCollapsed) {
                 <span class="text-sm font-medium whitespace-nowrap">Bilan (Rapports)</span>
+            }
+        </a>
+
+        <a [routerLink]="['/tenant', tenantId, 'accounting', 'resultat']"
+           routerLinkActive="bg-slate-800 text-white border-blue-500"
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg border-l-4 border-transparent hover:bg-slate-800/70 hover:text-white transition-all group outline-none">
+            <app-icon name="trending-up" className="shrink-0 text-slate-400 group-hover:text-blue-400 transition-colors"></app-icon>
+            @if (!isCollapsed) {
+                <span class="text-sm font-medium whitespace-nowrap">C. de Résultat</span>
             }
         </a>
 
