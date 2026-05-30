@@ -15,7 +15,7 @@ export class AccountService {
    */
   getAccounts(entrepriseId: string): Observable<CompteOHADA[]> {
     const accounts = this.coreAccountService.accounts()
-      .filter(a => a.entrepriseId === entrepriseId && a.actif !== false); // Seulement les comptes actifs
+      .filter(a => a.entrepriseId === entrepriseId && a.actif !== false);
     return of(accounts);
   }
 }
