@@ -89,7 +89,7 @@ export class LettrageService {
         });
       });
 
-    let charCode = 65; // 'A'
+    let charCode = 65;
     let prefix = '';
     
     while (true) {
@@ -99,7 +99,7 @@ export class LettrageService {
       }
       
       charCode++;
-      if (charCode > 90) { // Dépassé 'Z'
+      if (charCode > 90) { 
         charCode = 65;
         prefix = prefix ? String.fromCharCode(prefix.charCodeAt(0) + 1) : 'A';
       }
