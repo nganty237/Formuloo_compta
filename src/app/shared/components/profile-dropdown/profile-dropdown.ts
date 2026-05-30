@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostListener, Output, EventEmitter, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ButtonComponent } from '../components/button/button';
-import { IconComponent } from '../components/icon/icon';
+import { ButtonComponent } from '../button/button';
+import { IconComponent } from '../icon/icon';
 
 @Component({
   selector: 'app-profile-dropdown',
