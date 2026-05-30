@@ -17,11 +17,6 @@ export const accountingRoutes: Routes = [
     ],
     children: [
       {
-        path: '',
-        loadComponent: () =>
-          import('./pages/accounting-home/accounting-home').then(m => m.AccountingHomeComponent)
-      },
-      {
         path: 'new-entry',
         loadComponent: () =>
           import('./containers/entry-container/entry-container').then(m => m.EntryContainerComponent)
