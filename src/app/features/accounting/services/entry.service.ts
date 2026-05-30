@@ -1,42 +1,36 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Ecriture } from '../../../core/models/ecriture.model';
-import { MOCK_ENTRIES } from '../../../core/mocks/mock-entries';
+import { JournalService } from './journal.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EntryService {
-    private entries: Ecriture[] = [...MOCK_ENTRIES];
+    private journalService = inject(JournalService);
 
     // Get all entries for a specific company
     getAll(entrepriseId: string): Observable<Ecriture[]> {
-        const data = this.entries.filter(e => e.entrepriseId === entrepriseId);
-        return of(data).pipe(delay(700));
+        return this.journalService.getJournal(entrepriseId);
     }
 
     // Get a single entry by ID
     getById(id: string): Observable<Ecriture | undefined> {
-        const entry = this.entries.find(e => e.id === id);
-        return of(entry).pipe(delay(700));
+        return this.journalService.getById(id);
     }
 
     // Create a new entry
     create(entry: Ecriture): Observable<Ecriture> {
-        const newEntry = { ...entry, id: `entry-${Date.now()}` };
-        this.entries = [...this.entries, newEntry];
-        return of(newEntry).pipe(delay(700));
+        return this.journalService.create(entry);
     }
 
     // Update an existing entry
     update(id: string, entry: Ecriture): Observable<Ecriture> {
-        this.entries = this.entries.map(e => e.id === id ? { ...entry, id } : e);
-        return of({ ...entry, id }).pipe(delay(700));
+        return this.journalService.update(id, entry);
     }
 
     // Delete an entry
     delete(id: string): Observable<boolean> {
-        this.entries = this.entries.filter(e => e.id !== id);
-        return of(true).pipe(delay(700));
+        return this.journalService.delete(id);
     }
 }

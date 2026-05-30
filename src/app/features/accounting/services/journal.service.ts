@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of, delay, map } from 'rxjs';
 import { Ecriture, JournalFilter, JournalStats } from '../../../core/models/ecriture.model';
-import { MOCK_ENTRIES } from '../../../core/mocks/mock-entries';
+import { MockDataService } from '../../../core/services/mock-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JournalService {
-  private entries: Ecriture[] = [...MOCK_ENTRIES];
+  private mockData = inject(MockDataService);
+
+  get entries(): Ecriture[] {
+    return this.mockData.entries;
+  }
 
   getJournal(entrepriseId: string): Observable<Ecriture[]> {
-    const data = this.entries.filter(e => e.entrepriseId === entrepriseId);
+    const data = this.mockData.entries.filter(e => e.entrepriseId === entrepriseId);
     return of(data).pipe(delay(500));
   }
 
@@ -18,7 +22,7 @@ export class JournalService {
     entrepriseId: string,
     filter: JournalFilter
   ): Observable<Ecriture[]> {
-    let filtered = this.entries.filter(e => e.entrepriseId === entrepriseId);
+    let filtered = this.mockData.entries.filter(e => e.entrepriseId === entrepriseId);
 
     if (filter.journalId) {
       filtered = filtered.filter(e => e.journalId === filter.journalId);
@@ -45,36 +49,44 @@ export class JournalService {
   }
 
   getById(id: string): Observable<Ecriture | undefined> {
-    const entry = this.entries.find(e => e.id === id);
+    const entry = this.mockData.entries.find(e => e.id === id);
     return of(entry).pipe(delay(300));
   }
 
   create(entry: Ecriture): Observable<Ecriture> {
     const newEntry: Ecriture = {
       ...entry,
-      id: `entry-${Date.now()}`,
+      id: entry.id || `entry-${Date.now()}`,
       createdAt: new Date().toISOString(),
       createdBy: 'current-user'
     };
-    this.entries = [...this.entries, newEntry];
+    this.mockData.entries.push(newEntry);
     return of(newEntry).pipe(delay(500));
   }
 
   update(id: string, entry: Ecriture): Observable<Ecriture> {
-    this.entries = this.entries.map(e => e.id === id ? { ...entry, id } : e);
-    return of({ ...entry, id }).pipe(delay(500));
+    const idx = this.mockData.entries.findIndex(e => e.id === id);
+    if (idx !== -1) {
+        this.mockData.entries[idx] = { ...entry, id };
+        return of(this.mockData.entries[idx]).pipe(delay(500));
+    }
+    throw new Error('Entry not found');
   }
 
   validate(id: string): Observable<Ecriture> {
-    const entry = this.entries.find(e => e.id === id);
+    const entry = this.mockData.entries.find(e => e.id === id);
     if (!entry) throw new Error('Entry not found');
     entry.valide = true;
     return of(entry).pipe(delay(300));
   }
 
   delete(id: string): Observable<boolean> {
-    this.entries = this.entries.filter(e => e.id !== id);
-    return of(true).pipe(delay(300));
+    const idx = this.mockData.entries.findIndex(e => e.id === id);
+    if (idx !== -1) {
+        this.mockData.entries.splice(idx, 1);
+        return of(true).pipe(delay(300));
+    }
+    return of(false);
   }
 
   getJournalStats(entrepriseId: string, filter?: JournalFilter): Observable<JournalStats> {

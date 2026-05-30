@@ -5,4 +5,5 @@ export interface CompteOHADA {
     intitule: string;
     classe: number;
     type: 'ACTIF' | 'PASSIF' | 'CHARGE' | 'PRODUIT';
+    actif?: boolean;
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button';
 
@@ -6,6 +6,7 @@ import { ButtonComponent } from '../button/button';
   selector: 'app-modal',
   standalone: true,
   imports: [CommonModule, ButtonComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './modal.html'
 })
 export class ModalComponent {

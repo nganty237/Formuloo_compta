@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LucideDynamicIcon } from '@lucide/angular';
 
 type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -7,6 +7,7 @@ type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   selector: 'app-icon',
   standalone: true,
   imports: [LucideDynamicIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <svg
       [lucideIcon]="name"

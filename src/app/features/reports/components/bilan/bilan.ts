@@ -49,13 +49,17 @@ export class BilanComponent implements OnInit {
   ngOnInit() {
     this.tenantContext.companyId$.pipe(
       switchMap(companyId => {
-        if (!companyId) return of([]);
-        return this.balanceService.getBalance(companyId, this.today.toISOString());
+        if (!companyId) return of(null);
+        // On prend l'année en cours pour le bilan
+        const year = this.today.getFullYear();
+        return this.balanceService.getBalance(companyId, `${year}-01-01`, `${year}-12-31`);
       })
     ).subscribe(data => {
+      if (!data) return;
+
       // Tri selon les règles du plan OHADA :
       // - Actif : Comptes de classe 2 (Immo), 3 (Stocks), 4 (Clients/Débiteurs), 5 (Trésorerie Actif) qui ont un solde débiteur.
-      this.actifs = data.filter(d => 
+      this.actifs = data.lignes.filter(d => 
         (d.numeroCompte.startsWith('2') || 
          d.numeroCompte.startsWith('3') || 
          (d.numeroCompte.startsWith('4') && d.soldeDebit > 0) || 
@@ -63,7 +67,7 @@ export class BilanComponent implements OnInit {
       );
 
       // - Passif : Comptes de classe 1 (Capitaux), 4 (Fournisseurs/Créditeurs) qui ont un solde créditeur.
-      this.passifs = data.filter(d => 
+      this.passifs = data.lignes.filter(d => 
         (d.numeroCompte.startsWith('1') || 
          (d.numeroCompte.startsWith('4') && d.soldeCredit > 0)) && d.soldeCredit > 0
       );

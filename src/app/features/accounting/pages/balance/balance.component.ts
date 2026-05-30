@@ -24,6 +24,10 @@ import { distinctUntilChanged, filter, finalize } from 'rxjs';
           </p>
         </div>
         <div>
+          <label class="block text-sm text-slate-600 mb-1">Date de début</label>
+          <input type="date" [(ngModel)]="dateDebut" class="border border-slate-300 rounded p-2">
+        </div>
+        <div>
           <label class="block text-sm text-slate-600 mb-1">Date de fin</label>
           <input type="date" [(ngModel)]="dateFin" class="border border-slate-300 rounded p-2">
         </div>
@@ -54,6 +58,7 @@ export class BalanceComponent implements OnInit {
 
   companyName$ = this.tenantContext.companyName$;
   selectedCompanyId = '';
+  dateDebut = `${new Date().getFullYear()}-01-01`;
   dateFin = new Date().toISOString().split('T')[0];
   isLoading = false;
 
@@ -62,7 +67,6 @@ export class BalanceComponent implements OnInit {
   totalCredit = 0;
   isBalanced = false;
 
-  // On adapte les clés aux propriétés de votre LigneBalance existante !
   columns: TableColumn[] = [
     { key: 'numeroCompte', label: 'N° Compte', type: 'text' },
     { key: 'intituleCompte', label: 'Intitulé', type: 'text' },
@@ -92,20 +96,20 @@ export class BalanceComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.balanceService.getBalance(this.selectedCompanyId, this.dateFin).pipe(
+    this.balanceService.getBalance(this.selectedCompanyId, this.dateDebut, this.dateFin).pipe(
       finalize(() => {
         this.isLoading = false;
       }),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(data => {
-      this.displayData = data;
-      this.calculateTotals(data);
+      this.displayData = data.lignes;
+      this.calculateTotals(data.lignes);
     });
   }
 
   private calculateTotals(data: LigneBalance[]) {
     this.totalDebit = data.reduce((acc, curr) => acc + curr.totalDebit, 0);
     this.totalCredit = data.reduce((acc, curr) => acc + curr.totalCredit, 0);
-    this.isBalanced = this.totalDebit === this.totalCredit;
+    this.isBalanced = Math.abs(this.totalDebit - this.totalCredit) < 0.01;
   }
 }

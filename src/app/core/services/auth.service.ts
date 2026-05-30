@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type UserRole = 'ADMIN' | 'COMPTABLE' | 'CLIENT';
+export type UserRole = 'SUPER_ADMIN' | 'ADMIN' | 'COMPTABLE' | 'CLIENT';
 
 export interface User {
   id: string;
@@ -22,11 +22,21 @@ export class AuthService {
   
   public currentUser$ = this.currentUserSubject.asObservable();
 
+  updateRole(role: UserRole): void {
+    this.currentUserSubject.next({
+      ...this.currentUserSubject.value,
+      role
+    });
+  }
+
   // Méthode utile pour la directive
   hasRole(expectedRole: UserRole | UserRole[]): boolean {
     const user = this.currentUserSubject.value;
     if (!user) return false;
     
+    // Super Admin a tous les droits
+    if (user.role === 'SUPER_ADMIN') return true;
+
     if (Array.isArray(expectedRole)) {
       return expectedRole.includes(user.role);
     }
