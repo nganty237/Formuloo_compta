@@ -43,7 +43,7 @@ export class SignupComponent {
       
       // Simulation d'une création réussie et redirection directe vers le dashboard
       // On utilise le même ID de tenant fictif que pour le login pour l'instant
-      this.router.navigate(['/tenant/tenant-123/dashboard']);
+      this.router.navigate(['/tenant/ENT-001/dashboard']);
     } else {
       this.signupForm.markAllAsTouched();
     }

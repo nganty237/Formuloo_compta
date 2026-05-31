@@ -23,7 +23,7 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Connexion :', this.loginForm.value);
-      this.router.navigate(['/tenant/tenant-123/dashboard']);
+      this.router.navigate(['/tenant/ENT-001/dashboard']);
     }
   }
 

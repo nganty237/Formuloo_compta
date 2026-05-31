@@ -6,7 +6,7 @@ import { TenantContextService } from '../../../../core/services/tenant-context.s
 import { BalanceService, LigneBalance } from '../../services/balance.service';
 import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
 import { ButtonComponent } from '../../../../shared/components/button/button';
-import { distinctUntilChanged, filter, finalize } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, timeout, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-balance',
@@ -97,6 +97,11 @@ export class BalanceComponent implements OnInit {
 
     this.isLoading = true;
     this.balanceService.getBalance(this.selectedCompanyId, this.dateDebut, this.dateFin).pipe(
+      timeout(5000),
+      catchError(err => {
+        console.error('Erreur lors du chargement de la balance:', err);
+        return of({ lignes: [], totalMvtDebit: 0, totalMvtCredit: 0, totalSoldeDebit: 0, totalSoldeCredit: 0, isBalanced: true, classeGroups: [] });
+      }),
       finalize(() => {
         this.isLoading = false;
       }),

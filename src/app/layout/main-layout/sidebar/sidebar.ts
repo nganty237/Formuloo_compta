@@ -17,12 +17,20 @@ export class Sidebar implements OnInit {
   @Input() isCollapsed: boolean = false;
   @Output() toggleCollapse = new EventEmitter<void>();
 
-  tenantId: string = 'tenant-123';
+  tenantId: string = '';
 
   ngOnInit() {
-    const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
-    if (urlTenantId) {
-      this.tenantId = urlTenantId;
+    // Récupérer l'ID de l'entreprise (nommé 'id' dans la route /tenant/:id)
+    const urlId = this.route.snapshot.paramMap.get('id');
+    if (urlId) {
+      this.tenantId = urlId;
+    } else {
+      // Si on est sur une route enfant (ex: /tenant/ENT-001/dashboard), 
+      // il faut parfois regarder le parent selon la structure
+      const parentId = this.route.parent?.snapshot.paramMap.get('id');
+      if (parentId) {
+        this.tenantId = parentId;
+      }
     }
   }
 

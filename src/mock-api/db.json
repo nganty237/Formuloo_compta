@@ -1,0 +1,5600 @@
+{
+  "tenants": [
+    {
+      "id": "tenant-1",
+      "nom": "Cabinet Audit & Co",
+      "pays": "Côte d'Ivoire",
+      "devise": "XOF",
+      "planTarifaire": "PREMIUM"
+    },
+    {
+      "id": "tenant-2",
+      "nom": "Sénégal Expertise",
+      "pays": "Sénégal",
+      "devise": "XOF",
+      "planTarifaire": "PRO"
+    }
+  ],
+  "users": [
+    {
+      "id": "user-1",
+      "tenantId": "tenant-1",
+      "email": "admin@audit-co.ci",
+      "role": "ADMIN"
+    },
+    {
+      "id": "user-2",
+      "tenantId": "tenant-1",
+      "email": "jean@audit-co.ci",
+      "role": "COMPTABLE"
+    },
+    {
+      "id": "user-3",
+      "tenantId": "tenant-2",
+      "email": "client@senegal-expertise.sn",
+      "role": "CLIENT"
+    },
+    {
+      "id": "user-0",
+      "tenantId": null,
+      "email": "admin@formuloo.com",
+      "role": "SUPER_ADMIN"
+    }
+  ],
+  "entreprises": [
+    {
+      "id": "ENT-001",
+      "tenantId": "tenant-1",
+      "nom": "Tech Africa cameroun",
+      "ninea": "123456789",
+      "rccm": "SN.DKR.2023.B.123",
+      "adresse": "Plateau, camer",
+      "pays": "Cameroun",
+      "devise": "XAF"
+    },
+    {
+      "id": "ENT-002",
+      "tenantId": "tenant-1",
+      "nom": "Boutique Maman",
+      "ninea": "987654321",
+      "rccm": "SN.DKR.2023.A.456",
+      "adresse": "Médina, camer",
+      "pays": "Cameroun",
+      "devise": "XAF"
+    },
+    {
+      "id": "ENT-003",
+      "tenantId": "tenant-2",
+      "nom": "Consulting Services",
+      "ninea": "112233445",
+      "rccm": "SN.DKR.2022.B.789",
+      "adresse": "Almadies, camer",
+      "pays": "Sénégal",
+      "devise": "XOF"
+    }
+  ],
+  "comptes": [
+    {
+      "id": "cpt-101",
+      "entrepriseId": "ENT-001",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-162",
+      "entrepriseId": "ENT-001",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-211",
+      "entrepriseId": "ENT-001",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-241",
+      "entrepriseId": "ENT-001",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-244",
+      "entrepriseId": "ENT-001",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-311",
+      "entrepriseId": "ENT-001",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-401",
+      "entrepriseId": "ENT-001",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-411",
+      "entrepriseId": "ENT-001",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-421",
+      "entrepriseId": "ENT-001",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-431",
+      "entrepriseId": "ENT-001",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-443",
+      "entrepriseId": "ENT-001",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF"
+    },
+    {
+      "id": "cpt-445",
+      "entrepriseId": "ENT-001",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-521",
+      "entrepriseId": "ENT-001",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-571",
+      "entrepriseId": "ENT-001",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF"
+    },
+    {
+      "id": "cpt-601",
+      "entrepriseId": "ENT-001",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE"
+    },
+    {
+      "id": "cpt-622",
+      "entrepriseId": "ENT-001",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE"
+    },
+    {
+      "id": "cpt-661",
+      "entrepriseId": "ENT-001",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE"
+    },
+    {
+      "id": "cpt-701",
+      "entrepriseId": "ENT-001",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT"
+    },
+    {
+      "id": "cpt-706",
+      "entrepriseId": "ENT-001",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT"
+    },
+    {
+      "id": "cpt-821",
+      "entrepriseId": "ENT-001",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "Za8jGPVGpKU",
+      "actif": true
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "O8cAqzlfMH8"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "UXnvVe6DVC8"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "LIgbqYxoxpQ"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "sBJOL75Cosc"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "yrGPe1RWGBc"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "Rr9FyRVXz5s"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "qGDbrAlJgxQ"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "o0N2fCp2UOA"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "7S5K1VdWKgk"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "M4lV8IQBGOs"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "cmsij-A0iDI"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "vYLgeeNZgWU"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "PdRW_qKXzHs"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "XKypSDyENNU"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "iafGdP5cGCc"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "rgwkpopKgsY",
+      "actif": true
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "ZqgF4BRYlg4"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "CqULipWtLW4"
+    },
+    {
+      "entrepriseId": "ENT-002",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "jEwkRoL8z-Y"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "Z-dW372NPTU"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "Ftk6DTG6YYM"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "kKQK6O2J91c"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "-52RflfNZE8"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "HAgYy_0BzCs"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "l50wgf_b_K8"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "yyXjrLTqLKA"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "thtEf9ca_4I"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "779GIT3Bs2s"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "GW7wQzWjJyQ"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "c-UyxNPeclM"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "w7ynsE2ijO0"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "yUtPMoPFglk"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "pjXrL9povX4"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "K7DdaCwEqdo"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "x2qajUQtSyg"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "t8xMJCcShL0"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "gncFdascwXI"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "7jyqmTp9s2k"
+    },
+    {
+      "entrepriseId": "ENT-003",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "cGi7uxmNQ8I"
+    }
+  ],
+  "journaux": [
+    {
+      "id": "ACH",
+      "tenantId": "tenant-1",
+      "code": "ACH",
+      "intitule": "Journal des achats"
+    },
+    {
+      "id": "VTE",
+      "tenantId": "tenant-1",
+      "code": "VTE",
+      "intitule": "Journal des ventes"
+    },
+    {
+      "id": "BQ",
+      "tenantId": "tenant-1",
+      "code": "BQ",
+      "intitule": "Journal de banque"
+    },
+    {
+      "id": "OD",
+      "tenantId": "tenant-1",
+      "code": "OD",
+      "intitule": "Opérations diverses"
+    }
+  ],
+  "ecritures": [
+    {
+      "id": "entry-1",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-01-10",
+      "libelle": "Achat de marchandises",
+      "valide": true
+    },
+    {
+      "id": "entry-2",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-01-15",
+      "libelle": "Vente de services",
+      "valide": true
+    },
+    {
+      "id": "entry-3",
+      "entrepriseId": "ENT-001",
+      "journalId": "BQ",
+      "date": "2024-01-18",
+      "libelle": "Paiement fournisseur",
+      "valide": false
+    },
+    {
+      "id": "entry-4",
+      "entrepriseId": "ENT-001",
+      "journalId": "BQ",
+      "date": "2024-01-20",
+      "libelle": "Encaissement client",
+      "valide": false
+    },
+    {
+      "id": "entry-5",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2024-01-31",
+      "libelle": "Provision salaires",
+      "valide": false
+    },
+    {
+      "id": "6fCX2rksOf8",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-05-30",
+      "libelle": "achat de voitures",
+      "valide": true,
+      "createdAt": "2026-05-30T22:15:52.664Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "load-entry-1",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°1",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.868Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-2",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°2",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-3",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°3",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-4",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°4",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-5",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°5",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-6",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°6",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-7",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°7",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-8",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°8",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-9",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°9",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-10",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°10",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-11",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°11",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-12",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°12",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-13",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°13",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-14",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°14",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-15",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°15",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-16",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°16",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-17",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°17",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-18",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°18",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-19",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°19",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-20",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°20",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-21",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°21",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-22",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°22",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-23",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°23",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-24",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°24",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-25",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°25",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-26",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°26",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-27",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°27",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-28",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°28",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-29",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°29",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-30",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°30",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-31",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°31",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-32",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°32",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-33",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°33",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-34",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°34",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-35",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°35",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-36",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°36",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-37",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°37",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-38",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°38",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-39",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°39",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-40",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°40",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-41",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°41",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-42",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°42",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-43",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°43",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-44",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°44",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-45",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°45",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-46",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°46",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-47",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°47",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-48",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°48",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-49",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°49",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-50",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°50",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-51",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°51",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-52",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°52",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-53",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°53",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-54",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°54",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-55",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°55",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-56",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°56",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-57",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°57",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-58",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°58",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-59",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°59",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-60",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°60",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-61",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°61",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-62",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°62",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-63",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°63",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-64",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°64",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-65",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°65",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-66",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°66",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-67",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°67",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-68",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°68",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-69",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°69",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-70",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°70",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-71",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°71",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-72",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°72",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-73",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°73",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-74",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°74",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-75",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°75",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-76",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°76",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-77",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°77",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-78",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°78",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-79",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°79",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-80",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°80",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-81",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°81",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-82",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°82",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-83",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°83",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-84",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°84",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-85",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°85",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-86",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°86",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-87",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°87",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-88",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°88",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-89",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°89",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-90",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°90",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.869Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-91",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°91",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-92",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°92",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-93",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°93",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-94",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°94",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-95",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°95",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-96",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°96",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-97",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°97",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-98",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°98",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-99",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°99",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-100",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°100",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-101",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°101",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-102",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°102",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-103",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°103",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-104",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°104",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-105",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°105",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-106",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°106",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-107",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°107",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-108",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°108",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-109",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°109",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-110",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°110",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-111",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°111",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-112",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°112",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-113",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°113",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-114",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°114",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-115",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°115",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-116",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°116",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-117",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°117",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-118",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°118",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-119",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°119",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-120",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°120",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-121",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°121",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-122",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°122",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-123",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°123",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-124",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°124",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-125",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°125",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-126",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°126",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-127",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°127",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-128",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°128",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-129",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°129",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-130",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°130",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-131",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°131",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-132",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°132",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-133",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°133",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-134",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°134",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-135",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°135",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-136",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°136",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-137",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°137",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-138",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°138",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-139",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°139",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-140",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°140",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-141",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°141",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-142",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°142",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-143",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°143",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-144",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°144",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-145",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°145",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-146",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°146",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-147",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°147",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-148",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°148",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-149",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°149",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-150",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°150",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-151",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°151",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-152",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°152",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-153",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°153",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-154",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°154",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-155",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°155",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-156",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°156",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-157",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°157",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-158",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°158",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-159",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°159",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-160",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°160",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-161",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°161",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-162",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°162",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-163",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°163",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-164",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°164",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-165",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°165",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-166",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°166",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-167",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°167",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-168",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°168",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-169",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°169",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-170",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°170",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-171",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°171",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-172",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°172",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-173",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-06",
+      "libelle": "Écriture de test de charge n°173",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-174",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-07",
+      "libelle": "Écriture de test de charge n°174",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-175",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-08",
+      "libelle": "Écriture de test de charge n°175",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-176",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-09",
+      "libelle": "Écriture de test de charge n°176",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-177",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-010",
+      "libelle": "Écriture de test de charge n°177",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-178",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-011",
+      "libelle": "Écriture de test de charge n°178",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-179",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-012",
+      "libelle": "Écriture de test de charge n°179",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-180",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-013",
+      "libelle": "Écriture de test de charge n°180",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-181",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-014",
+      "libelle": "Écriture de test de charge n°181",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-182",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-015",
+      "libelle": "Écriture de test de charge n°182",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-183",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-016",
+      "libelle": "Écriture de test de charge n°183",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-184",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-017",
+      "libelle": "Écriture de test de charge n°184",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-185",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-018",
+      "libelle": "Écriture de test de charge n°185",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-186",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-019",
+      "libelle": "Écriture de test de charge n°186",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-187",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-020",
+      "libelle": "Écriture de test de charge n°187",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-188",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-021",
+      "libelle": "Écriture de test de charge n°188",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-189",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-022",
+      "libelle": "Écriture de test de charge n°189",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-190",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-023",
+      "libelle": "Écriture de test de charge n°190",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-191",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-024",
+      "libelle": "Écriture de test de charge n°191",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-192",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-025",
+      "libelle": "Écriture de test de charge n°192",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-193",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-026",
+      "libelle": "Écriture de test de charge n°193",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-194",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-027",
+      "libelle": "Écriture de test de charge n°194",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-195",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-028",
+      "libelle": "Écriture de test de charge n°195",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-196",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-01",
+      "libelle": "Écriture de test de charge n°196",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-197",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-02",
+      "libelle": "Écriture de test de charge n°197",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-198",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-03",
+      "libelle": "Écriture de test de charge n°198",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-199",
+      "entrepriseId": "ENT-001",
+      "journalId": "ACH",
+      "date": "2024-02-04",
+      "libelle": "Écriture de test de charge n°199",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    },
+    {
+      "id": "load-entry-200",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2024-02-05",
+      "libelle": "Écriture de test de charge n°200",
+      "valide": true,
+      "createdAt": "2026-05-31T02:27:44.870Z",
+      "createdBy": "load-tester"
+    }
+  ],
+  "lignes": [
+    {
+      "id": "l1",
+      "ecritureId": "entry-1",
+      "compteId": "cpt-601",
+      "debit": 500000,
+      "credit": 0
+    },
+    {
+      "id": "l2",
+      "ecritureId": "entry-1",
+      "compteId": "cpt-445",
+      "debit": 90000,
+      "credit": 0
+    },
+    {
+      "id": "l3",
+      "ecritureId": "entry-1",
+      "compteId": "cpt-401",
+      "debit": 0,
+      "credit": 590000
+    },
+    {
+      "id": "l4",
+      "ecritureId": "entry-2",
+      "compteId": "cpt-411",
+      "debit": 1180000,
+      "credit": 0
+    },
+    {
+      "id": "l5",
+      "ecritureId": "entry-2",
+      "compteId": "cpt-706",
+      "debit": 0,
+      "credit": 1000000
+    },
+    {
+      "id": "l6",
+      "ecritureId": "entry-2",
+      "compteId": "cpt-443",
+      "debit": 0,
+      "credit": 180000
+    },
+    {
+      "id": "l7",
+      "ecritureId": "entry-3",
+      "compteId": "cpt-401",
+      "debit": 590000,
+      "credit": 0
+    },
+    {
+      "id": "l8",
+      "ecritureId": "entry-3",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 590000
+    },
+    {
+      "id": "l9",
+      "ecritureId": "entry-4",
+      "compteId": "cpt-521",
+      "debit": 1180000,
+      "credit": 0
+    },
+    {
+      "id": "l10",
+      "ecritureId": "entry-4",
+      "compteId": "cpt-411",
+      "debit": 0,
+      "credit": 1180000
+    },
+    {
+      "id": "l11",
+      "ecritureId": "entry-5",
+      "compteId": "cpt-661",
+      "debit": 2000000,
+      "credit": 0
+    },
+    {
+      "id": "l12",
+      "ecritureId": "entry-5",
+      "compteId": "cpt-421",
+      "debit": 0,
+      "credit": 2000000
+    },
+    {
+      "ecritureId": "6fCX2rksOf8",
+      "compteId": "cpt-601",
+      "debit": 1000,
+      "credit": 0,
+      "id": "45hlDUinIf0"
+    },
+    {
+      "ecritureId": "6fCX2rksOf8",
+      "compteId": "cpt-401",
+      "debit": 0,
+      "credit": 1000,
+      "id": "qX1GEaHP4xg"
+    },
+    {
+      "id": "load-l-1-1",
+      "ecritureId": "load-entry-1",
+      "compteId": "cpt-601",
+      "debit": 123062,
+      "credit": 0
+    },
+    {
+      "id": "load-l-1-2",
+      "ecritureId": "load-entry-1",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 123062
+    },
+    {
+      "id": "load-l-2-1",
+      "ecritureId": "load-entry-2",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 314110
+    },
+    {
+      "id": "load-l-2-2",
+      "ecritureId": "load-entry-2",
+      "compteId": "cpt-521",
+      "debit": 314110,
+      "credit": 0
+    },
+    {
+      "id": "load-l-3-1",
+      "ecritureId": "load-entry-3",
+      "compteId": "cpt-601",
+      "debit": 971496,
+      "credit": 0
+    },
+    {
+      "id": "load-l-3-2",
+      "ecritureId": "load-entry-3",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 971496
+    },
+    {
+      "id": "load-l-4-1",
+      "ecritureId": "load-entry-4",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 902965
+    },
+    {
+      "id": "load-l-4-2",
+      "ecritureId": "load-entry-4",
+      "compteId": "cpt-521",
+      "debit": 902965,
+      "credit": 0
+    },
+    {
+      "id": "load-l-5-1",
+      "ecritureId": "load-entry-5",
+      "compteId": "cpt-601",
+      "debit": 319075,
+      "credit": 0
+    },
+    {
+      "id": "load-l-5-2",
+      "ecritureId": "load-entry-5",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 319075
+    },
+    {
+      "id": "load-l-6-1",
+      "ecritureId": "load-entry-6",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 242641
+    },
+    {
+      "id": "load-l-6-2",
+      "ecritureId": "load-entry-6",
+      "compteId": "cpt-521",
+      "debit": 242641,
+      "credit": 0
+    },
+    {
+      "id": "load-l-7-1",
+      "ecritureId": "load-entry-7",
+      "compteId": "cpt-601",
+      "debit": 840753,
+      "credit": 0
+    },
+    {
+      "id": "load-l-7-2",
+      "ecritureId": "load-entry-7",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 840753
+    },
+    {
+      "id": "load-l-8-1",
+      "ecritureId": "load-entry-8",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 837475
+    },
+    {
+      "id": "load-l-8-2",
+      "ecritureId": "load-entry-8",
+      "compteId": "cpt-521",
+      "debit": 837475,
+      "credit": 0
+    },
+    {
+      "id": "load-l-9-1",
+      "ecritureId": "load-entry-9",
+      "compteId": "cpt-601",
+      "debit": 703036,
+      "credit": 0
+    },
+    {
+      "id": "load-l-9-2",
+      "ecritureId": "load-entry-9",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 703036
+    },
+    {
+      "id": "load-l-10-1",
+      "ecritureId": "load-entry-10",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 627520
+    },
+    {
+      "id": "load-l-10-2",
+      "ecritureId": "load-entry-10",
+      "compteId": "cpt-521",
+      "debit": 627520,
+      "credit": 0
+    },
+    {
+      "id": "load-l-11-1",
+      "ecritureId": "load-entry-11",
+      "compteId": "cpt-601",
+      "debit": 553452,
+      "credit": 0
+    },
+    {
+      "id": "load-l-11-2",
+      "ecritureId": "load-entry-11",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 553452
+    },
+    {
+      "id": "load-l-12-1",
+      "ecritureId": "load-entry-12",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 470447
+    },
+    {
+      "id": "load-l-12-2",
+      "ecritureId": "load-entry-12",
+      "compteId": "cpt-521",
+      "debit": 470447,
+      "credit": 0
+    },
+    {
+      "id": "load-l-13-1",
+      "ecritureId": "load-entry-13",
+      "compteId": "cpt-601",
+      "debit": 874587,
+      "credit": 0
+    },
+    {
+      "id": "load-l-13-2",
+      "ecritureId": "load-entry-13",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 874587
+    },
+    {
+      "id": "load-l-14-1",
+      "ecritureId": "load-entry-14",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 570170
+    },
+    {
+      "id": "load-l-14-2",
+      "ecritureId": "load-entry-14",
+      "compteId": "cpt-521",
+      "debit": 570170,
+      "credit": 0
+    },
+    {
+      "id": "load-l-15-1",
+      "ecritureId": "load-entry-15",
+      "compteId": "cpt-601",
+      "debit": 825862,
+      "credit": 0
+    },
+    {
+      "id": "load-l-15-2",
+      "ecritureId": "load-entry-15",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 825862
+    },
+    {
+      "id": "load-l-16-1",
+      "ecritureId": "load-entry-16",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 156527
+    },
+    {
+      "id": "load-l-16-2",
+      "ecritureId": "load-entry-16",
+      "compteId": "cpt-521",
+      "debit": 156527,
+      "credit": 0
+    },
+    {
+      "id": "load-l-17-1",
+      "ecritureId": "load-entry-17",
+      "compteId": "cpt-601",
+      "debit": 323961,
+      "credit": 0
+    },
+    {
+      "id": "load-l-17-2",
+      "ecritureId": "load-entry-17",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 323961
+    },
+    {
+      "id": "load-l-18-1",
+      "ecritureId": "load-entry-18",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 259150
+    },
+    {
+      "id": "load-l-18-2",
+      "ecritureId": "load-entry-18",
+      "compteId": "cpt-521",
+      "debit": 259150,
+      "credit": 0
+    },
+    {
+      "id": "load-l-19-1",
+      "ecritureId": "load-entry-19",
+      "compteId": "cpt-601",
+      "debit": 121066,
+      "credit": 0
+    },
+    {
+      "id": "load-l-19-2",
+      "ecritureId": "load-entry-19",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 121066
+    },
+    {
+      "id": "load-l-20-1",
+      "ecritureId": "load-entry-20",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 383633
+    },
+    {
+      "id": "load-l-20-2",
+      "ecritureId": "load-entry-20",
+      "compteId": "cpt-521",
+      "debit": 383633,
+      "credit": 0
+    },
+    {
+      "id": "load-l-21-1",
+      "ecritureId": "load-entry-21",
+      "compteId": "cpt-601",
+      "debit": 215262,
+      "credit": 0
+    },
+    {
+      "id": "load-l-21-2",
+      "ecritureId": "load-entry-21",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 215262
+    },
+    {
+      "id": "load-l-22-1",
+      "ecritureId": "load-entry-22",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 387915
+    },
+    {
+      "id": "load-l-22-2",
+      "ecritureId": "load-entry-22",
+      "compteId": "cpt-521",
+      "debit": 387915,
+      "credit": 0
+    },
+    {
+      "id": "load-l-23-1",
+      "ecritureId": "load-entry-23",
+      "compteId": "cpt-601",
+      "debit": 222999,
+      "credit": 0
+    },
+    {
+      "id": "load-l-23-2",
+      "ecritureId": "load-entry-23",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 222999
+    },
+    {
+      "id": "load-l-24-1",
+      "ecritureId": "load-entry-24",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 343299
+    },
+    {
+      "id": "load-l-24-2",
+      "ecritureId": "load-entry-24",
+      "compteId": "cpt-521",
+      "debit": 343299,
+      "credit": 0
+    },
+    {
+      "id": "load-l-25-1",
+      "ecritureId": "load-entry-25",
+      "compteId": "cpt-601",
+      "debit": 108934,
+      "credit": 0
+    },
+    {
+      "id": "load-l-25-2",
+      "ecritureId": "load-entry-25",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 108934
+    },
+    {
+      "id": "load-l-26-1",
+      "ecritureId": "load-entry-26",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 872633
+    },
+    {
+      "id": "load-l-26-2",
+      "ecritureId": "load-entry-26",
+      "compteId": "cpt-521",
+      "debit": 872633,
+      "credit": 0
+    },
+    {
+      "id": "load-l-27-1",
+      "ecritureId": "load-entry-27",
+      "compteId": "cpt-601",
+      "debit": 864130,
+      "credit": 0
+    },
+    {
+      "id": "load-l-27-2",
+      "ecritureId": "load-entry-27",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 864130
+    },
+    {
+      "id": "load-l-28-1",
+      "ecritureId": "load-entry-28",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 381128
+    },
+    {
+      "id": "load-l-28-2",
+      "ecritureId": "load-entry-28",
+      "compteId": "cpt-521",
+      "debit": 381128,
+      "credit": 0
+    },
+    {
+      "id": "load-l-29-1",
+      "ecritureId": "load-entry-29",
+      "compteId": "cpt-601",
+      "debit": 723890,
+      "credit": 0
+    },
+    {
+      "id": "load-l-29-2",
+      "ecritureId": "load-entry-29",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 723890
+    },
+    {
+      "id": "load-l-30-1",
+      "ecritureId": "load-entry-30",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 812778
+    },
+    {
+      "id": "load-l-30-2",
+      "ecritureId": "load-entry-30",
+      "compteId": "cpt-521",
+      "debit": 812778,
+      "credit": 0
+    },
+    {
+      "id": "load-l-31-1",
+      "ecritureId": "load-entry-31",
+      "compteId": "cpt-601",
+      "debit": 736632,
+      "credit": 0
+    },
+    {
+      "id": "load-l-31-2",
+      "ecritureId": "load-entry-31",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 736632
+    },
+    {
+      "id": "load-l-32-1",
+      "ecritureId": "load-entry-32",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 229972
+    },
+    {
+      "id": "load-l-32-2",
+      "ecritureId": "load-entry-32",
+      "compteId": "cpt-521",
+      "debit": 229972,
+      "credit": 0
+    },
+    {
+      "id": "load-l-33-1",
+      "ecritureId": "load-entry-33",
+      "compteId": "cpt-601",
+      "debit": 259368,
+      "credit": 0
+    },
+    {
+      "id": "load-l-33-2",
+      "ecritureId": "load-entry-33",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 259368
+    },
+    {
+      "id": "load-l-34-1",
+      "ecritureId": "load-entry-34",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 818377
+    },
+    {
+      "id": "load-l-34-2",
+      "ecritureId": "load-entry-34",
+      "compteId": "cpt-521",
+      "debit": 818377,
+      "credit": 0
+    },
+    {
+      "id": "load-l-35-1",
+      "ecritureId": "load-entry-35",
+      "compteId": "cpt-601",
+      "debit": 904156,
+      "credit": 0
+    },
+    {
+      "id": "load-l-35-2",
+      "ecritureId": "load-entry-35",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 904156
+    },
+    {
+      "id": "load-l-36-1",
+      "ecritureId": "load-entry-36",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 304407
+    },
+    {
+      "id": "load-l-36-2",
+      "ecritureId": "load-entry-36",
+      "compteId": "cpt-521",
+      "debit": 304407,
+      "credit": 0
+    },
+    {
+      "id": "load-l-37-1",
+      "ecritureId": "load-entry-37",
+      "compteId": "cpt-601",
+      "debit": 902051,
+      "credit": 0
+    },
+    {
+      "id": "load-l-37-2",
+      "ecritureId": "load-entry-37",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 902051
+    },
+    {
+      "id": "load-l-38-1",
+      "ecritureId": "load-entry-38",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 986556
+    },
+    {
+      "id": "load-l-38-2",
+      "ecritureId": "load-entry-38",
+      "compteId": "cpt-521",
+      "debit": 986556,
+      "credit": 0
+    },
+    {
+      "id": "load-l-39-1",
+      "ecritureId": "load-entry-39",
+      "compteId": "cpt-601",
+      "debit": 141609,
+      "credit": 0
+    },
+    {
+      "id": "load-l-39-2",
+      "ecritureId": "load-entry-39",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 141609
+    },
+    {
+      "id": "load-l-40-1",
+      "ecritureId": "load-entry-40",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 593491
+    },
+    {
+      "id": "load-l-40-2",
+      "ecritureId": "load-entry-40",
+      "compteId": "cpt-521",
+      "debit": 593491,
+      "credit": 0
+    },
+    {
+      "id": "load-l-41-1",
+      "ecritureId": "load-entry-41",
+      "compteId": "cpt-601",
+      "debit": 761311,
+      "credit": 0
+    },
+    {
+      "id": "load-l-41-2",
+      "ecritureId": "load-entry-41",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 761311
+    },
+    {
+      "id": "load-l-42-1",
+      "ecritureId": "load-entry-42",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 115370
+    },
+    {
+      "id": "load-l-42-2",
+      "ecritureId": "load-entry-42",
+      "compteId": "cpt-521",
+      "debit": 115370,
+      "credit": 0
+    },
+    {
+      "id": "load-l-43-1",
+      "ecritureId": "load-entry-43",
+      "compteId": "cpt-601",
+      "debit": 377036,
+      "credit": 0
+    },
+    {
+      "id": "load-l-43-2",
+      "ecritureId": "load-entry-43",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 377036
+    },
+    {
+      "id": "load-l-44-1",
+      "ecritureId": "load-entry-44",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 894488
+    },
+    {
+      "id": "load-l-44-2",
+      "ecritureId": "load-entry-44",
+      "compteId": "cpt-521",
+      "debit": 894488,
+      "credit": 0
+    },
+    {
+      "id": "load-l-45-1",
+      "ecritureId": "load-entry-45",
+      "compteId": "cpt-601",
+      "debit": 926873,
+      "credit": 0
+    },
+    {
+      "id": "load-l-45-2",
+      "ecritureId": "load-entry-45",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 926873
+    },
+    {
+      "id": "load-l-46-1",
+      "ecritureId": "load-entry-46",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 845292
+    },
+    {
+      "id": "load-l-46-2",
+      "ecritureId": "load-entry-46",
+      "compteId": "cpt-521",
+      "debit": 845292,
+      "credit": 0
+    },
+    {
+      "id": "load-l-47-1",
+      "ecritureId": "load-entry-47",
+      "compteId": "cpt-601",
+      "debit": 413191,
+      "credit": 0
+    },
+    {
+      "id": "load-l-47-2",
+      "ecritureId": "load-entry-47",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 413191
+    },
+    {
+      "id": "load-l-48-1",
+      "ecritureId": "load-entry-48",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 677498
+    },
+    {
+      "id": "load-l-48-2",
+      "ecritureId": "load-entry-48",
+      "compteId": "cpt-521",
+      "debit": 677498,
+      "credit": 0
+    },
+    {
+      "id": "load-l-49-1",
+      "ecritureId": "load-entry-49",
+      "compteId": "cpt-601",
+      "debit": 478488,
+      "credit": 0
+    },
+    {
+      "id": "load-l-49-2",
+      "ecritureId": "load-entry-49",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 478488
+    },
+    {
+      "id": "load-l-50-1",
+      "ecritureId": "load-entry-50",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 19119
+    },
+    {
+      "id": "load-l-50-2",
+      "ecritureId": "load-entry-50",
+      "compteId": "cpt-521",
+      "debit": 19119,
+      "credit": 0
+    },
+    {
+      "id": "load-l-51-1",
+      "ecritureId": "load-entry-51",
+      "compteId": "cpt-601",
+      "debit": 955686,
+      "credit": 0
+    },
+    {
+      "id": "load-l-51-2",
+      "ecritureId": "load-entry-51",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 955686
+    },
+    {
+      "id": "load-l-52-1",
+      "ecritureId": "load-entry-52",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 437260
+    },
+    {
+      "id": "load-l-52-2",
+      "ecritureId": "load-entry-52",
+      "compteId": "cpt-521",
+      "debit": 437260,
+      "credit": 0
+    },
+    {
+      "id": "load-l-53-1",
+      "ecritureId": "load-entry-53",
+      "compteId": "cpt-601",
+      "debit": 52891,
+      "credit": 0
+    },
+    {
+      "id": "load-l-53-2",
+      "ecritureId": "load-entry-53",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 52891
+    },
+    {
+      "id": "load-l-54-1",
+      "ecritureId": "load-entry-54",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 255614
+    },
+    {
+      "id": "load-l-54-2",
+      "ecritureId": "load-entry-54",
+      "compteId": "cpt-521",
+      "debit": 255614,
+      "credit": 0
+    },
+    {
+      "id": "load-l-55-1",
+      "ecritureId": "load-entry-55",
+      "compteId": "cpt-601",
+      "debit": 134821,
+      "credit": 0
+    },
+    {
+      "id": "load-l-55-2",
+      "ecritureId": "load-entry-55",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 134821
+    },
+    {
+      "id": "load-l-56-1",
+      "ecritureId": "load-entry-56",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 48541
+    },
+    {
+      "id": "load-l-56-2",
+      "ecritureId": "load-entry-56",
+      "compteId": "cpt-521",
+      "debit": 48541,
+      "credit": 0
+    },
+    {
+      "id": "load-l-57-1",
+      "ecritureId": "load-entry-57",
+      "compteId": "cpt-601",
+      "debit": 360565,
+      "credit": 0
+    },
+    {
+      "id": "load-l-57-2",
+      "ecritureId": "load-entry-57",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 360565
+    },
+    {
+      "id": "load-l-58-1",
+      "ecritureId": "load-entry-58",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 809787
+    },
+    {
+      "id": "load-l-58-2",
+      "ecritureId": "load-entry-58",
+      "compteId": "cpt-521",
+      "debit": 809787,
+      "credit": 0
+    },
+    {
+      "id": "load-l-59-1",
+      "ecritureId": "load-entry-59",
+      "compteId": "cpt-601",
+      "debit": 832036,
+      "credit": 0
+    },
+    {
+      "id": "load-l-59-2",
+      "ecritureId": "load-entry-59",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 832036
+    },
+    {
+      "id": "load-l-60-1",
+      "ecritureId": "load-entry-60",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 886871
+    },
+    {
+      "id": "load-l-60-2",
+      "ecritureId": "load-entry-60",
+      "compteId": "cpt-521",
+      "debit": 886871,
+      "credit": 0
+    },
+    {
+      "id": "load-l-61-1",
+      "ecritureId": "load-entry-61",
+      "compteId": "cpt-601",
+      "debit": 256902,
+      "credit": 0
+    },
+    {
+      "id": "load-l-61-2",
+      "ecritureId": "load-entry-61",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 256902
+    },
+    {
+      "id": "load-l-62-1",
+      "ecritureId": "load-entry-62",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 337260
+    },
+    {
+      "id": "load-l-62-2",
+      "ecritureId": "load-entry-62",
+      "compteId": "cpt-521",
+      "debit": 337260,
+      "credit": 0
+    },
+    {
+      "id": "load-l-63-1",
+      "ecritureId": "load-entry-63",
+      "compteId": "cpt-601",
+      "debit": 347249,
+      "credit": 0
+    },
+    {
+      "id": "load-l-63-2",
+      "ecritureId": "load-entry-63",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 347249
+    },
+    {
+      "id": "load-l-64-1",
+      "ecritureId": "load-entry-64",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 859003
+    },
+    {
+      "id": "load-l-64-2",
+      "ecritureId": "load-entry-64",
+      "compteId": "cpt-521",
+      "debit": 859003,
+      "credit": 0
+    },
+    {
+      "id": "load-l-65-1",
+      "ecritureId": "load-entry-65",
+      "compteId": "cpt-601",
+      "debit": 939044,
+      "credit": 0
+    },
+    {
+      "id": "load-l-65-2",
+      "ecritureId": "load-entry-65",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 939044
+    },
+    {
+      "id": "load-l-66-1",
+      "ecritureId": "load-entry-66",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 283038
+    },
+    {
+      "id": "load-l-66-2",
+      "ecritureId": "load-entry-66",
+      "compteId": "cpt-521",
+      "debit": 283038,
+      "credit": 0
+    },
+    {
+      "id": "load-l-67-1",
+      "ecritureId": "load-entry-67",
+      "compteId": "cpt-601",
+      "debit": 954602,
+      "credit": 0
+    },
+    {
+      "id": "load-l-67-2",
+      "ecritureId": "load-entry-67",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 954602
+    },
+    {
+      "id": "load-l-68-1",
+      "ecritureId": "load-entry-68",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 279769
+    },
+    {
+      "id": "load-l-68-2",
+      "ecritureId": "load-entry-68",
+      "compteId": "cpt-521",
+      "debit": 279769,
+      "credit": 0
+    },
+    {
+      "id": "load-l-69-1",
+      "ecritureId": "load-entry-69",
+      "compteId": "cpt-601",
+      "debit": 63087,
+      "credit": 0
+    },
+    {
+      "id": "load-l-69-2",
+      "ecritureId": "load-entry-69",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 63087
+    },
+    {
+      "id": "load-l-70-1",
+      "ecritureId": "load-entry-70",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 349920
+    },
+    {
+      "id": "load-l-70-2",
+      "ecritureId": "load-entry-70",
+      "compteId": "cpt-521",
+      "debit": 349920,
+      "credit": 0
+    },
+    {
+      "id": "load-l-71-1",
+      "ecritureId": "load-entry-71",
+      "compteId": "cpt-601",
+      "debit": 899073,
+      "credit": 0
+    },
+    {
+      "id": "load-l-71-2",
+      "ecritureId": "load-entry-71",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 899073
+    },
+    {
+      "id": "load-l-72-1",
+      "ecritureId": "load-entry-72",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 10407
+    },
+    {
+      "id": "load-l-72-2",
+      "ecritureId": "load-entry-72",
+      "compteId": "cpt-521",
+      "debit": 10407,
+      "credit": 0
+    },
+    {
+      "id": "load-l-73-1",
+      "ecritureId": "load-entry-73",
+      "compteId": "cpt-601",
+      "debit": 754062,
+      "credit": 0
+    },
+    {
+      "id": "load-l-73-2",
+      "ecritureId": "load-entry-73",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 754062
+    },
+    {
+      "id": "load-l-74-1",
+      "ecritureId": "load-entry-74",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 610340
+    },
+    {
+      "id": "load-l-74-2",
+      "ecritureId": "load-entry-74",
+      "compteId": "cpt-521",
+      "debit": 610340,
+      "credit": 0
+    },
+    {
+      "id": "load-l-75-1",
+      "ecritureId": "load-entry-75",
+      "compteId": "cpt-601",
+      "debit": 138959,
+      "credit": 0
+    },
+    {
+      "id": "load-l-75-2",
+      "ecritureId": "load-entry-75",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 138959
+    },
+    {
+      "id": "load-l-76-1",
+      "ecritureId": "load-entry-76",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 739226
+    },
+    {
+      "id": "load-l-76-2",
+      "ecritureId": "load-entry-76",
+      "compteId": "cpt-521",
+      "debit": 739226,
+      "credit": 0
+    },
+    {
+      "id": "load-l-77-1",
+      "ecritureId": "load-entry-77",
+      "compteId": "cpt-601",
+      "debit": 352127,
+      "credit": 0
+    },
+    {
+      "id": "load-l-77-2",
+      "ecritureId": "load-entry-77",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 352127
+    },
+    {
+      "id": "load-l-78-1",
+      "ecritureId": "load-entry-78",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 137733
+    },
+    {
+      "id": "load-l-78-2",
+      "ecritureId": "load-entry-78",
+      "compteId": "cpt-521",
+      "debit": 137733,
+      "credit": 0
+    },
+    {
+      "id": "load-l-79-1",
+      "ecritureId": "load-entry-79",
+      "compteId": "cpt-601",
+      "debit": 54656,
+      "credit": 0
+    },
+    {
+      "id": "load-l-79-2",
+      "ecritureId": "load-entry-79",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 54656
+    },
+    {
+      "id": "load-l-80-1",
+      "ecritureId": "load-entry-80",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 620066
+    },
+    {
+      "id": "load-l-80-2",
+      "ecritureId": "load-entry-80",
+      "compteId": "cpt-521",
+      "debit": 620066,
+      "credit": 0
+    },
+    {
+      "id": "load-l-81-1",
+      "ecritureId": "load-entry-81",
+      "compteId": "cpt-601",
+      "debit": 403900,
+      "credit": 0
+    },
+    {
+      "id": "load-l-81-2",
+      "ecritureId": "load-entry-81",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 403900
+    },
+    {
+      "id": "load-l-82-1",
+      "ecritureId": "load-entry-82",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 483092
+    },
+    {
+      "id": "load-l-82-2",
+      "ecritureId": "load-entry-82",
+      "compteId": "cpt-521",
+      "debit": 483092,
+      "credit": 0
+    },
+    {
+      "id": "load-l-83-1",
+      "ecritureId": "load-entry-83",
+      "compteId": "cpt-601",
+      "debit": 372647,
+      "credit": 0
+    },
+    {
+      "id": "load-l-83-2",
+      "ecritureId": "load-entry-83",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 372647
+    },
+    {
+      "id": "load-l-84-1",
+      "ecritureId": "load-entry-84",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 686666
+    },
+    {
+      "id": "load-l-84-2",
+      "ecritureId": "load-entry-84",
+      "compteId": "cpt-521",
+      "debit": 686666,
+      "credit": 0
+    },
+    {
+      "id": "load-l-85-1",
+      "ecritureId": "load-entry-85",
+      "compteId": "cpt-601",
+      "debit": 958132,
+      "credit": 0
+    },
+    {
+      "id": "load-l-85-2",
+      "ecritureId": "load-entry-85",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 958132
+    },
+    {
+      "id": "load-l-86-1",
+      "ecritureId": "load-entry-86",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 60960
+    },
+    {
+      "id": "load-l-86-2",
+      "ecritureId": "load-entry-86",
+      "compteId": "cpt-521",
+      "debit": 60960,
+      "credit": 0
+    },
+    {
+      "id": "load-l-87-1",
+      "ecritureId": "load-entry-87",
+      "compteId": "cpt-601",
+      "debit": 578198,
+      "credit": 0
+    },
+    {
+      "id": "load-l-87-2",
+      "ecritureId": "load-entry-87",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 578198
+    },
+    {
+      "id": "load-l-88-1",
+      "ecritureId": "load-entry-88",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 862523
+    },
+    {
+      "id": "load-l-88-2",
+      "ecritureId": "load-entry-88",
+      "compteId": "cpt-521",
+      "debit": 862523,
+      "credit": 0
+    },
+    {
+      "id": "load-l-89-1",
+      "ecritureId": "load-entry-89",
+      "compteId": "cpt-601",
+      "debit": 180702,
+      "credit": 0
+    },
+    {
+      "id": "load-l-89-2",
+      "ecritureId": "load-entry-89",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 180702
+    },
+    {
+      "id": "load-l-90-1",
+      "ecritureId": "load-entry-90",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 593179
+    },
+    {
+      "id": "load-l-90-2",
+      "ecritureId": "load-entry-90",
+      "compteId": "cpt-521",
+      "debit": 593179,
+      "credit": 0
+    },
+    {
+      "id": "load-l-91-1",
+      "ecritureId": "load-entry-91",
+      "compteId": "cpt-601",
+      "debit": 394208,
+      "credit": 0
+    },
+    {
+      "id": "load-l-91-2",
+      "ecritureId": "load-entry-91",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 394208
+    },
+    {
+      "id": "load-l-92-1",
+      "ecritureId": "load-entry-92",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 459239
+    },
+    {
+      "id": "load-l-92-2",
+      "ecritureId": "load-entry-92",
+      "compteId": "cpt-521",
+      "debit": 459239,
+      "credit": 0
+    },
+    {
+      "id": "load-l-93-1",
+      "ecritureId": "load-entry-93",
+      "compteId": "cpt-601",
+      "debit": 625093,
+      "credit": 0
+    },
+    {
+      "id": "load-l-93-2",
+      "ecritureId": "load-entry-93",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 625093
+    },
+    {
+      "id": "load-l-94-1",
+      "ecritureId": "load-entry-94",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 977570
+    },
+    {
+      "id": "load-l-94-2",
+      "ecritureId": "load-entry-94",
+      "compteId": "cpt-521",
+      "debit": 977570,
+      "credit": 0
+    },
+    {
+      "id": "load-l-95-1",
+      "ecritureId": "load-entry-95",
+      "compteId": "cpt-601",
+      "debit": 900204,
+      "credit": 0
+    },
+    {
+      "id": "load-l-95-2",
+      "ecritureId": "load-entry-95",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 900204
+    },
+    {
+      "id": "load-l-96-1",
+      "ecritureId": "load-entry-96",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 980595
+    },
+    {
+      "id": "load-l-96-2",
+      "ecritureId": "load-entry-96",
+      "compteId": "cpt-521",
+      "debit": 980595,
+      "credit": 0
+    },
+    {
+      "id": "load-l-97-1",
+      "ecritureId": "load-entry-97",
+      "compteId": "cpt-601",
+      "debit": 194129,
+      "credit": 0
+    },
+    {
+      "id": "load-l-97-2",
+      "ecritureId": "load-entry-97",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 194129
+    },
+    {
+      "id": "load-l-98-1",
+      "ecritureId": "load-entry-98",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 295678
+    },
+    {
+      "id": "load-l-98-2",
+      "ecritureId": "load-entry-98",
+      "compteId": "cpt-521",
+      "debit": 295678,
+      "credit": 0
+    },
+    {
+      "id": "load-l-99-1",
+      "ecritureId": "load-entry-99",
+      "compteId": "cpt-601",
+      "debit": 165935,
+      "credit": 0
+    },
+    {
+      "id": "load-l-99-2",
+      "ecritureId": "load-entry-99",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 165935
+    },
+    {
+      "id": "load-l-100-1",
+      "ecritureId": "load-entry-100",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 511595
+    },
+    {
+      "id": "load-l-100-2",
+      "ecritureId": "load-entry-100",
+      "compteId": "cpt-521",
+      "debit": 511595,
+      "credit": 0
+    },
+    {
+      "id": "load-l-101-1",
+      "ecritureId": "load-entry-101",
+      "compteId": "cpt-601",
+      "debit": 829709,
+      "credit": 0
+    },
+    {
+      "id": "load-l-101-2",
+      "ecritureId": "load-entry-101",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 829709
+    },
+    {
+      "id": "load-l-102-1",
+      "ecritureId": "load-entry-102",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 838730
+    },
+    {
+      "id": "load-l-102-2",
+      "ecritureId": "load-entry-102",
+      "compteId": "cpt-521",
+      "debit": 838730,
+      "credit": 0
+    },
+    {
+      "id": "load-l-103-1",
+      "ecritureId": "load-entry-103",
+      "compteId": "cpt-601",
+      "debit": 717070,
+      "credit": 0
+    },
+    {
+      "id": "load-l-103-2",
+      "ecritureId": "load-entry-103",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 717070
+    },
+    {
+      "id": "load-l-104-1",
+      "ecritureId": "load-entry-104",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 699023
+    },
+    {
+      "id": "load-l-104-2",
+      "ecritureId": "load-entry-104",
+      "compteId": "cpt-521",
+      "debit": 699023,
+      "credit": 0
+    },
+    {
+      "id": "load-l-105-1",
+      "ecritureId": "load-entry-105",
+      "compteId": "cpt-601",
+      "debit": 718104,
+      "credit": 0
+    },
+    {
+      "id": "load-l-105-2",
+      "ecritureId": "load-entry-105",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 718104
+    },
+    {
+      "id": "load-l-106-1",
+      "ecritureId": "load-entry-106",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 506327
+    },
+    {
+      "id": "load-l-106-2",
+      "ecritureId": "load-entry-106",
+      "compteId": "cpt-521",
+      "debit": 506327,
+      "credit": 0
+    },
+    {
+      "id": "load-l-107-1",
+      "ecritureId": "load-entry-107",
+      "compteId": "cpt-601",
+      "debit": 928100,
+      "credit": 0
+    },
+    {
+      "id": "load-l-107-2",
+      "ecritureId": "load-entry-107",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 928100
+    },
+    {
+      "id": "load-l-108-1",
+      "ecritureId": "load-entry-108",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 119362
+    },
+    {
+      "id": "load-l-108-2",
+      "ecritureId": "load-entry-108",
+      "compteId": "cpt-521",
+      "debit": 119362,
+      "credit": 0
+    },
+    {
+      "id": "load-l-109-1",
+      "ecritureId": "load-entry-109",
+      "compteId": "cpt-601",
+      "debit": 257644,
+      "credit": 0
+    },
+    {
+      "id": "load-l-109-2",
+      "ecritureId": "load-entry-109",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 257644
+    },
+    {
+      "id": "load-l-110-1",
+      "ecritureId": "load-entry-110",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 110514
+    },
+    {
+      "id": "load-l-110-2",
+      "ecritureId": "load-entry-110",
+      "compteId": "cpt-521",
+      "debit": 110514,
+      "credit": 0
+    },
+    {
+      "id": "load-l-111-1",
+      "ecritureId": "load-entry-111",
+      "compteId": "cpt-601",
+      "debit": 682161,
+      "credit": 0
+    },
+    {
+      "id": "load-l-111-2",
+      "ecritureId": "load-entry-111",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 682161
+    },
+    {
+      "id": "load-l-112-1",
+      "ecritureId": "load-entry-112",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 481773
+    },
+    {
+      "id": "load-l-112-2",
+      "ecritureId": "load-entry-112",
+      "compteId": "cpt-521",
+      "debit": 481773,
+      "credit": 0
+    },
+    {
+      "id": "load-l-113-1",
+      "ecritureId": "load-entry-113",
+      "compteId": "cpt-601",
+      "debit": 866961,
+      "credit": 0
+    },
+    {
+      "id": "load-l-113-2",
+      "ecritureId": "load-entry-113",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 866961
+    },
+    {
+      "id": "load-l-114-1",
+      "ecritureId": "load-entry-114",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 883234
+    },
+    {
+      "id": "load-l-114-2",
+      "ecritureId": "load-entry-114",
+      "compteId": "cpt-521",
+      "debit": 883234,
+      "credit": 0
+    },
+    {
+      "id": "load-l-115-1",
+      "ecritureId": "load-entry-115",
+      "compteId": "cpt-601",
+      "debit": 985333,
+      "credit": 0
+    },
+    {
+      "id": "load-l-115-2",
+      "ecritureId": "load-entry-115",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 985333
+    },
+    {
+      "id": "load-l-116-1",
+      "ecritureId": "load-entry-116",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 147217
+    },
+    {
+      "id": "load-l-116-2",
+      "ecritureId": "load-entry-116",
+      "compteId": "cpt-521",
+      "debit": 147217,
+      "credit": 0
+    },
+    {
+      "id": "load-l-117-1",
+      "ecritureId": "load-entry-117",
+      "compteId": "cpt-601",
+      "debit": 704896,
+      "credit": 0
+    },
+    {
+      "id": "load-l-117-2",
+      "ecritureId": "load-entry-117",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 704896
+    },
+    {
+      "id": "load-l-118-1",
+      "ecritureId": "load-entry-118",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 285066
+    },
+    {
+      "id": "load-l-118-2",
+      "ecritureId": "load-entry-118",
+      "compteId": "cpt-521",
+      "debit": 285066,
+      "credit": 0
+    },
+    {
+      "id": "load-l-119-1",
+      "ecritureId": "load-entry-119",
+      "compteId": "cpt-601",
+      "debit": 71229,
+      "credit": 0
+    },
+    {
+      "id": "load-l-119-2",
+      "ecritureId": "load-entry-119",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 71229
+    },
+    {
+      "id": "load-l-120-1",
+      "ecritureId": "load-entry-120",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 420261
+    },
+    {
+      "id": "load-l-120-2",
+      "ecritureId": "load-entry-120",
+      "compteId": "cpt-521",
+      "debit": 420261,
+      "credit": 0
+    },
+    {
+      "id": "load-l-121-1",
+      "ecritureId": "load-entry-121",
+      "compteId": "cpt-601",
+      "debit": 127086,
+      "credit": 0
+    },
+    {
+      "id": "load-l-121-2",
+      "ecritureId": "load-entry-121",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 127086
+    },
+    {
+      "id": "load-l-122-1",
+      "ecritureId": "load-entry-122",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 541155
+    },
+    {
+      "id": "load-l-122-2",
+      "ecritureId": "load-entry-122",
+      "compteId": "cpt-521",
+      "debit": 541155,
+      "credit": 0
+    },
+    {
+      "id": "load-l-123-1",
+      "ecritureId": "load-entry-123",
+      "compteId": "cpt-601",
+      "debit": 960636,
+      "credit": 0
+    },
+    {
+      "id": "load-l-123-2",
+      "ecritureId": "load-entry-123",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 960636
+    },
+    {
+      "id": "load-l-124-1",
+      "ecritureId": "load-entry-124",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 334533
+    },
+    {
+      "id": "load-l-124-2",
+      "ecritureId": "load-entry-124",
+      "compteId": "cpt-521",
+      "debit": 334533,
+      "credit": 0
+    },
+    {
+      "id": "load-l-125-1",
+      "ecritureId": "load-entry-125",
+      "compteId": "cpt-601",
+      "debit": 666976,
+      "credit": 0
+    },
+    {
+      "id": "load-l-125-2",
+      "ecritureId": "load-entry-125",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 666976
+    },
+    {
+      "id": "load-l-126-1",
+      "ecritureId": "load-entry-126",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 786531
+    },
+    {
+      "id": "load-l-126-2",
+      "ecritureId": "load-entry-126",
+      "compteId": "cpt-521",
+      "debit": 786531,
+      "credit": 0
+    },
+    {
+      "id": "load-l-127-1",
+      "ecritureId": "load-entry-127",
+      "compteId": "cpt-601",
+      "debit": 820198,
+      "credit": 0
+    },
+    {
+      "id": "load-l-127-2",
+      "ecritureId": "load-entry-127",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 820198
+    },
+    {
+      "id": "load-l-128-1",
+      "ecritureId": "load-entry-128",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 511514
+    },
+    {
+      "id": "load-l-128-2",
+      "ecritureId": "load-entry-128",
+      "compteId": "cpt-521",
+      "debit": 511514,
+      "credit": 0
+    },
+    {
+      "id": "load-l-129-1",
+      "ecritureId": "load-entry-129",
+      "compteId": "cpt-601",
+      "debit": 210072,
+      "credit": 0
+    },
+    {
+      "id": "load-l-129-2",
+      "ecritureId": "load-entry-129",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 210072
+    },
+    {
+      "id": "load-l-130-1",
+      "ecritureId": "load-entry-130",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 228135
+    },
+    {
+      "id": "load-l-130-2",
+      "ecritureId": "load-entry-130",
+      "compteId": "cpt-521",
+      "debit": 228135,
+      "credit": 0
+    },
+    {
+      "id": "load-l-131-1",
+      "ecritureId": "load-entry-131",
+      "compteId": "cpt-601",
+      "debit": 496761,
+      "credit": 0
+    },
+    {
+      "id": "load-l-131-2",
+      "ecritureId": "load-entry-131",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 496761
+    },
+    {
+      "id": "load-l-132-1",
+      "ecritureId": "load-entry-132",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 582756
+    },
+    {
+      "id": "load-l-132-2",
+      "ecritureId": "load-entry-132",
+      "compteId": "cpt-521",
+      "debit": 582756,
+      "credit": 0
+    },
+    {
+      "id": "load-l-133-1",
+      "ecritureId": "load-entry-133",
+      "compteId": "cpt-601",
+      "debit": 882003,
+      "credit": 0
+    },
+    {
+      "id": "load-l-133-2",
+      "ecritureId": "load-entry-133",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 882003
+    },
+    {
+      "id": "load-l-134-1",
+      "ecritureId": "load-entry-134",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 655336
+    },
+    {
+      "id": "load-l-134-2",
+      "ecritureId": "load-entry-134",
+      "compteId": "cpt-521",
+      "debit": 655336,
+      "credit": 0
+    },
+    {
+      "id": "load-l-135-1",
+      "ecritureId": "load-entry-135",
+      "compteId": "cpt-601",
+      "debit": 62171,
+      "credit": 0
+    },
+    {
+      "id": "load-l-135-2",
+      "ecritureId": "load-entry-135",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 62171
+    },
+    {
+      "id": "load-l-136-1",
+      "ecritureId": "load-entry-136",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 343636
+    },
+    {
+      "id": "load-l-136-2",
+      "ecritureId": "load-entry-136",
+      "compteId": "cpt-521",
+      "debit": 343636,
+      "credit": 0
+    },
+    {
+      "id": "load-l-137-1",
+      "ecritureId": "load-entry-137",
+      "compteId": "cpt-601",
+      "debit": 536134,
+      "credit": 0
+    },
+    {
+      "id": "load-l-137-2",
+      "ecritureId": "load-entry-137",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 536134
+    },
+    {
+      "id": "load-l-138-1",
+      "ecritureId": "load-entry-138",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 338963
+    },
+    {
+      "id": "load-l-138-2",
+      "ecritureId": "load-entry-138",
+      "compteId": "cpt-521",
+      "debit": 338963,
+      "credit": 0
+    },
+    {
+      "id": "load-l-139-1",
+      "ecritureId": "load-entry-139",
+      "compteId": "cpt-601",
+      "debit": 701894,
+      "credit": 0
+    },
+    {
+      "id": "load-l-139-2",
+      "ecritureId": "load-entry-139",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 701894
+    },
+    {
+      "id": "load-l-140-1",
+      "ecritureId": "load-entry-140",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 470002
+    },
+    {
+      "id": "load-l-140-2",
+      "ecritureId": "load-entry-140",
+      "compteId": "cpt-521",
+      "debit": 470002,
+      "credit": 0
+    },
+    {
+      "id": "load-l-141-1",
+      "ecritureId": "load-entry-141",
+      "compteId": "cpt-601",
+      "debit": 528559,
+      "credit": 0
+    },
+    {
+      "id": "load-l-141-2",
+      "ecritureId": "load-entry-141",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 528559
+    },
+    {
+      "id": "load-l-142-1",
+      "ecritureId": "load-entry-142",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 47767
+    },
+    {
+      "id": "load-l-142-2",
+      "ecritureId": "load-entry-142",
+      "compteId": "cpt-521",
+      "debit": 47767,
+      "credit": 0
+    },
+    {
+      "id": "load-l-143-1",
+      "ecritureId": "load-entry-143",
+      "compteId": "cpt-601",
+      "debit": 614861,
+      "credit": 0
+    },
+    {
+      "id": "load-l-143-2",
+      "ecritureId": "load-entry-143",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 614861
+    },
+    {
+      "id": "load-l-144-1",
+      "ecritureId": "load-entry-144",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 757749
+    },
+    {
+      "id": "load-l-144-2",
+      "ecritureId": "load-entry-144",
+      "compteId": "cpt-521",
+      "debit": 757749,
+      "credit": 0
+    },
+    {
+      "id": "load-l-145-1",
+      "ecritureId": "load-entry-145",
+      "compteId": "cpt-601",
+      "debit": 187107,
+      "credit": 0
+    },
+    {
+      "id": "load-l-145-2",
+      "ecritureId": "load-entry-145",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 187107
+    },
+    {
+      "id": "load-l-146-1",
+      "ecritureId": "load-entry-146",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 673459
+    },
+    {
+      "id": "load-l-146-2",
+      "ecritureId": "load-entry-146",
+      "compteId": "cpt-521",
+      "debit": 673459,
+      "credit": 0
+    },
+    {
+      "id": "load-l-147-1",
+      "ecritureId": "load-entry-147",
+      "compteId": "cpt-601",
+      "debit": 972646,
+      "credit": 0
+    },
+    {
+      "id": "load-l-147-2",
+      "ecritureId": "load-entry-147",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 972646
+    },
+    {
+      "id": "load-l-148-1",
+      "ecritureId": "load-entry-148",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 293765
+    },
+    {
+      "id": "load-l-148-2",
+      "ecritureId": "load-entry-148",
+      "compteId": "cpt-521",
+      "debit": 293765,
+      "credit": 0
+    },
+    {
+      "id": "load-l-149-1",
+      "ecritureId": "load-entry-149",
+      "compteId": "cpt-601",
+      "debit": 692564,
+      "credit": 0
+    },
+    {
+      "id": "load-l-149-2",
+      "ecritureId": "load-entry-149",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 692564
+    },
+    {
+      "id": "load-l-150-1",
+      "ecritureId": "load-entry-150",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 466729
+    },
+    {
+      "id": "load-l-150-2",
+      "ecritureId": "load-entry-150",
+      "compteId": "cpt-521",
+      "debit": 466729,
+      "credit": 0
+    },
+    {
+      "id": "load-l-151-1",
+      "ecritureId": "load-entry-151",
+      "compteId": "cpt-601",
+      "debit": 21660,
+      "credit": 0
+    },
+    {
+      "id": "load-l-151-2",
+      "ecritureId": "load-entry-151",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 21660
+    },
+    {
+      "id": "load-l-152-1",
+      "ecritureId": "load-entry-152",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 55980
+    },
+    {
+      "id": "load-l-152-2",
+      "ecritureId": "load-entry-152",
+      "compteId": "cpt-521",
+      "debit": 55980,
+      "credit": 0
+    },
+    {
+      "id": "load-l-153-1",
+      "ecritureId": "load-entry-153",
+      "compteId": "cpt-601",
+      "debit": 299961,
+      "credit": 0
+    },
+    {
+      "id": "load-l-153-2",
+      "ecritureId": "load-entry-153",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 299961
+    },
+    {
+      "id": "load-l-154-1",
+      "ecritureId": "load-entry-154",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 496926
+    },
+    {
+      "id": "load-l-154-2",
+      "ecritureId": "load-entry-154",
+      "compteId": "cpt-521",
+      "debit": 496926,
+      "credit": 0
+    },
+    {
+      "id": "load-l-155-1",
+      "ecritureId": "load-entry-155",
+      "compteId": "cpt-601",
+      "debit": 389909,
+      "credit": 0
+    },
+    {
+      "id": "load-l-155-2",
+      "ecritureId": "load-entry-155",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 389909
+    },
+    {
+      "id": "load-l-156-1",
+      "ecritureId": "load-entry-156",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 224288
+    },
+    {
+      "id": "load-l-156-2",
+      "ecritureId": "load-entry-156",
+      "compteId": "cpt-521",
+      "debit": 224288,
+      "credit": 0
+    },
+    {
+      "id": "load-l-157-1",
+      "ecritureId": "load-entry-157",
+      "compteId": "cpt-601",
+      "debit": 222723,
+      "credit": 0
+    },
+    {
+      "id": "load-l-157-2",
+      "ecritureId": "load-entry-157",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 222723
+    },
+    {
+      "id": "load-l-158-1",
+      "ecritureId": "load-entry-158",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 849670
+    },
+    {
+      "id": "load-l-158-2",
+      "ecritureId": "load-entry-158",
+      "compteId": "cpt-521",
+      "debit": 849670,
+      "credit": 0
+    },
+    {
+      "id": "load-l-159-1",
+      "ecritureId": "load-entry-159",
+      "compteId": "cpt-601",
+      "debit": 629492,
+      "credit": 0
+    },
+    {
+      "id": "load-l-159-2",
+      "ecritureId": "load-entry-159",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 629492
+    },
+    {
+      "id": "load-l-160-1",
+      "ecritureId": "load-entry-160",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 90536
+    },
+    {
+      "id": "load-l-160-2",
+      "ecritureId": "load-entry-160",
+      "compteId": "cpt-521",
+      "debit": 90536,
+      "credit": 0
+    },
+    {
+      "id": "load-l-161-1",
+      "ecritureId": "load-entry-161",
+      "compteId": "cpt-601",
+      "debit": 484324,
+      "credit": 0
+    },
+    {
+      "id": "load-l-161-2",
+      "ecritureId": "load-entry-161",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 484324
+    },
+    {
+      "id": "load-l-162-1",
+      "ecritureId": "load-entry-162",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 598871
+    },
+    {
+      "id": "load-l-162-2",
+      "ecritureId": "load-entry-162",
+      "compteId": "cpt-521",
+      "debit": 598871,
+      "credit": 0
+    },
+    {
+      "id": "load-l-163-1",
+      "ecritureId": "load-entry-163",
+      "compteId": "cpt-601",
+      "debit": 201979,
+      "credit": 0
+    },
+    {
+      "id": "load-l-163-2",
+      "ecritureId": "load-entry-163",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 201979
+    },
+    {
+      "id": "load-l-164-1",
+      "ecritureId": "load-entry-164",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 985537
+    },
+    {
+      "id": "load-l-164-2",
+      "ecritureId": "load-entry-164",
+      "compteId": "cpt-521",
+      "debit": 985537,
+      "credit": 0
+    },
+    {
+      "id": "load-l-165-1",
+      "ecritureId": "load-entry-165",
+      "compteId": "cpt-601",
+      "debit": 979437,
+      "credit": 0
+    },
+    {
+      "id": "load-l-165-2",
+      "ecritureId": "load-entry-165",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 979437
+    },
+    {
+      "id": "load-l-166-1",
+      "ecritureId": "load-entry-166",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 454135
+    },
+    {
+      "id": "load-l-166-2",
+      "ecritureId": "load-entry-166",
+      "compteId": "cpt-521",
+      "debit": 454135,
+      "credit": 0
+    },
+    {
+      "id": "load-l-167-1",
+      "ecritureId": "load-entry-167",
+      "compteId": "cpt-601",
+      "debit": 186524,
+      "credit": 0
+    },
+    {
+      "id": "load-l-167-2",
+      "ecritureId": "load-entry-167",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 186524
+    },
+    {
+      "id": "load-l-168-1",
+      "ecritureId": "load-entry-168",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 779945
+    },
+    {
+      "id": "load-l-168-2",
+      "ecritureId": "load-entry-168",
+      "compteId": "cpt-521",
+      "debit": 779945,
+      "credit": 0
+    },
+    {
+      "id": "load-l-169-1",
+      "ecritureId": "load-entry-169",
+      "compteId": "cpt-601",
+      "debit": 557108,
+      "credit": 0
+    },
+    {
+      "id": "load-l-169-2",
+      "ecritureId": "load-entry-169",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 557108
+    },
+    {
+      "id": "load-l-170-1",
+      "ecritureId": "load-entry-170",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 451270
+    },
+    {
+      "id": "load-l-170-2",
+      "ecritureId": "load-entry-170",
+      "compteId": "cpt-521",
+      "debit": 451270,
+      "credit": 0
+    },
+    {
+      "id": "load-l-171-1",
+      "ecritureId": "load-entry-171",
+      "compteId": "cpt-601",
+      "debit": 922794,
+      "credit": 0
+    },
+    {
+      "id": "load-l-171-2",
+      "ecritureId": "load-entry-171",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 922794
+    },
+    {
+      "id": "load-l-172-1",
+      "ecritureId": "load-entry-172",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 372227
+    },
+    {
+      "id": "load-l-172-2",
+      "ecritureId": "load-entry-172",
+      "compteId": "cpt-521",
+      "debit": 372227,
+      "credit": 0
+    },
+    {
+      "id": "load-l-173-1",
+      "ecritureId": "load-entry-173",
+      "compteId": "cpt-601",
+      "debit": 981964,
+      "credit": 0
+    },
+    {
+      "id": "load-l-173-2",
+      "ecritureId": "load-entry-173",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 981964
+    },
+    {
+      "id": "load-l-174-1",
+      "ecritureId": "load-entry-174",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 393028
+    },
+    {
+      "id": "load-l-174-2",
+      "ecritureId": "load-entry-174",
+      "compteId": "cpt-521",
+      "debit": 393028,
+      "credit": 0
+    },
+    {
+      "id": "load-l-175-1",
+      "ecritureId": "load-entry-175",
+      "compteId": "cpt-601",
+      "debit": 818250,
+      "credit": 0
+    },
+    {
+      "id": "load-l-175-2",
+      "ecritureId": "load-entry-175",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 818250
+    },
+    {
+      "id": "load-l-176-1",
+      "ecritureId": "load-entry-176",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 756551
+    },
+    {
+      "id": "load-l-176-2",
+      "ecritureId": "load-entry-176",
+      "compteId": "cpt-521",
+      "debit": 756551,
+      "credit": 0
+    },
+    {
+      "id": "load-l-177-1",
+      "ecritureId": "load-entry-177",
+      "compteId": "cpt-601",
+      "debit": 514833,
+      "credit": 0
+    },
+    {
+      "id": "load-l-177-2",
+      "ecritureId": "load-entry-177",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 514833
+    },
+    {
+      "id": "load-l-178-1",
+      "ecritureId": "load-entry-178",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 989137
+    },
+    {
+      "id": "load-l-178-2",
+      "ecritureId": "load-entry-178",
+      "compteId": "cpt-521",
+      "debit": 989137,
+      "credit": 0
+    },
+    {
+      "id": "load-l-179-1",
+      "ecritureId": "load-entry-179",
+      "compteId": "cpt-601",
+      "debit": 36459,
+      "credit": 0
+    },
+    {
+      "id": "load-l-179-2",
+      "ecritureId": "load-entry-179",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 36459
+    },
+    {
+      "id": "load-l-180-1",
+      "ecritureId": "load-entry-180",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 275686
+    },
+    {
+      "id": "load-l-180-2",
+      "ecritureId": "load-entry-180",
+      "compteId": "cpt-521",
+      "debit": 275686,
+      "credit": 0
+    },
+    {
+      "id": "load-l-181-1",
+      "ecritureId": "load-entry-181",
+      "compteId": "cpt-601",
+      "debit": 244786,
+      "credit": 0
+    },
+    {
+      "id": "load-l-181-2",
+      "ecritureId": "load-entry-181",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 244786
+    },
+    {
+      "id": "load-l-182-1",
+      "ecritureId": "load-entry-182",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 575602
+    },
+    {
+      "id": "load-l-182-2",
+      "ecritureId": "load-entry-182",
+      "compteId": "cpt-521",
+      "debit": 575602,
+      "credit": 0
+    },
+    {
+      "id": "load-l-183-1",
+      "ecritureId": "load-entry-183",
+      "compteId": "cpt-601",
+      "debit": 102097,
+      "credit": 0
+    },
+    {
+      "id": "load-l-183-2",
+      "ecritureId": "load-entry-183",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 102097
+    },
+    {
+      "id": "load-l-184-1",
+      "ecritureId": "load-entry-184",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 999719
+    },
+    {
+      "id": "load-l-184-2",
+      "ecritureId": "load-entry-184",
+      "compteId": "cpt-521",
+      "debit": 999719,
+      "credit": 0
+    },
+    {
+      "id": "load-l-185-1",
+      "ecritureId": "load-entry-185",
+      "compteId": "cpt-601",
+      "debit": 64286,
+      "credit": 0
+    },
+    {
+      "id": "load-l-185-2",
+      "ecritureId": "load-entry-185",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 64286
+    },
+    {
+      "id": "load-l-186-1",
+      "ecritureId": "load-entry-186",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 735691
+    },
+    {
+      "id": "load-l-186-2",
+      "ecritureId": "load-entry-186",
+      "compteId": "cpt-521",
+      "debit": 735691,
+      "credit": 0
+    },
+    {
+      "id": "load-l-187-1",
+      "ecritureId": "load-entry-187",
+      "compteId": "cpt-601",
+      "debit": 115171,
+      "credit": 0
+    },
+    {
+      "id": "load-l-187-2",
+      "ecritureId": "load-entry-187",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 115171
+    },
+    {
+      "id": "load-l-188-1",
+      "ecritureId": "load-entry-188",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 450328
+    },
+    {
+      "id": "load-l-188-2",
+      "ecritureId": "load-entry-188",
+      "compteId": "cpt-521",
+      "debit": 450328,
+      "credit": 0
+    },
+    {
+      "id": "load-l-189-1",
+      "ecritureId": "load-entry-189",
+      "compteId": "cpt-601",
+      "debit": 397526,
+      "credit": 0
+    },
+    {
+      "id": "load-l-189-2",
+      "ecritureId": "load-entry-189",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 397526
+    },
+    {
+      "id": "load-l-190-1",
+      "ecritureId": "load-entry-190",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 86565
+    },
+    {
+      "id": "load-l-190-2",
+      "ecritureId": "load-entry-190",
+      "compteId": "cpt-521",
+      "debit": 86565,
+      "credit": 0
+    },
+    {
+      "id": "load-l-191-1",
+      "ecritureId": "load-entry-191",
+      "compteId": "cpt-601",
+      "debit": 554130,
+      "credit": 0
+    },
+    {
+      "id": "load-l-191-2",
+      "ecritureId": "load-entry-191",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 554130
+    },
+    {
+      "id": "load-l-192-1",
+      "ecritureId": "load-entry-192",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 161123
+    },
+    {
+      "id": "load-l-192-2",
+      "ecritureId": "load-entry-192",
+      "compteId": "cpt-521",
+      "debit": 161123,
+      "credit": 0
+    },
+    {
+      "id": "load-l-193-1",
+      "ecritureId": "load-entry-193",
+      "compteId": "cpt-601",
+      "debit": 914960,
+      "credit": 0
+    },
+    {
+      "id": "load-l-193-2",
+      "ecritureId": "load-entry-193",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 914960
+    },
+    {
+      "id": "load-l-194-1",
+      "ecritureId": "load-entry-194",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 932791
+    },
+    {
+      "id": "load-l-194-2",
+      "ecritureId": "load-entry-194",
+      "compteId": "cpt-521",
+      "debit": 932791,
+      "credit": 0
+    },
+    {
+      "id": "load-l-195-1",
+      "ecritureId": "load-entry-195",
+      "compteId": "cpt-601",
+      "debit": 128374,
+      "credit": 0
+    },
+    {
+      "id": "load-l-195-2",
+      "ecritureId": "load-entry-195",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 128374
+    },
+    {
+      "id": "load-l-196-1",
+      "ecritureId": "load-entry-196",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 322315
+    },
+    {
+      "id": "load-l-196-2",
+      "ecritureId": "load-entry-196",
+      "compteId": "cpt-521",
+      "debit": 322315,
+      "credit": 0
+    },
+    {
+      "id": "load-l-197-1",
+      "ecritureId": "load-entry-197",
+      "compteId": "cpt-601",
+      "debit": 225545,
+      "credit": 0
+    },
+    {
+      "id": "load-l-197-2",
+      "ecritureId": "load-entry-197",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 225545
+    },
+    {
+      "id": "load-l-198-1",
+      "ecritureId": "load-entry-198",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 897052
+    },
+    {
+      "id": "load-l-198-2",
+      "ecritureId": "load-entry-198",
+      "compteId": "cpt-521",
+      "debit": 897052,
+      "credit": 0
+    },
+    {
+      "id": "load-l-199-1",
+      "ecritureId": "load-entry-199",
+      "compteId": "cpt-601",
+      "debit": 226530,
+      "credit": 0
+    },
+    {
+      "id": "load-l-199-2",
+      "ecritureId": "load-entry-199",
+      "compteId": "cpt-521",
+      "debit": 0,
+      "credit": 226530
+    },
+    {
+      "id": "load-l-200-1",
+      "ecritureId": "load-entry-200",
+      "compteId": "cpt-701",
+      "debit": 0,
+      "credit": 431835
+    },
+    {
+      "id": "load-l-200-2",
+      "ecritureId": "load-entry-200",
+      "compteId": "cpt-521",
+      "debit": 431835,
+      "credit": 0
+    }
+  ],
+  "clients": [
+    {
+      "id": "CLI-001",
+      "entrepriseId": "ENT-001",
+      "code": "C001",
+      "nom": "Client A",
+      "email": "[EMAIL_ADDRESS]"
+    },
+    {
+      "id": "CLI-002",
+      "entrepriseId": "ENT-001",
+      "code": "C002",
+      "nom": "Client B",
+      "email": "[EMAIL_ADDRESS]"
+    },
+    {
+      "id": "CLI-003",
+      "entrepriseId": "ENT-002",
+      "code": "C001",
+      "nom": "Client C",
+      "email": "[EMAIL_ADDRESS]"
+    }
+  ],
+  "factures": [
+    {
+      "id": "FAC-001",
+      "entrepriseId": "ENT-001",
+      "clientId": "CLI-001",
+      "numero": "F2023-0001",
+      "date": "2023-10-01",
+      "type": "FACTURE",
+      "statut": "PAYEE",
+      "montantHt": 500000,
+      "tva": 90000,
+      "montantTtc": 590000
+    },
+    {
+      "id": "FAC-002",
+      "entrepriseId": "ENT-001",
+      "clientId": "CLI-002",
+      "numero": "F2023-0002",
+      "date": "2023-10-15",
+      "type": "FACTURE",
+      "statut": "PAYEE",
+      "montantHt": 1000000,
+      "tva": 180000,
+      "montantTtc": 1180000
+    },
+    {
+      "id": "FAC-003",
+      "entrepriseId": "ENT-002",
+      "clientId": "CLI-003",
+      "numero": "F2023-0001",
+      "date": "2023-11-05",
+      "type": "FACTURE",
+      "statut": "BROUILLON",
+      "montantHt": 250000,
+      "tva": 45000,
+      "montantTtc": 295000
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

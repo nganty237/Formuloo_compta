@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth-guard';
+import { tenantGuard } from './core/guards/tenant-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -9,6 +11,7 @@ export const routes: Routes = [
     },
     {
         path: 'tenant/:id',
+        canActivate: [authGuard, tenantGuard],
         loadComponent: () => import('./layout/main-layout/main-layout').then(m => m.MainLayout),
         children: [
             {

@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { AccountService } from '../../services/account.service';
 import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
 import { Ecriture } from '../../../../core/models/ecriture.model';
 import { ButtonComponent } from '../../../../shared/components/button/button';
 import { IconComponent } from '../../../../shared/components/icon/icon';
+import { TenantContextService } from '../../../../core/services/tenant-context.service';
 
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;
@@ -41,9 +42,10 @@ export class EntryFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private accountService = inject(AccountService);
   private route = inject(ActivatedRoute);
+  private tenantContext = inject(TenantContextService);
 
   comptes$!: Observable<CompteOHADA[]>;
-  tenantId: string = 'tenant-1';
+  tenantId: string = '';
 
   totalDebit: number = 0;
   totalCredit: number = 0;
@@ -62,12 +64,13 @@ export class EntryFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
-    if (urlTenantId) {
-      this.tenantId = urlTenantId;
-    }
-
-    this.comptes$ = this.accountService.getAccounts(this.tenantId);
+    // Utilisation de l'observable pour être toujours synchronisé avec l'entreprise active
+    this.tenantContext.companyId$.subscribe(id => {
+      if (id) {
+        this.tenantId = id;
+        this.comptes$ = this.accountService.getAccounts(id);
+      }
+    });
 
     this.entryForm.valueChanges.pipe(
       startWith(this.entryForm.value)

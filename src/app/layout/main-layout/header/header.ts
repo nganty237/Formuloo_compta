@@ -28,22 +28,31 @@ export class HeaderComponent implements OnInit {
   isProfileMenuOpen = signal<boolean>(false);
   currentUser = toSignal(this.authService.currentUser$);
 
-  selectedTenantId = '123';
-  selectedCompanyId = 'tenant-1';
+  selectedTenantId = '';
+  selectedCompanyId = '';
 
   ngOnInit() {
-    const urlTenantId = this.route.parent?.snapshot.paramMap.get('id');
-    if (urlTenantId) {
-      this.selectedTenantId = urlTenantId;
-    }
-
-    const initialCompanies = this.companyService.companies();
-    if (initialCompanies.length > 0) {
-      const defaultComp = initialCompanies[0];
-      this.selectedCompanyId = defaultComp.id;
-      this.tenantContext.selectCompany(defaultComp.id, defaultComp.nom, this.selectedTenantId);
-      // S'assurer que le plan comptable est chargé pour le dossier par défaut
-      this.planService.initializeForCompany(defaultComp.id).subscribe();
+    // Récupérer l'ID de l'entreprise depuis l'URL
+    const urlId = this.route.snapshot.paramMap.get('id') || this.route.parent?.snapshot.paramMap.get('id');
+    
+    if (urlId) {
+      this.selectedCompanyId = urlId;
+      // On cherche l'entreprise pour initialiser le contexte
+      const companies = this.companyService.companies();
+      const company = companies.find(c => c.id === urlId);
+      if (company) {
+        this.tenantContext.selectCompany(company.id, company.nom, company.tenantId);
+        this.planService.initializeForCompany(company.id).subscribe();
+      } else {
+        // Si les entreprises ne sont pas encore chargées (cas du refresh)
+        // Le tenantGuard s'en occupe déjà, mais on peut renforcer ici
+        this.companyService.getCompanyById(urlId).subscribe(comp => {
+          if (comp) {
+            this.tenantContext.selectCompany(comp.id, comp.nom, comp.tenantId);
+            this.planService.initializeForCompany(comp.id).subscribe();
+          }
+        });
+      }
     }
   }
 

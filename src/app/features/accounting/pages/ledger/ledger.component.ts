@@ -7,7 +7,7 @@ import { LedgerService, LedgerResult, LigneLedger } from '../../services/ledger.
 import { ButtonComponent } from '../../../../shared/components/button/button';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
 import { PlanComptableService } from '../../services/plan-comptable.service';
-import { distinctUntilChanged, filter, finalize, of, switchMap } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, of, switchMap, timeout, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-ledger',
@@ -300,6 +300,11 @@ export class LedgerComponent implements OnInit {
     this.ledgerService
       .getGrandLivre(this.selectedCompanyId, this.selectedCompteId, this.dateDebut, this.dateFin)
       .pipe(
+        timeout(5000),
+        catchError(err => {
+          console.error('Erreur lors du chargement du grand livre:', err);
+          return of(null);
+        }),
         finalize(() => { this.isLoading = false; }),
         takeUntilDestroyed(this.destroyRef)
       )

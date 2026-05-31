@@ -248,23 +248,24 @@ export class PlanComptableComponent {
     // Déterminer la classe automatiquement à partir du premier chiffre du numéro
     const firstDigit = parseInt(formValue.numero!.substring(0, 1), 10);
 
-    const success = this.accountService.addCustomAccount(activeCompanyId, {
+    this.accountService.addCustomAccount(activeCompanyId, {
       numero: formValue.numero!,
       intitule: formValue.intitule!,
       classe: firstDigit,
       type: formValue.type as any
+    }).subscribe({
+      next: () => {
+        this.accountForm.reset({
+          numero: '',
+          intitule: '',
+          type: 'CHARGE'
+        });
+        this.showAddForm.set(false);
+      },
+      error: (err) => {
+        this.errorMessage.set('Erreur : Impossible d\'ajouter le compte. Il existe peut-être déjà.');
+      }
     });
-
-    if (success) {
-      this.accountForm.reset({
-        numero: '',
-        intitule: '',
-        type: 'CHARGE'
-      });
-      this.showAddForm.set(false);
-    } else {
-      this.errorMessage.set('Erreur : Ce numéro de compte existe déjà.');
-    }
   }
 
   toggleStatus(account: CompteOHADA): void {

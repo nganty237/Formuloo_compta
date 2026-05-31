@@ -145,8 +145,7 @@ export class BalanceService {
                         };
                     })
                 );
-            }),
-            delay(700)
+            })
         );
     }
 }
