@@ -80,7 +80,8 @@
       "numero": "101",
       "intitule": "Capital social",
       "classe": 1,
-      "type": "PASSIF"
+      "type": "PASSIF",
+      "actif": true
     },
     {
       "id": "cpt-162",
