@@ -16,6 +16,11 @@ export class TenantContextService {
   public companyId$ = this.currentCompanyId.asObservable().pipe(distinctUntilChanged());
   public companyName$ = this.currentCompanyName.asObservable().pipe(distinctUntilChanged());
 
+  // Accesseurs synchrones pour les interceptors et services critiques
+  get tenantId(): string | null { return this.currentTenantId.value; }
+  get companyId(): string | null { return this.currentCompanyId.value; }
+  get companyName(): string | null { return this.currentCompanyName.value; }
+
   /**
    * Met à jour le contexte avec les informations de l'entreprise sélectionnée.
    * @param companyId L'ID de l'entreprise (ex: ID dans la base de données)

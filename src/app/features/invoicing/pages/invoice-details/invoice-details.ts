@@ -18,7 +18,7 @@ import { InvoicingService } from '../../services/invoicing.service';
 
       <!-- Barre d'outils haut -->
       <div class="flex items-center justify-between">
-        <a routerLink="../../list" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors font-medium">
+        <a routerLink="../list" class="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors font-medium">
           <app-icon name="arrow-left"></app-icon> Retour à la liste
         </a>
 
@@ -198,7 +198,7 @@ export class InvoiceDetailsComponent implements OnInit {
         this.invoicingService.convertToFacture(current.id).subscribe(newFacture => {
             this.showNotification('Devis converti en facture avec succès !');
             setTimeout(() => {
-                this.router.navigate(['../../', newFacture.id], { relativeTo: this.route });
+                this.router.navigate(['../', newFacture.id], { relativeTo: this.route });
             }, 1500);
         });
     }

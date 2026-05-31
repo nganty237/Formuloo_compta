@@ -1,50 +1,50 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, switchMap, forkJoin, of } from 'rxjs';
 import { CompteOHADA } from '../../../core/models/compte-ohada.model';
-import { MockDataService } from '../../../core/services/mock-data.service';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlanComptableService {
-  private mockData = inject(MockDataService);
+  private http = inject(HttpClient);
+  private apiUrl = `${environment.apiUrl}/comptes`;
 
   getAccounts(entrepriseId: string): Observable<CompteOHADA[]> {
-    const data = this.mockData.accounts.filter(a => a.entrepriseId === entrepriseId);
-    return of(data).pipe(delay(500));
+    return this.http.get<CompteOHADA[]>(`${this.apiUrl}?entrepriseId=${entrepriseId}`);
   }
 
   addAccount(account: CompteOHADA): Observable<CompteOHADA> {
-    this.mockData.accounts.push(account);
-    return of(account).pipe(delay(300));
+    return this.http.post<CompteOHADA>(this.apiUrl, account);
   }
 
   updateAccount(id: string, account: Partial<CompteOHADA>): Observable<CompteOHADA> {
-    const idx = this.mockData.accounts.findIndex(a => a.id === id);
-    if (idx !== -1) {
-        this.mockData.accounts[idx] = { ...this.mockData.accounts[idx], ...account };
-        return of(this.mockData.accounts[idx]).pipe(delay(300));
-    }
-    throw new Error('Account not found');
+    return this.http.patch<CompteOHADA>(`${this.apiUrl}/${id}`, account);
   }
 
   /**
    * Initialise le plan comptable standard pour une nouvelle entreprise.
    */
   initializeForCompany(entrepriseId: string): Observable<CompteOHADA[]> {
-    // Si l'entreprise a déjà des comptes, on ne fait rien
-    const existing = this.mockData.accounts.filter(a => a.entrepriseId === entrepriseId);
-    if (existing.length > 0) return of(existing);
+    return this.getAccounts(entrepriseId).pipe(
+      switchMap(existing => {
+        if (existing.length > 0) return of(existing);
 
-    // On prend un échantillon standard (ex: ceux de tenant-1) et on les clone pour la nouvelle entreprise
-    const standardPlan = this.mockData.accounts.filter(a => a.entrepriseId === 'tenant-1');
-    const newPlan: CompteOHADA[] = standardPlan.map(a => ({
-      ...a,
-      id: `cpt-${entrepriseId}-${a.numero}`,
-      entrepriseId: entrepriseId
-    }));
-    
-    this.mockData.accounts.push(...newPlan);
-    return of(newPlan).pipe(delay(800));
+        // On prend un échantillon standard (ceux de ENT-001 dans db.json)
+        return this.getAccounts('ENT-001').pipe(
+          switchMap(standardPlan => {
+            const requests = standardPlan.map(a => {
+              const { id, ...data } = a;
+              return this.http.post<CompteOHADA>(this.apiUrl, {
+                ...data,
+                entrepriseId: entrepriseId
+              });
+            });
+            return forkJoin(requests);
+          })
+        );
+      })
+    );
   }
 }

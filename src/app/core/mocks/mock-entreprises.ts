@@ -3,26 +3,26 @@ import { Entreprise } from '../models/entreprise.model';
 export const MOCK_ENTREPRISES: Entreprise[] = [
   {
     id: 'ENT-001',
-    tenantId: 'TENANT-1',
-    nom: 'Tech Africa Dakar',
+    tenantId: 'tenant-1',
+    nom: 'Tech Africa cameroun',
     ninea: '123456789',
     rccm: 'SN.DKR.2023.B.123',
-    adresse: 'Plateau, Dakar'
+    adresse: 'Plateau, camer'
   },
   {
     id: 'ENT-002',
-    tenantId: 'TENANT-1',
+    tenantId: 'tenant-1',
     nom: 'Boutique Maman',
     ninea: '987654321',
     rccm: 'SN.DKR.2023.A.456',
-    adresse: 'Médina, Dakar'
+    adresse: 'Médina, camer'
   },
   {
     id: 'ENT-003',
-    tenantId: 'TENANT-2',
+    tenantId: 'tenant-2',
     nom: 'Consulting Services',
     ninea: '112233445',
     rccm: 'SN.DKR.2022.B.789',
-    adresse: 'Almadies, Dakar'
+    adresse: 'Almadies, camer'
   }
 ];

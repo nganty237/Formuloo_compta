@@ -3,7 +3,7 @@ import { Facture } from '../models/facture.model';
 export const MOCK_FACTURES: Facture[] = [
   {
     id: 'FAC-001',
-    entrepriseId: 'tenant-1',
+    entrepriseId: 'ENT-001',
     clientId: 'CLI-001',
     numero: 'F2023-0001',
     date: '2023-10-01',
@@ -15,7 +15,7 @@ export const MOCK_FACTURES: Facture[] = [
   },
   {
     id: 'FAC-002',
-    entrepriseId: 'tenant-1',
+    entrepriseId: 'ENT-001',
     clientId: 'CLI-002',
     numero: 'F2023-0002',
     date: '2023-10-15',
@@ -27,7 +27,7 @@ export const MOCK_FACTURES: Facture[] = [
   },
   {
     id: 'FAC-003',
-    entrepriseId: 'c-002',
+    entrepriseId: 'ENT-002',
     clientId: 'CLI-003',
     numero: 'F2023-0001',
     date: '2023-11-05',
