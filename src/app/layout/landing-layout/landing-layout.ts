@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IconComponent } from '../../shared/components/icon/icon';
-import { ButtonComponent } from '../../shared/components/button/button';
+import { IconComponent, ButtonComponent } from '@shared';
 
 @Component({
   selector: 'app-landing-layout',

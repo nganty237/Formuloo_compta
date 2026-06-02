@@ -5,11 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { AccountService } from '../../services/account.service';
-import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
-import { Ecriture } from '../../../../core/models/ecriture.model';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { IconComponent } from '../../../../shared/components/icon/icon';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { CompteOHADA, Ecriture, TenantContextService } from '@core';
+import { ButtonComponent, IconComponent } from '@shared';
 
 function partieDoubleValidator(control: AbstractControl): ValidationErrors | null {
   const formGroup = control as FormGroup;

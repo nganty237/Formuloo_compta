@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CompteOHADA } from '../../../core/models/compte-ohada.model';
-import { AccountService as CoreAccountService } from '../../../core/services/account.service';
+import { CompteOHADA, AccountService as CoreAccountService } from '@core';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({

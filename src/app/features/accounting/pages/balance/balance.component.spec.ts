@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BalanceComponent } from './balance.component';
 import { BalanceService } from '../../services/balance.service';
-import { TableComponent } from '../../../../shared/components/table/table';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import {  TableComponent  } from '@shared';
+import {  TenantContextService  } from '@core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
+import {  environment  } from '@env/environment';
 import { Component, Input } from '@angular/core';
 
 // Mock du SpinnerComponent qui appelle l'icône

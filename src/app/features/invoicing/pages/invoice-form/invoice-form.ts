@@ -4,11 +4,8 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { ModalComponent } from '../../../../shared/components/modal/modal';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { IconComponent } from '../../../../shared/components/icon/icon';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
-import { Facture } from '../../../../core/models/facture.model';
+import { ModalComponent, ButtonComponent, IconComponent } from '@shared';
+import { TenantContextService, Facture } from '@core';
 import { InvoicingService } from '../../services/invoicing.service';
 
 function validInvoiceAmountsValidator(control: AbstractControl): ValidationErrors | null {

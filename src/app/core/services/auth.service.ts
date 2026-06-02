@@ -1,23 +1,37 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, take } from 'rxjs';
+import { User, UserRole } from '../models/user.model';
 
-export type UserRole = 'SUPER_ADMIN' | 'ADMIN' | 'COMPTABLE' | 'CLIENT';
-
-export interface User {
-  id: string;
-  name: string;
-  role: UserRole;
-  tenantId: string | null;
-}
+export type { User, UserRole };
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // INITIALISATION À NULL : Pour permettre de tester le flux de connexion/onboarding
+  private readonly AUTH_KEY = 'formuloo_user';
+  private platformId = inject(PLATFORM_ID);
+  
+  // INITIALISATION : Démarrage à null pour le SSR
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   
   public currentUser$ = this.currentUserSubject.asObservable();
+
+  constructor() {
+    // Si on est sur le navigateur, on tente de récupérer l'utilisateur
+    if (isPlatformBrowser(this.platformId)) {
+      const storedUser = this.getStoredUser();
+      if (storedUser) {
+        this.currentUserSubject.next(storedUser);
+      }
+    }
+  }
+
+  private getStoredUser(): User | null {
+    if (!isPlatformBrowser(this.platformId)) return null;
+    const stored = localStorage.getItem(this.AUTH_KEY);
+    return stored ? JSON.parse(stored) : null;
+  }
 
   // Méthode de simulation de login
   login(email: string, password: string) {
@@ -32,17 +46,29 @@ export class AuthService {
     };
     
     this.currentUserSubject.next(mockUser);
+    
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.AUTH_KEY, JSON.stringify(mockUser));
+    }
     return mockUser;
   }
 
   logout() {
     this.currentUserSubject.next(null);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.AUTH_KEY);
+    }
   }
 
   updateRole(role: UserRole): void {
     const current = this.currentUserSubject.value;
     if (current) {
-      this.currentUserSubject.next({ ...current, role });
+      const updated = { ...current, role };
+      this.currentUserSubject.next(updated);
+      
+      if (isPlatformBrowser(this.platformId)) {
+        localStorage.setItem(this.AUTH_KEY, JSON.stringify(updated));
+      }
     }
   }
 
@@ -57,6 +83,10 @@ export class AuthService {
     };
     
     this.currentUserSubject.next(newUser);
+    
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.AUTH_KEY, JSON.stringify(newUser));
+    }
     return newUser;
   }
 

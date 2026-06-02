@@ -1,11 +1,9 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { AccountService } from '../../../../core/services/account.service';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { AccountService, TenantContextService, CompteOHADA } from '@core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { IconComponent } from '../../../../shared/components/icon/icon';
-import { CompteOHADA } from '../../../../core/models/compte-ohada.model';
+import { IconComponent } from '@shared';
 
 @Component({
   selector: 'app-plan-comptable',

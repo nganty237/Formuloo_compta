@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap, withLatestFrom, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import * as JournalActions from './journal.actions';
 import { JournalService } from '../services/journal.service';
-import { TenantContextService } from '../../../core/services/tenant-context.service';
+import {  TenantContextService  } from '@core';
 
 @Injectable()
 export class JournalEffects {
@@ -85,7 +85,7 @@ export class JournalEffects {
   // Delete entry from service
   deleteEntry$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(JournalActions.deleteEntry),
+      ofType(JournalActions.deleteJournalEntry),
       switchMap(({ entryId }) =>
         this.journalService.delete(entryId).pipe(
           map(() => JournalActions.entryDeleted({ entryId })),

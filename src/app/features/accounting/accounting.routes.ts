@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router'; 
+import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { accountingReducer } from './store/accounting.reducer';
@@ -6,7 +6,7 @@ import { journalReducer } from './store/journal.reducer';
 import { AccountingEffects } from './store/accounting.effects';
 import { JournalEffects } from './store/journal.effects';
 
-import { roleGuard } from '../../core/guards/role-guard';
+import { roleGuard } from '@core';
 
 export const accountingRoutes: Routes = [
   {
@@ -55,11 +55,15 @@ export const accountingRoutes: Routes = [
       },
       {
         path: 'bilan',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN', 'COMPTABLE', 'CLIENT'] },
         loadComponent: () =>
           import('../reports/components/bilan/bilan').then(m => m.BilanComponent)
       },
       {
         path: 'resultat',
+        canActivate: [roleGuard],
+        data: { roles: ['ADMIN', 'COMPTABLE', 'CLIENT'] },
         loadComponent: () =>
           import('../reports/components/compte-resultat/compte-resultat').then(m => m.CompteResultatComponent)
       },

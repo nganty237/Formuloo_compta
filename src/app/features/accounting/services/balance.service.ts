@@ -79,13 +79,15 @@ export class BalanceService {
                         entries
                             .filter(e => e.date >= dateDebut && e.date <= dateFin)
                             .forEach(ecriture => {
-                                ecriture.lignes.forEach(ligne => {
-                                    const balanceLine = mapBalance.get(ligne.compteId);
-                                    if (balanceLine) {
-                                        balanceLine.totalDebit += ligne.debit;
-                                        balanceLine.totalCredit += ligne.credit;
-                                    }
-                                });
+                                if (ecriture.lignes) {
+                                    ecriture.lignes.forEach(ligne => {
+                                        const balanceLine = mapBalance.get(ligne.compteId);
+                                        if (balanceLine) {
+                                            balanceLine.totalDebit += (ligne.debit || 0);
+                                            balanceLine.totalCredit += (ligne.credit || 0);
+                                        }
+                                    });
+                                }
                             });
 
                         // Compute solde debiteur/crediteur

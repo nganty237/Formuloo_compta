@@ -1,7 +1,9 @@
-// Un utilisateur est toujours rattaché à un Tenant.
+export type UserRole = 'SUPER_ADMIN' | 'ADMIN' | 'COMPTABLE' | 'CLIENT';
+
 export interface User {
-    id: string;
-    tenantId: string;
-    email: string;
-    role: 'ADMIN' | 'COMPTABLE' | 'CLIENT';
+  id: string;
+  name?: string;
+  email?: string;
+  role: UserRole;
+  tenantId: string | null;
 }

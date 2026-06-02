@@ -27,23 +27,23 @@ export class DashboardApiService {
     const firstDayOfYear = `${new Date().getFullYear()}-01-01`;
 
     return this.balanceService.getBalance(entrepriseId, firstDayOfYear, today).pipe(
-      map(data => {
-        const balances = data.lignes;
+      map((data: any) => {
+        const balances: any[] = data.lignes;
         
         // CA: Somme des soldes créditeurs de la classe 7
         const ca = balances
-          .filter(b => b.numeroCompte.startsWith('7'))
-          .reduce((acc, b) => acc + b.soldeCredit, 0);
+          .filter((b: any) => b.numeroCompte.startsWith('7'))
+          .reduce((acc: number, b: any) => acc + b.soldeCredit, 0);
           
         // Trésorerie: Somme des soldes débiteurs de la classe 5 (moins créditeurs si découvert)
         const tresorerie = balances
-          .filter(b => b.numeroCompte.startsWith('5'))
-          .reduce((acc, b) => acc + (b.soldeDebit - b.soldeCredit), 0);
+          .filter((b: any) => b.numeroCompte.startsWith('5'))
+          .reduce((acc: number, b: any) => acc + (b.soldeDebit - b.soldeCredit), 0);
 
         // Charges: Somme des soldes débiteurs de la classe 6
         const charges = balances
-          .filter(b => b.numeroCompte.startsWith('6'))
-          .reduce((acc, b) => acc + b.soldeDebit, 0);
+          .filter((b: any) => b.numeroCompte.startsWith('6'))
+          .reduce((acc: number, b: any) => acc + b.soldeDebit, 0);
 
         return [
           { title: 'Chiffre d\'Affaires', value: ca, trend: 'up', icon: 'banknote' },
@@ -63,7 +63,7 @@ export class DashboardApiService {
       entries: this.entryService.getAll(entrepriseId),
       accounts: this.planService.getAccounts(entrepriseId)
     }).pipe(
-      map(({ entries, accounts }) => {
+      map(({ entries, accounts }: { entries: any[], accounts: any[] }) => {
         const months = this.getMonthLabels();
         const cashFlowData: CashFlowPoint[] = months.map(month => ({
           month,
@@ -71,18 +71,20 @@ export class DashboardApiService {
           outflows: 0
         }));
 
-        entries.forEach(entry => {
+        entries.forEach((entry: any) => {
           const entryDate = new Date(entry.date);
           if (entryDate.getFullYear() === annee) {
             const monthIdx = entryDate.getMonth();
 
-            entry.lignes.forEach(ligne => {
-              const account = accounts.find(a => a.id === ligne.compteId);
-              if (account?.numero.startsWith('5')) {
-                cashFlowData[monthIdx].inflows += ligne.debit;
-                cashFlowData[monthIdx].outflows += ligne.credit;
-              }
-            });
+            if (entry.lignes) {
+              entry.lignes.forEach((ligne: any) => {
+                const account = accounts.find((a: any) => a.id === ligne.compteId);
+                if (account?.numero.startsWith('5')) {
+                  cashFlowData[monthIdx].inflows += (ligne.debit || 0);
+                  cashFlowData[monthIdx].outflows += (ligne.credit || 0);
+                }
+              });
+            }
           }
         });
 
@@ -96,7 +98,7 @@ export class DashboardApiService {
    */
   getAccountingMovements(entrepriseId: string, annee: number): Observable<AccountingMovementPoint[]> {
     return this.entryService.getAll(entrepriseId).pipe(
-      map(entries => {
+      map((entries: any[]) => {
         const months = this.getMonthLabels();
         const movementData: AccountingMovementPoint[] = months.map(month => ({
           month,
@@ -104,15 +106,17 @@ export class DashboardApiService {
           credit: 0
         }));
 
-        entries.forEach(entry => {
+        entries.forEach((entry: any) => {
           const entryDate = new Date(entry.date);
           if (entryDate.getFullYear() === annee) {
             const monthIdx = entryDate.getMonth();
 
-            entry.lignes.forEach(ligne => {
-              movementData[monthIdx].debit += ligne.debit;
-              movementData[monthIdx].credit += ligne.credit;
-            });
+            if (entry.lignes) {
+              entry.lignes.forEach((ligne: any) => {
+                movementData[monthIdx].debit += (ligne.debit || 0);
+                movementData[monthIdx].credit += (ligne.credit || 0);
+              });
+            }
           }
         });
 
@@ -129,13 +133,13 @@ export class DashboardApiService {
     const firstDayOfYear = `${new Date().getFullYear()}-01-01`;
 
     return this.balanceService.getBalance(entrepriseId, firstDayOfYear, today).pipe(
-      map(data => {
-        const balances = data.lignes;
+      map((data: any) => {
+        const balances: any[] = data.lignes;
         const categoriesMap = new Map<string, number>();
 
         balances
-          .filter(b => b.numeroCompte.startsWith('6'))
-          .forEach(b => {
+          .filter((b: any) => b.numeroCompte.startsWith('6'))
+          .forEach((b: any) => {
             const subClass = b.numeroCompte.substring(0, 2);
             const label = this.getExpenseLabel(subClass);
             const current = categoriesMap.get(label) || 0;
@@ -158,30 +162,32 @@ export class DashboardApiService {
       entries: this.entryService.getAll(entrepriseId),
       accounts: this.planService.getAccounts(entrepriseId)
     }).pipe(
-      map(({ entries, accounts }) => {
+      map(({ entries, accounts }: { entries: any[], accounts: any[] }) => {
         const aging: InvoiceAging[] = [];
         const today = new Date();
 
-        entries.forEach(entry => {
-          entry.lignes.forEach(ligne => {
-            const account = accounts.find(a => a.id === ligne.compteId);
-            // On cherche les factures impayées (lettrage vide sur le compte 411)
-            if (account?.numero.startsWith('411') && !ligne.lettrage && ligne.debit > 0) {
-              const entryDate = new Date(entry.date);
-              const diffTime = today.getTime() - entryDate.getTime();
-              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        entries.forEach((entry: any) => {
+          if (entry.lignes) {
+            entry.lignes.forEach((ligne: any) => {
+              const account = accounts.find((a: any) => a.id === ligne.compteId);
+              // On cherche les factures impayées (lettrage vide sur le compte 411)
+              if (account?.numero.startsWith('411') && !ligne.lettrage && (ligne.debit || 0) > 0) {
+                const entryDate = new Date(entry.date);
+                const diffTime = today.getTime() - entryDate.getTime();
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-              if (diffDays > 30) {
-                aging.push({
-                  customer: entry.libelle.split('N°')[0].trim() || 'Client Divers',
-                  invoice: entry.libelle.includes('N°') ? entry.libelle.split('N°')[1].trim() : `ENT-${entry.id.substring(0, 5)}`,
-                  date: entry.date,
-                  amount: ligne.debit,
-                  overdueDays: diffDays
-                });
+                if (diffDays > 30) {
+                  aging.push({
+                    customer: entry.libelle.split('N°')[0].trim() || 'Client Divers',
+                    invoice: entry.libelle.includes('N°') ? entry.libelle.split('N°')[1].trim() : `ENT-${entry.id.substring(0, 5)}`,
+                    date: entry.date,
+                    amount: (ligne.debit || 0),
+                    overdueDays: diffDays
+                  });
+                }
               }
-            }
-          });
+            });
+          }
         });
 
         return aging.sort((a, b) => b.overdueDays - a.overdueDays).slice(0, 5);

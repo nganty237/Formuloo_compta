@@ -1,7 +1,7 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, of, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment';
+import {  environment  } from '@env/environment';
 
 export type OnboardingRole = 'cabinet' | 'client' | 'comptable';
 

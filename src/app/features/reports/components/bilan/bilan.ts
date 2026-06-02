@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
-import { BalanceService, LigneBalance } from '../../../accounting/services/balance.service';
-import { StatementTableComponent, StatementTableRow } from '../../../../shared/components/statement-table/statement-table';
+import { TenantContextService } from '@core';
+import { BalanceService, LigneBalance } from '@features/accounting';
+import { StatementTableComponent, StatementTableRow } from '@shared';
 import { switchMap, of } from 'rxjs';
 
 @Component({

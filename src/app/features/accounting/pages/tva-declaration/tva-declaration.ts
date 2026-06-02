@@ -1,10 +1,10 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import {  TenantContextService  } from '@core';
 import { InvoicingService } from '../../../invoicing/services/invoicing.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import {  IconComponent  } from '@shared';
 import { switchMap, of } from 'rxjs';
 
 interface AchatMock {
@@ -243,7 +243,7 @@ export class TvaDeclarationComponent {
   // Récupération des factures via InvoicingService
   private factures = toSignal(
     this.tenantContext.companyId$.pipe(
-      switchMap(id => id ? this.invoicingService.getFactures(id) : of([]))
+      switchMap((id: string | null) => id ? this.invoicingService.getFactures(id) : of([]))
     ),
     { initialValue: [] }
   );
@@ -257,38 +257,38 @@ export class TvaDeclarationComponent {
     const y = this.selectedYear() || '2023';
 
     // Filtre des ventes (factures de statut différent de BROUILLON/ANNULEE)
-    let filteredSales = this.factures().filter(f => f.statut !== 'ANNULEE' && f.statut !== 'BROUILLON' && f.type === 'FACTURE');
+    let filteredSales = this.factures().filter((f: any) => f.statut !== 'ANNULEE' && f.statut !== 'BROUILLON' && f.type === 'FACTURE');
     // Filtre des achats
-    let filteredPurchases = this.achatsMockList.filter(p => p.entrepriseId === activeCompanyId);
+    let filteredPurchases = this.achatsMockList.filter((p: AchatMock) => p.entrepriseId === activeCompanyId);
 
     // Filtres temporels
     if (isMonthly) {
       const matchPattern = `${y}-${m}`;
-      filteredSales = filteredSales.filter(f => f.date.startsWith(matchPattern));
-      filteredPurchases = filteredPurchases.filter(p => p.date.startsWith(matchPattern));
+      filteredSales = filteredSales.filter((f: any) => f.date.startsWith(matchPattern));
+      filteredPurchases = filteredPurchases.filter((p: AchatMock) => p.date.startsWith(matchPattern));
     } else {
       // Filtrer par trimestre
       const months = q === 'Q1' ? ['01', '02', '03'] :
                      q === 'Q2' ? ['04', '05', '06'] :
                      q === 'Q3' ? ['07', '08', '09'] : ['10', '11', '12'];
 
-      filteredSales = filteredSales.filter(f => {
+      filteredSales = filteredSales.filter((f: any) => {
         const parts = f.date.split('-');
         return parts[0] === y && months.includes(parts[1]);
       });
-      filteredPurchases = filteredPurchases.filter(p => {
+      filteredPurchases = filteredPurchases.filter((p: AchatMock) => {
         const parts = p.date.split('-');
         return parts[0] === y && months.includes(parts[1]);
       });
     }
 
     // Totaux Ventes
-    const baseVentesHt = filteredSales.reduce((sum, f) => sum + f.montantHt, 0);
-    const collectee = filteredSales.reduce((sum, f) => sum + f.tva, 0);
+    const baseVentesHt = filteredSales.reduce((sum: number, f: any) => sum + f.montantHt, 0);
+    const collectee = filteredSales.reduce((sum: number, f: any) => sum + f.tva, 0);
 
     // Totaux Achats
-    const baseAchatsHt = filteredPurchases.reduce((sum, p) => sum + p.montantHt, 0);
-    const deductible = filteredPurchases.reduce((sum, p) => sum + p.tva, 0);
+    const baseAchatsHt = filteredPurchases.reduce((sum: number, p: AchatMock) => sum + p.montantHt, 0);
+    const deductible = filteredPurchases.reduce((sum: number, p: AchatMock) => sum + p.tva, 0);
 
     const solde = collectee - deductible;
 

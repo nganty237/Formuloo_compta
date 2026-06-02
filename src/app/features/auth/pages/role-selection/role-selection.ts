@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import {  IconComponent  } from '@shared';
 import { OnboardingService, OnboardingRole } from '../../services/onboarding.service';
 
 @Component({

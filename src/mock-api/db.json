@@ -2655,6 +2655,46 @@
       "valide": true,
       "createdAt": "2026-05-31T02:27:44.870Z",
       "createdBy": "load-tester"
+    },
+    {
+      "id": "Yb1nxIjcpV8",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-06-02",
+      "libelle": "wd",
+      "valide": true,
+      "createdAt": "2026-06-02T03:18:30.251Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "T5My9fiISlY",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-06-02",
+      "libelle": "achat camion",
+      "valide": true,
+      "createdAt": "2026-06-02T03:22:21.502Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "aLA-U9P8tUo",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-06-02",
+      "libelle": "achat de camion",
+      "valide": true,
+      "createdAt": "2026-06-02T03:23:55.637Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "XJfEBY3bTd0",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-06-02",
+      "libelle": "achat camion",
+      "valide": true,
+      "createdAt": "2026-06-02T03:30:30.044Z",
+      "createdBy": "current-user"
     }
   ],
   "lignes": [
@@ -5555,6 +5595,20 @@
       "compteId": "cpt-521",
       "debit": 431835,
       "credit": 0
+    },
+    {
+      "id": "EPaFAn0Cu2I",
+      "ecritureId": "XJfEBY3bTd0",
+      "compteId": "cpt-601",
+      "debit": 10000,
+      "credit": 0
+    },
+    {
+      "id": "xeoRXoatFZE",
+      "ecritureId": "XJfEBY3bTd0",
+      "compteId": "cpt-401",
+      "debit": 0,
+      "credit": 10000
     }
   ],
   "clients": [

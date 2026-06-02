@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Ecriture } from '../../../core/models/ecriture.model';
+import {  Ecriture  } from '@core';
 
 export const loadEntries = createAction(
   '[Accounting] Load Entries'
@@ -20,7 +20,7 @@ export const updateEntry = createAction(
   props<{ entry: Ecriture }>()
 );
 
-export const deleteEntry = createAction(
+export const deleteAccountingEntry = createAction(
   '[Accounting] Delete Entry',
   props<{ entryId: string }>()
 );

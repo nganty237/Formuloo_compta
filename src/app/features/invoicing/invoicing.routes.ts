@@ -10,7 +10,7 @@ export const invoicingRoutes: Routes = [
     {
         path: 'list',
         canActivate: [roleGuard],
-        data: { roles: ['ADMIN', 'COMPTABLE'] },
+        data: { roles: ['ADMIN', 'COMPTABLE', 'CLIENT'] },
         loadComponent: () => import('./pages/invoice-list/invoice-list').then(m => m.InvoiceListComponent)
     },
     {

@@ -2,7 +2,7 @@ import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CompteOHADA } from '../models/compte-ohada.model';
-import { environment } from '../../../environments/environment';
+import {  environment  } from '@env/environment';
 import { tap } from 'rxjs/operators';
 
 @Injectable({

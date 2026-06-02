@@ -1,8 +1,8 @@
+import { Ecriture, JournalFilter, JournalStats } from '@core';
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, switchMap, forkJoin, of } from 'rxjs';
-import { Ecriture, JournalFilter, JournalStats } from '../../../core/models/ecriture.model';
-import { environment } from '../../../../environments/environment';
+import { Observable, map, switchMap, forkJoin, of, delay } from 'rxjs';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class JournalService {
     }
 
     return this.http.get<Ecriture[]>(this.apiUrl, { params }).pipe(
-      map(entries => {
+      map((entries: Ecriture[]) => {
         if (filter.searchTerm) {
           const term = filter.searchTerm.toLowerCase();
           return entries.filter(e =>
@@ -48,6 +48,23 @@ export class JournalService {
           );
         }
         return entries;
+      })
+    );
+  }
+
+  getJournalStats(entrepriseId: string, filter?: JournalFilter): Observable<JournalStats> {
+    return this.getJournalFiltered(entrepriseId, filter || {}).pipe(
+      map((entries: Ecriture[]) => {
+        const allLines = entries.flatMap(e => e.lignes || []);
+        const totalDebit = allLines.reduce((sum: number, line: any) => sum + (line.debit || 0), 0);
+        const totalCredit = allLines.reduce((sum: number, line: any) => sum + (line.credit || 0), 0);
+
+        return {
+          totalEntries: entries.length,
+          totalDebit,
+          totalCredit,
+          isBalanced: Math.abs(totalDebit - totalCredit) < 0.01
+        };
       })
     );
   }
@@ -66,76 +83,53 @@ export class JournalService {
     };
 
     return this.http.post<Ecriture>(this.apiUrl, newEntryData).pipe(
-      switchMap(savedEntry => {
-        if (!lignes || lignes.length === 0) return of(savedEntry);
-        
-        const lineRequests = lignes.map(line => {
-          const { id, ...lineData } = line;
-          return this.http.post(`${environment.apiUrl}/lignes`, {
-            ...lineData,
-            ecritureId: savedEntry.id
-          });
+      switchMap(createdEntry => {
+        if (!lignes || lignes.length === 0) {
+          return of(createdEntry);
+        }
+
+        // Save each line to /lignes
+        const lineRequests = lignes.map((line, index) => {
+          const newLine = {
+            ...line,
+            id: `line-${createdEntry.id}-${index}`,
+            ecritureId: createdEntry.id
+          };
+          return this.http.post(`${environment.apiUrl}/lignes`, newLine);
         });
 
         return forkJoin(lineRequests).pipe(
-          map(() => ({ ...savedEntry, lignes }))
+          map(() => ({ ...createdEntry, lignes }))
         );
       })
     );
   }
 
-  update(id: string, entry: Ecriture): Observable<Ecriture> {
-    const { lignes, ...entryData } = entry;
-    return this.http.put<Ecriture>(`${this.apiUrl}/${id}`, entryData).pipe(
-        switchMap(updatedEntry => {
-            // Pour simplifier l'update des lignes avec json-server, 
-            // on pourrait supprimer les anciennes et recréer les nouvelles.
-            // Mais ici on va juste retourner l'entrée mise à jour pour le moment.
-            return of({ ...updatedEntry, lignes });
-        })
-    );
+  update(id: string, entry: Partial<Ecriture>): Observable<Ecriture> {
+    return this.http.patch<Ecriture>(`${this.apiUrl}/${id}`, entry);
   }
 
   validate(id: string): Observable<Ecriture> {
-    return this.http.patch<Ecriture>(`${this.apiUrl}/${id}`, { valide: true });
+    return this.update(id, { valide: true });
   }
 
-  delete(id: string): Observable<boolean> {
-    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
-      map(() => true)
-    );
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  getJournalStats(entrepriseId: string, filter?: JournalFilter): Observable<JournalStats> {
-    return this.getJournalFiltered(entrepriseId, filter || {}).pipe(
-      map(entries => {
-        const allLines = entries.flatMap(e => e.lignes || []);
-        const totalDebit = allLines.reduce((sum, line) => sum + (line.debit || 0), 0);
-        const totalCredit = allLines.reduce((sum, line) => sum + (line.credit || 0), 0);
+  exportData(entrepriseId: string, filter: JournalFilter): Observable<any> {
+    // Simulation d'un export
+    return of({ success: true, url: '#' }).pipe(delay(1000));
+  }
 
+  getGlobalStats(entrepriseId: string): Observable<any> {
+    return this.getJournal(entrepriseId).pipe(
+      map((entries: Ecriture[]) => {
         return {
-          totalEntries: entries.length,
-          totalDebit,
-          totalCredit,
-          isBalanced: Math.abs(totalDebit - totalCredit) < 0.01
+          count: entries.length,
+          totalDebit: entries.flatMap((e: Ecriture) => e.lignes || []).reduce((s: number, l: any) => s + (l.debit || 0), 0),
+          totalCredit: entries.flatMap((e: Ecriture) => e.lignes || []).reduce((s: number, l: any) => s + (l.credit || 0), 0),
         };
-      })
-    );
-  }
-
-  exportData(
-    entrepriseId: string,
-    filter: JournalFilter
-  ): Observable<{ entries: Ecriture[]; stats: JournalStats }> {
-    return this.getJournalFiltered(entrepriseId, filter).pipe(
-      map(entries => {
-        const stats = {
-          totalEntries: entries.length,
-          totalDebit: entries.flatMap(e => e.lignes || []).reduce((s, l) => s + (l.debit || 0), 0),
-          totalCredit: entries.flatMap(e => e.lignes || []).reduce((s, l) => s + (l.credit || 0), 0),
-          isBalanced: true // Simplifié
-        };
-        return { entries, stats };
       })
     );
   }

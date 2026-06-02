@@ -4,11 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
-import { Ecriture, JournalFilter, JournalStats } from '../../../../core/models/ecriture.model';
-import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import { TenantContextService, Ecriture, JournalFilter, JournalStats } from '@core';
+import { TableComponent, TableColumn, ButtonComponent, IconComponent } from '@shared';
 import * as JournalActions from '../../store/journal.actions';
 import {
   selectExportLoading,
@@ -205,7 +202,7 @@ export class JournalComponent implements OnInit, OnDestroy {
         take(1),
         takeUntil(this.destroy$)
       )
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.applyJournalFilter({
@@ -220,7 +217,7 @@ export class JournalComponent implements OnInit, OnDestroy {
   exportToPDF() {
     this.tenantContext.companyId$
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.exportJournal({
@@ -236,7 +233,7 @@ export class JournalComponent implements OnInit, OnDestroy {
   exportToExcel() {
     this.tenantContext.companyId$
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.exportJournal({

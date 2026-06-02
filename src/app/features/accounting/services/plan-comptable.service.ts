@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, switchMap, forkJoin, of } from 'rxjs';
-import { CompteOHADA } from '../../../core/models/compte-ohada.model';
-import { environment } from '../../../../environments/environment';
+import {  CompteOHADA  } from '@core';
+import {  environment  } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'

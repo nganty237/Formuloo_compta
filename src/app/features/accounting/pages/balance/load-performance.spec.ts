@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { JournalService } from '../../services/journal.service';
 import { firstValueFrom } from 'rxjs';
-import { Ecriture } from '../../../../core/models/ecriture.model';
+import {  Ecriture  } from '@core';
 
 describe('Performance & Load Testing (Basics)', () => {
   let httpMock: HttpTestingController;

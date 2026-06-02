@@ -2,9 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { ButtonComponent } from '../../../../shared/components/button/button';
+import {  ButtonComponent  } from '@shared';
 import { OnboardingService, OnboardingRole } from '../../services/onboarding.service';
-import { AuthService } from '../../../../core/services/auth.service';
+import {  AuthService  } from '@core';
 
 // Custom Validator : Vérifie que le mot de passe et sa confirmation sont identiques
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {

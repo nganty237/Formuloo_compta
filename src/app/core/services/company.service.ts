@@ -1,8 +1,8 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, shareReplay, tap } from 'rxjs';
 import { Entreprise } from '../models/entreprise.model';
-import { environment } from '../../../environments/environment';
+import {  environment  } from '@env/environment';
 
 export interface CompanyWithTaxInfo extends Entreprise {
   pays?: string;
@@ -22,14 +22,26 @@ export class CompanyService {
   // Sélecteur réactif pour obtenir la liste complète
   public companies = this.companiesList.asReadonly();
 
+  // Observable pour attendre le chargement des entreprises (avec cache)
+  private companiesLoader$ = this.http.get<CompanyWithTaxInfo[]>(this.apiUrl).pipe(
+    tap(companies => this.companiesList.set(companies)),
+    shareReplay(1) // Cache la réponse pour eviter les requêtes multiples
+  );
+
   constructor() {
     this.loadCompanies();
   }
 
   private loadCompanies(): void {
-    this.http.get<CompanyWithTaxInfo[]>(this.apiUrl).subscribe(companies => {
-      this.companiesList.set(companies);
-    });
+    this.companiesLoader$.subscribe(); // Lance le chargement et utilise le cache
+  }
+
+  /**
+   * Récupère la liste des entreprises comme Observable
+   * Utile pour les guards qui doivent attendre le chargement
+   */
+  getCompanies(): Observable<CompanyWithTaxInfo[]> {
+    return this.companiesLoader$;
   }
 
   /**
@@ -37,6 +49,13 @@ export class CompanyService {
    */
   getCompanyById(id: string): Observable<CompanyWithTaxInfo | undefined> {
     return this.http.get<CompanyWithTaxInfo>(`${this.apiUrl}/${id}`);
+  }
+
+  /**
+   * Filtre les entreprises par tenant
+   */
+  getCompaniesByTenant(tenantId: string): CompanyWithTaxInfo[] {
+    return this.companies().filter(c => c.tenantId === tenantId);
   }
 
   /**

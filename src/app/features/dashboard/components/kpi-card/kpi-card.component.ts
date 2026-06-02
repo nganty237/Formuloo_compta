@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KPI } from '../../models/dashboard.model';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import {  IconComponent  } from '@shared';
 
 @Component({
   selector: 'app-kpi-card',

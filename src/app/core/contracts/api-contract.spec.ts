@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '../../../environments/environment';
+import {  environment  } from '@env/environment';
 import { CompteOHADA } from '../models/compte-ohada.model';
 import { Ecriture } from '../models/ecriture.model';
 import { firstValueFrom } from 'rxjs';

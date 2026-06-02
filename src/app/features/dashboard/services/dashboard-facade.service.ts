@@ -46,7 +46,13 @@ export class DashboardFacade {
       invoiceAging: this.apiService.getInvoiceAging(entrepriseId)
     })
     .pipe(
-      tap(({ kpis, cashFlow, accountingMovements, expenseStructure, invoiceAging }) => {
+      tap(({ kpis, cashFlow, accountingMovements, expenseStructure, invoiceAging }: { 
+        kpis: KPI[], 
+        cashFlow: CashFlowPoint[], 
+        accountingMovements: AccountingMovementPoint[], 
+        expenseStructure: ExpenseCategory[], 
+        invoiceAging: InvoiceAging[] 
+      }) => {
         this.kpisSubject.next(kpis);
         this.cashFlowSubject.next(cashFlow);
         this.accountingMovementsSubject.next(accountingMovements);

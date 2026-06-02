@@ -1,5 +1,5 @@
 <header class="w-full flex justify-between items-center bg-white border-b border-gray-200 h-16 px-6">
-    
+
     <div class="flex items-center gap-4">
         <!-- Sélection du dossier (Multi-tenant) -->
         <div *appHasRole="['ADMIN', 'COMPTABLE', 'SUPER_ADMIN']" class="flex items-center gap-3">
@@ -7,7 +7,7 @@
             <div class="relative">
                 <select id="company-select" #companySelect (change)="onCompanyChange(companySelect.value)"
                     class="block w-48 pl-3 pr-10 py-1.5 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 appearance-none bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors font-medium">
-                    @for (company of companyService.companies(); track company.id) {
+                    @for (company of filteredCompanies(); track company.id) {
                     <option [value]="company.id" [selected]="company.id === selectedCompanyId">
                         {{ company.nom }}
                     </option>
@@ -61,7 +61,7 @@
             </app-button>
 
             @if (isProfileMenuOpen()) {
-                <app-profile-dropdown 
+                <app-profile-dropdown
                     [username]="currentUser()?.name ?? 'Utilisateur'"
                     [role]="currentUser()?.role ?? 'Role'"
                     (closeMenu)="isProfileMenuOpen.set(false)"
