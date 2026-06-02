@@ -10,10 +10,12 @@ import { AuthService } from '../../../core/services/auth.service';
 import { PlanComptableService } from '../../../features/accounting/services/plan-comptable.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 
+import { HasRoleDirective } from '../../../shared/directives/has-role.directive';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, ProfileDropdownComponent, ButtonComponent, IconComponent, RouterModule],
+  imports: [CommonModule, ProfileDropdownComponent, ButtonComponent, IconComponent, RouterModule, HasRoleDirective],
   templateUrl: './header.html',
 })
 export class HeaderComponent implements OnInit {
@@ -64,10 +66,6 @@ export class HeaderComponent implements OnInit {
       // Auto-initialisation du plan comptable si vide pour ce nouveau dossier
       this.planService.initializeForCompany(company.id).subscribe();
     }
-  }
-
-  onRoleChange(newRole: string) {
-    this.authService.updateRole(newRole as any);
   }
 
   toggleProfileMenu(event: Event): void {

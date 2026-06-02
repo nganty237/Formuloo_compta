@@ -2,7 +2,7 @@
     
     <div class="flex items-center gap-4">
         <!-- Sélection du dossier (Multi-tenant) -->
-        <div class="flex items-center gap-3">
+        <div *appHasRole="['ADMIN', 'COMPTABLE', 'SUPER_ADMIN']" class="flex items-center gap-3">
             <label for="company-select" class="text-sm font-medium text-gray-500 font-semibold">Dossier :</label>
             <div class="relative">
                 <select id="company-select" #companySelect (change)="onCompanyChange(companySelect.value)"
@@ -12,22 +12,6 @@
                         {{ company.nom }}
                     </option>
                     }
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                    <app-icon name="chevron-down" size="sm"></app-icon>
-                </div>
-            </div>
-        </div>
-
-        <!-- Simulation du rôle (pour démo / tests d'isolation) -->
-        <div class="flex items-center gap-3 ml-2 border-l border-slate-200 pl-4">
-            <label for="role-select" class="text-sm font-medium text-gray-500 font-semibold">Simuler Rôle :</label>
-            <div class="relative">
-                <select id="role-select" #roleSelect (change)="onRoleChange(roleSelect.value)"
-                    class="block w-36 pl-3 pr-10 py-1.5 text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-slate-500 focus:border-slate-500 appearance-none bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors font-medium">
-                    <option value="ADMIN" [selected]="currentUser()?.role === 'ADMIN'">Admin</option>
-                    <option value="COMPTABLE" [selected]="currentUser()?.role === 'COMPTABLE'">Comptable</option>
-                    <option value="CLIENT" [selected]="currentUser()?.role === 'CLIENT'">Client (L-O)</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
                     <app-icon name="chevron-down" size="sm"></app-icon>
@@ -50,7 +34,7 @@
 
     <div class="flex items-center gap-4">
         <!-- Lien vers la liste des entreprises du cabinet -->
-        <a routerLink="companies" class="inline-flex items-center gap-1.5 text-slate-600 hover:text-blue-600 transition-colors text-sm font-semibold mr-2 cursor-pointer">
+        <a *appHasRole="['ADMIN', 'COMPTABLE', 'SUPER_ADMIN']" routerLink="companies" class="inline-flex items-center gap-1.5 text-slate-600 hover:text-blue-600 transition-colors text-sm font-semibold mr-2 cursor-pointer">
             <app-icon name="settings" size="sm"></app-icon>
             Dossiers Clients
         </a>

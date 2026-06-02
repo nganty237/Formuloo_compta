@@ -1,4 +1,24 @@
 {
+  "onboarding_roles": [
+    {
+      "id": "cabinet",
+      "title": "Cabinet Comptable",
+      "description": "Gérez plusieurs clients et vos collaborateurs.",
+      "icon": "building"
+    },
+    {
+      "id": "client",
+      "title": "Entreprise / Client",
+      "description": "Suivez votre comptabilité et collaborez avec votre expert.",
+      "icon": "users"
+    },
+    {
+      "id": "comptable",
+      "title": "Comptable Indépendant",
+      "description": "Travaillez sur vos dossiers en toute autonomie.",
+      "icon": "briefcase"
+    }
+  ],
   "tenants": [
     {
       "id": "tenant-1",
@@ -209,7 +229,8 @@
       "numero": "661",
       "intitule": "Rémunérations du personnel",
       "classe": 6,
-      "type": "CHARGE"
+      "type": "CHARGE",
+      "actif": true
     },
     {
       "id": "cpt-701",
