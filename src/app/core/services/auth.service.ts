@@ -12,13 +12,11 @@ export class AuthService {
   private readonly AUTH_KEY = 'formuloo_user';
   private platformId = inject(PLATFORM_ID);
   
-  // INITIALISATION : Démarrage à null pour le SSR
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   
   public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
-    // Si on est sur le navigateur, on tente de récupérer l'utilisateur
     if (isPlatformBrowser(this.platformId)) {
       const storedUser = this.getStoredUser();
       if (storedUser) {
@@ -29,15 +27,12 @@ export class AuthService {
 
   private getStoredUser(): User | null {
     if (!isPlatformBrowser(this.platformId)) return null;
-    const stored = localStorage.getItem(this.AUTH_KEY);
+    const stored = sessionStorage.getItem(this.AUTH_KEY);
     return stored ? JSON.parse(stored) : null;
   }
 
-  // Méthode de simulation de login
   login(email: string, password: string) {
-    console.log(`[AuthService] Tentative de connexion pour : ${email}`);
-    
-    // Simulation d'un utilisateur admin par défaut pour les tests
+    // Hardcoded mock user for testing authentication flow without a backend
     const mockUser: User = { 
       id: 'user-1',
       name: 'Admin Cabinet',
@@ -48,7 +43,7 @@ export class AuthService {
     this.currentUserSubject.next(mockUser);
     
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.AUTH_KEY, JSON.stringify(mockUser));
+      sessionStorage.setItem(this.AUTH_KEY, JSON.stringify(mockUser));
     }
     return mockUser;
   }
@@ -56,7 +51,7 @@ export class AuthService {
   logout() {
     this.currentUserSubject.next(null);
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem(this.AUTH_KEY);
+      sessionStorage.removeItem(this.AUTH_KEY);
     }
   }
 
@@ -67,25 +62,24 @@ export class AuthService {
       this.currentUserSubject.next(updated);
       
       if (isPlatformBrowser(this.platformId)) {
-        localStorage.setItem(this.AUTH_KEY, JSON.stringify(updated));
+        sessionStorage.setItem(this.AUTH_KEY, JSON.stringify(updated));
       }
     }
   }
 
   register(signupData: any, role: string) {
-    console.log(`[AuthService] Inscription du rôle ${role}`, signupData);
-    
     const newUser: User = {
       id: 'u' + Math.floor(Math.random() * 1000),
       name: signupData.fullName,
       role: this.mapOnboardingRoleToUserRole(role),
-      tenantId: 'tenant-1' // Utilise tenant-1 par défaut pour la démo
+      // Defaulting to tenant-1 for demo purposes until multi-tenant creation is implemented
+      tenantId: 'tenant-1'
     };
     
     this.currentUserSubject.next(newUser);
     
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.AUTH_KEY, JSON.stringify(newUser));
+      sessionStorage.setItem(this.AUTH_KEY, JSON.stringify(newUser));
     }
     return newUser;
   }

@@ -28,7 +28,7 @@ import {
         <p class="text-blue-100">View all recorded entries and validate your transactions.</p>
       </div>
 
-      <ng-container *ngIf="stats$ | async as stats">
+      @if (stats$ | async; as stats) {
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
             <div class="text-sm text-slate-600 font-medium">Total Entries</div>
@@ -63,7 +63,7 @@ import {
             </div>
           </div>
         </div>
-      </ng-container>
+      }
 
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-8">
         <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
@@ -121,7 +121,7 @@ import {
         </app-table>
       </div>
 
-      <ng-container *ngIf="(entries$ | async)?.length">
+      @if ((entries$ | async)?.length) {
         <div class="mt-8 flex flex-wrap gap-4">
           <app-button (clicked)="exportToPDF()"
                   [disabled]="(exportLoading$ | async) ?? false"
@@ -136,7 +136,7 @@ import {
             Export Excel
           </app-button>
         </div>
-      </ng-container>
+      }
     </div>
   `
 })

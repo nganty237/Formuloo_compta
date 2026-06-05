@@ -10,14 +10,14 @@ export const tenantGuard: CanActivateFn = (route, state) => {
   const companyService = inject(CompanyService);
   const authService = inject(AuthService);
   const router = inject(Router);
-  
+
   const companyId = route.paramMap.get('id');
 
   if (!companyId) {
     return router.createUrlTree(['/auth/login']);
   }
 
-  // Double vérification : Existence de l'entreprise + Appartenance au Tenant de l'utilisateur
+  // Cross-reference company existence and user tenant affiliation to prevent unauthorized cross-tenant access
   return authService.currentUser$.pipe(
     take(1),
     switchMap(user => {
@@ -31,17 +31,16 @@ export const tenantGuard: CanActivateFn = (route, state) => {
             return router.createUrlTree(['/auth/login']);
           }
 
-          // LE POINT CRITIQUE : L'utilisateur a-t-il le droit d'accéder à ce tenant ?
-          // Le Super Admin bypass, sinon on compare les tenantId
+          // SECURITY: Ensure user belongs to the same tenant as the company, or has SUPER_ADMIN privileges
           const isAllowed = user.role === 'SUPER_ADMIN' || company.tenantId === user.tenantId;
 
           if (isAllowed) {
             tenantContext.selectCompany(company.id, company.nom, company.tenantId);
             return true;
           } else {
+            // Log security violation for audit purposes
             console.error(`[TenantGuard] Violation d'accès : L'utilisateur ${user.id} tente d'accéder à l'entreprise ${company.id} d'un autre tenant.`);
-            // Redirection vers la racine (évite la boucle infinie sur ENT-001)
-            return router.createUrlTree(['/']);
+            return router.createUrlTree(['/403']);
           }
         }),
         catchError(() => of(router.createUrlTree(['/auth/login'])))

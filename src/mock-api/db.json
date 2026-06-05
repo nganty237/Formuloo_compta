@@ -246,7 +246,8 @@
       "numero": "706",
       "intitule": "Services vendus",
       "classe": 7,
-      "type": "PRODUIT"
+      "type": "PRODUIT",
+      "actif": true
     },
     {
       "id": "cpt-821",
@@ -2694,6 +2695,36 @@
       "libelle": "achat camion",
       "valide": true,
       "createdAt": "2026-06-02T03:30:30.044Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "SYZewmGy58A",
+      "entrepriseId": "ENT-002",
+      "journalId": "OD",
+      "date": "2026-06-03",
+      "libelle": "achat de velos",
+      "valide": true,
+      "createdAt": "2026-06-03T14:27:24.199Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "IxCh6BHrQdk",
+      "entrepriseId": "ENT-001",
+      "journalId": "OD",
+      "date": "2026-06-03",
+      "libelle": "achat velo",
+      "valide": true,
+      "createdAt": "2026-06-03T14:30:56.175Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "EEH4pAi1wZI",
+      "entrepriseId": "ENT-001",
+      "journalId": "VTE",
+      "date": "2026-06-03",
+      "libelle": "FACTURE N° FAC-202606-02216",
+      "valide": true,
+      "createdAt": "2026-06-03T18:16:58.562Z",
       "createdBy": "current-user"
     }
   ],
@@ -5609,6 +5640,55 @@
       "compteId": "cpt-401",
       "debit": 0,
       "credit": 10000
+    },
+    {
+      "id": "30TNyXZTXsA",
+      "ecritureId": "SYZewmGy58A",
+      "compteId": "XKypSDyENNU",
+      "debit": 100000,
+      "credit": 0
+    },
+    {
+      "id": "eA6wlI0NVvY",
+      "ecritureId": "SYZewmGy58A",
+      "compteId": "Rr9FyRVXz5s",
+      "debit": 0,
+      "credit": 100000
+    },
+    {
+      "id": "Y9S3vaUcdRg",
+      "ecritureId": "IxCh6BHrQdk",
+      "compteId": "cpt-601",
+      "debit": 100000,
+      "credit": 0
+    },
+    {
+      "id": "g8qlhLztUzg",
+      "ecritureId": "IxCh6BHrQdk",
+      "compteId": "cpt-401",
+      "debit": 0,
+      "credit": 100000
+    },
+    {
+      "id": "v6XE21x_vAM",
+      "ecritureId": "EEH4pAi1wZI",
+      "compteId": "cpt-411",
+      "debit": 118000,
+      "credit": 0
+    },
+    {
+      "id": "OqS0es5g3bE",
+      "ecritureId": "EEH4pAi1wZI",
+      "compteId": "701000",
+      "debit": 0,
+      "credit": 100000
+    },
+    {
+      "id": "0XH0vMKdBwI",
+      "ecritureId": "EEH4pAi1wZI",
+      "compteId": "cpt-443",
+      "debit": 0,
+      "credit": 18000
     }
   ],
   "clients": [
@@ -5670,6 +5750,20 @@
       "montantHt": 250000,
       "tva": 45000,
       "montantTtc": 295000
+    },
+    {
+      "entrepriseId": "ENT-001",
+      "clientId": "ENT-001",
+      "numero": "FAC-202606-02216",
+      "type": "FACTURE",
+      "date": "2026-06-03",
+      "statut": "ANNULEE",
+      "montantHt": 100000,
+      "tva": 18000,
+      "montantTtc": 118000,
+      "compteProduitId": "701000",
+      "description": "",
+      "id": "t8s2A-MxrKg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

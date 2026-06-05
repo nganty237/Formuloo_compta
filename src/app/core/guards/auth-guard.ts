@@ -9,26 +9,23 @@ export const authGuard: CanActivateFn = (route, state) => {
   const companyService = inject(CompanyService);
   const router = inject(Router);
 
-  // Vérifier si la route est marquée comme réservée aux invités (ex: Login, Signup)
+  // Handle guest-only routes (e.g., login/register) to prevent logged-in users from re-authenticating
   const onlyGuests = route.data['onlyGuests'] === true;
 
   return authService.currentUser$.pipe(
     take(1),
     switchMap(user => {
       if (user) {
-        // L'utilisateur est connecté
         if (onlyGuests) {
-          // S'il tente d'aller sur une page "Guest Only", on le renvoie au Dashboard
-          // Récupérer les entreprises via Observable pour attendre le chargement
+          // Redirect authenticated users to their primary dashboard instead of guest pages
           return companyService.getCompanies().pipe(
             map(companies => {
               const userCompanies = companies.filter(c => c.tenantId === user.tenantId);
 
               if (userCompanies.length > 0) {
-                // Rediriger vers la première entreprise du tenant
                 return router.createUrlTree([`/tenant/${userCompanies[0].id}/dashboard`]);
               } else {
-                // Si pas d'entreprise pour ce tenant, rediriger vers login
+                // Fallback for edge case where a user exists without an associated company
                 console.warn('[AuthGuard] Aucune entreprise trouvée pour le tenant', user.tenantId);
                 return router.createUrlTree(['/auth/login']);
               }
@@ -37,12 +34,9 @@ export const authGuard: CanActivateFn = (route, state) => {
         }
         return of(true);
       } else {
-        // L'utilisateur n'est pas connecté
         if (onlyGuests) {
-          // C'est un invité sur une page d'invité, tout est OK
           return of(true);
         }
-        // Sinon, redirection vers le login
         return of(router.createUrlTree(['/auth/login']));
       }
     })

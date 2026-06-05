@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { IconComponent, ButtonComponent } from '@shared';
 
 @Component({
   selector: 'app-landing-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, IconComponent, ButtonComponent],
+  imports: [CommonModule, RouterModule, RouterOutlet, IconComponent, ButtonComponent],
   template: `
     <div class="min-h-screen flex flex-col bg-white">
       <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100">

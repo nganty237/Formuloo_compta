@@ -88,7 +88,6 @@ export class JournalService {
           return of(createdEntry);
         }
 
-        // Save each line to /lignes
         const lineRequests = lignes.map((line, index) => {
           const newLine = {
             ...line,
@@ -118,7 +117,7 @@ export class JournalService {
   }
 
   exportData(entrepriseId: string, filter: JournalFilter): Observable<any> {
-    // Simulation d'un export
+    // Simulated async export process; will be replaced by a real file stream in production
     return of({ success: true, url: '#' }).pipe(delay(1000));
   }
 

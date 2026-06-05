@@ -46,7 +46,6 @@ describe('Performance & Load Testing (Basics)', () => {
     const endTime = performance.now();
     
     const duration = endTime - startTime;
-    console.log(`Temps de réponse pour ${NB_USERS} requêtes simulées : ${duration.toFixed(2)}ms`);
     expect(duration).toBeLessThan(1000); 
   });
 

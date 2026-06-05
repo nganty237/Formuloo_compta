@@ -20,6 +20,10 @@ export const routes: Routes = [
         loadChildren: () => import('./features/auth/auth.routes').then(m => m.authRoutes)
     },
     {
+        path: '403',
+        loadComponent: () => import('./features/auth/pages/access-denied/access-denied.component').then(m => m.AccessDeniedComponent)
+    },
+    {
         path: 'tenant/:id',
         canActivate: [authGuard, tenantGuard],
         loadComponent: () => import('./layout/main-layout/main-layout').then(m => m.MainLayout),

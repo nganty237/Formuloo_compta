@@ -19,8 +19,14 @@ export class OnboardingService {
   private http = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
-  // Signaux pour l'état dynamique - Initialisé vide
-  private _availableRoles = signal<RoleConfig[]>([]);
+  // Signaux pour l'état dynamique - Initialisé avec des valeurs par défaut pour éviter l'écran vide
+  private defaultRoles: RoleConfig[] = [
+    { id: 'cabinet', title: 'Cabinet Comptable', description: 'Gérez plusieurs clients et vos collaborateurs.', icon: 'building' },
+    { id: 'client', title: 'Entreprise / Client', description: 'Suivez votre comptabilité et collaborez avec votre expert.', icon: 'users' },
+    { id: 'comptable', title: 'Comptable Indépendant', description: 'Travaillez sur vos dossiers en toute autonomie.', icon: 'briefcase' }
+  ];
+
+  private _availableRoles = signal<RoleConfig[]>(this.defaultRoles);
   readonly availableRoles = this._availableRoles.asReadonly();
 
   private _selectedRole = signal<OnboardingRole | null>(null);
