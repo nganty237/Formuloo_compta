@@ -2,10 +2,9 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { TenantContextService } from '@core';
 import { BalanceService, LigneBalance } from '../../services/balance.service';
-import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
-import { ButtonComponent } from '../../../../shared/components/button/button';
+import { TableComponent, TableColumn, ButtonComponent } from '@shared';
 import { distinctUntilChanged, filter, finalize, timeout, catchError, of } from 'rxjs';
 
 @Component({

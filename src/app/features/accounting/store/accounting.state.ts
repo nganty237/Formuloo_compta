@@ -1,4 +1,4 @@
-import { Ecriture } from '../../../core/models/ecriture.model';
+import {  Ecriture  } from '@core';
 
 export interface AccountingState {
   entries: Ecriture[]; 

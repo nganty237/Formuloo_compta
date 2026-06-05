@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Ecriture } from '../../../core/models/ecriture.model';
+import {  Ecriture  } from '@core';
 import { JournalService } from './journal.service';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class EntryService {
     }
 
     // Delete an entry
-    delete(id: string): Observable<boolean> {
+    delete(id: string): Observable<void> {
         return this.journalService.delete(id);
     }
 }

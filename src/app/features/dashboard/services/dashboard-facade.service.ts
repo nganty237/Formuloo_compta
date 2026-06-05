@@ -31,9 +31,8 @@ export class DashboardFacade {
   public readonly loading$ = this.loadingSubject.asObservable();
 
   /**
-   * Charge l'ensemble des données du dashboard
-   * @param entrepriseId ID de l'entreprise active
-   * @param annee Année fiscale (par défaut l'année en cours)
+   * @param entrepriseId Active company ID
+   * @param annee Fiscal year
    */
   loadDashboard(entrepriseId: string, annee: number = new Date().getFullYear()): void {
     this.loadingSubject.next(true);
@@ -46,7 +45,13 @@ export class DashboardFacade {
       invoiceAging: this.apiService.getInvoiceAging(entrepriseId)
     })
     .pipe(
-      tap(({ kpis, cashFlow, accountingMovements, expenseStructure, invoiceAging }) => {
+      tap(({ kpis, cashFlow, accountingMovements, expenseStructure, invoiceAging }: { 
+        kpis: KPI[], 
+        cashFlow: CashFlowPoint[], 
+        accountingMovements: AccountingMovementPoint[], 
+        expenseStructure: ExpenseCategory[], 
+        invoiceAging: InvoiceAging[] 
+      }) => {
         this.kpisSubject.next(kpis);
         this.cashFlowSubject.next(cashFlow);
         this.accountingMovementsSubject.next(accountingMovements);
@@ -58,10 +63,6 @@ export class DashboardFacade {
     .subscribe();
   }
 
-  /**
-   * Permet de rafraîchir manuellement les données
-   */
-  
   refresh(entrepriseId: string): void {
     this.loadDashboard(entrepriseId);
   }

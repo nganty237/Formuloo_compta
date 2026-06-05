@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
-import { HasRoleDirective } from '../../../shared/directives/has-role.directive';
-import { ButtonComponent } from '../../../shared/components/button/button';
-import { IconComponent } from '../../../shared/components/icon/icon';
+import { HasRoleDirective, ButtonComponent, IconComponent } from '@shared';
 
 @Component({
   selector: 'app-sidebar',

@@ -60,7 +60,6 @@ export class BalanceService {
                     map(entries => {
                         const mapBalance = new Map<string, LigneBalance>();
 
-                        // Initialize all accounts for the company
                         accounts.forEach(compte => {
                             mapBalance.set(compte.id, {
                                 compteId: compte.id,
@@ -75,20 +74,20 @@ export class BalanceService {
                             });
                         });
 
-                        // Accumulate movements within the date range
                         entries
                             .filter(e => e.date >= dateDebut && e.date <= dateFin)
                             .forEach(ecriture => {
-                                ecriture.lignes.forEach(ligne => {
-                                    const balanceLine = mapBalance.get(ligne.compteId);
-                                    if (balanceLine) {
-                                        balanceLine.totalDebit += ligne.debit;
-                                        balanceLine.totalCredit += ligne.credit;
-                                    }
-                                });
+                                if (ecriture.lignes) {
+                                    ecriture.lignes.forEach(ligne => {
+                                        const balanceLine = mapBalance.get(ligne.compteId);
+                                        if (balanceLine) {
+                                            balanceLine.totalDebit += (ligne.debit || 0);
+                                            balanceLine.totalCredit += (ligne.credit || 0);
+                                        }
+                                    });
+                                }
                             });
 
-                        // Compute solde debiteur/crediteur
                         const allLines = Array.from(mapBalance.values()).map(b => {
                             const diff = b.totalDebit - b.totalCredit;
                             if (diff > 0) {
@@ -101,13 +100,10 @@ export class BalanceService {
                             return b;
                         });
 
-                        // Only keep accounts with movements
                         const activeLignes = allLines.filter(b => b.totalDebit > 0 || b.totalCredit > 0);
 
-                        // Sort by account number
                         activeLignes.sort((a, b) => a.numeroCompte.localeCompare(b.numeroCompte));
 
-                        // Group by class
                         const classeMap = new Map<number, LigneBalance[]>();
                         activeLignes.forEach(l => {
                             if (!classeMap.has(l.classe)) {
@@ -128,7 +124,6 @@ export class BalanceService {
                                 lignes
                             }));
 
-                        // Global totals
                         const totalMvtDebit = activeLignes.reduce((s, l) => s + l.totalDebit, 0);
                         const totalMvtCredit = activeLignes.reduce((s, l) => s + l.totalCredit, 0);
                         const totalSoldeDebit = activeLignes.reduce((s, l) => s + l.soldeDebit, 0);
@@ -140,6 +135,7 @@ export class BalanceService {
                             totalMvtCredit,
                             totalSoldeDebit,
                             totalSoldeCredit,
+                            // Precision check for floating point arithmetic in accounting balances
                             isBalanced: Math.abs(totalMvtDebit - totalMvtCredit) < 0.01,
                             classeGroups
                         };

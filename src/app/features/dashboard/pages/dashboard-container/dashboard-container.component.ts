@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { DashboardFacade } from '../../services/dashboard-facade.service';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import {  TenantContextService  } from '@core';
 
 import { KpiCardComponent } from '../../components/kpi-card/kpi-card.component';
 import { AccountingMovementsChartComponent } from '../../components/accounting-movements-chart/accounting-movements-chart.component';

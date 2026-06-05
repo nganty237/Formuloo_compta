@@ -57,7 +57,6 @@ export class LedgerService {
 
                 return this.entryService.getAll(entrepriseId).pipe(
                     map(entries => {
-                        // Collect all relevant lines from entries
                         const rawLines: { ligne: any; ecriture: any }[] = [];
 
                         entries
@@ -73,14 +72,12 @@ export class LedgerService {
                                     });
                             });
 
-                        // Sort by date, then by entry ID for consistent ordering
                         rawLines.sort((a, b) => {
                             const dateDiff = new Date(a.ecriture.date).getTime() - new Date(b.ecriture.date).getTime();
                             if (dateDiff !== 0) return dateDiff;
                             return a.ecriture.id.localeCompare(b.ecriture.id);
                         });
 
-                        // Calculate running balance
                         let soldeProgressif = 0;
                         let totalDebit = 0;
                         let totalCredit = 0;

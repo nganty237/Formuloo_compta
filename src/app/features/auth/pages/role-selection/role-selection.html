@@ -1,0 +1,36 @@
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      Choisissez votre profil
+    </h2>
+    <p class="mt-2 text-center text-sm text-gray-600">
+      Pour personnaliser votre expérience sur Formuloo
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 px-4 sm:px-0">
+      @for (role of roles(); track role.id) {
+        <div 
+          (click)="selectRole(role.id)"
+          class="relative flex flex-col items-center p-8 bg-white border-2 border-transparent rounded-2xl shadow-sm cursor-pointer hover:border-blue-500 hover:shadow-md transition-all group"
+        >
+          <div class="flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors mb-4">
+            <app-icon [name]="role.icon" size="xl"></app-icon>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 text-center mb-2">{{ role.title }}</h3>
+          <p class="text-sm text-gray-500 text-center">{{ role.description }}</p>
+        </div>
+      }
+    </div>
+
+    <div class="mt-8 text-center">
+      <p class="text-sm text-gray-600">
+        Déjà un compte ? 
+        <a routerLink="/auth/login" class="font-medium text-blue-600 hover:text-blue-500">
+          Connectez-vous ici
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

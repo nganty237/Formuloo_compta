@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EntryFormComponent } from '../../pages/entry-from/entry-from';
-import { ModalComponent } from '../../../../shared/components/modal/modal';
-import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import { ModalComponent, SpinnerComponent, ButtonComponent, IconComponent } from '@shared';
 import { addEntry, resetSavedState } from '../../store/accounting.actions';
 import { selectLoading, selectSaved } from '../../store/accounting.selectors';
-import { Ecriture } from '../../../../core/models/ecriture.model';
+import { Ecriture } from '@core';
 
 @Component({
   selector: 'app-entry-container',

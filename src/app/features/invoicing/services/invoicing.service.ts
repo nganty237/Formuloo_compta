@@ -1,11 +1,11 @@
+import { Facture, Ecriture } from '@core';
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, switchMap, of } from 'rxjs';
-import { Facture } from '../../../core/models/facture.model';
+;
 import { EntryService } from '../../accounting/services/entry.service';
-import { Ecriture } from '../../../core/models/ecriture.model';
-import { environment } from '../../../../environments/environment';
-
+;
+import {  environment  } from '@env/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,21 +13,17 @@ export class InvoicingService {
   private http = inject(HttpClient);
   private entryService = inject(EntryService);
   private apiUrl = `${environment.apiUrl}/factures`;
-
   getFactures(entrepriseId: string): Observable<Facture[]> {
     return this.http.get<Facture[]>(`${this.apiUrl}?entrepriseId=${entrepriseId}`);
   }
-
   getById(id: string): Observable<Facture | undefined> {
     return this.http.get<Facture>(`${this.apiUrl}/${id}`);
   }
-
   create(facture: Omit<Facture, 'id'>): Observable<Facture> {
     const newFacture: Partial<Facture> = {
       ...facture,
       id: `FAC-${Date.now()}`
     };
-
     return this.http.post<Facture>(this.apiUrl, newFacture).pipe(
       switchMap(savedFacture => {
         // Si c'est une facture déjà validée, on comptabilise
@@ -38,7 +34,6 @@ export class InvoicingService {
       })
     );
   }
-
   update(id: string, facture: Partial<Facture>): Observable<Facture> {
     return this.http.patch<Facture>(`${this.apiUrl}/${id}`, facture).pipe(
       switchMap(updated => {
@@ -50,11 +45,9 @@ export class InvoicingService {
       })
     );
   }
-
   delete(id: string): Observable<boolean> {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(map(() => true));
   }
-
   convertToFacture(devisId: string): Observable<Facture> {
     return this.getById(devisId).pipe(
         switchMap(devis => {
@@ -70,15 +63,11 @@ export class InvoicingService {
         })
     );
   }
-
   sendEmail(id: string): Observable<boolean> {
-    console.log(`Simulation d'envoi d'email pour la facture ${id}`);
     return of(true);
   }
-
   private comptabiliser(f: Facture): Observable<Ecriture> {
     const isAvoir = f.type === 'AVOIR';
-    
     const ecriture: Ecriture = {
         id: `INV-ENT-${f.id}`,
         entrepriseId: f.entrepriseId,
@@ -113,7 +102,6 @@ export class InvoicingService {
             }
         ]
     };
-
     return this.entryService.create(ecriture);
   }
 }

@@ -4,11 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
-import { Ecriture, JournalFilter, JournalStats } from '../../../../core/models/ecriture.model';
-import { TableComponent, TableColumn } from '../../../../shared/components/table/table';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import { TenantContextService, Ecriture, JournalFilter, JournalStats } from '@core';
+import { TableComponent, TableColumn, ButtonComponent, IconComponent } from '@shared';
 import * as JournalActions from '../../store/journal.actions';
 import {
   selectExportLoading,
@@ -31,7 +28,7 @@ import {
         <p class="text-blue-100">View all recorded entries and validate your transactions.</p>
       </div>
 
-      <ng-container *ngIf="stats$ | async as stats">
+      @if (stats$ | async; as stats) {
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
             <div class="text-sm text-slate-600 font-medium">Total Entries</div>
@@ -66,7 +63,7 @@ import {
             </div>
           </div>
         </div>
-      </ng-container>
+      }
 
       <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-8">
         <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2">
@@ -124,7 +121,7 @@ import {
         </app-table>
       </div>
 
-      <ng-container *ngIf="(entries$ | async)?.length">
+      @if ((entries$ | async)?.length) {
         <div class="mt-8 flex flex-wrap gap-4">
           <app-button (clicked)="exportToPDF()"
                   [disabled]="(exportLoading$ | async) ?? false"
@@ -139,7 +136,7 @@ import {
             Export Excel
           </app-button>
         </div>
-      </ng-container>
+      }
     </div>
   `
 })
@@ -205,7 +202,7 @@ export class JournalComponent implements OnInit, OnDestroy {
         take(1),
         takeUntil(this.destroy$)
       )
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.applyJournalFilter({
@@ -220,7 +217,7 @@ export class JournalComponent implements OnInit, OnDestroy {
   exportToPDF() {
     this.tenantContext.companyId$
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.exportJournal({
@@ -236,7 +233,7 @@ export class JournalComponent implements OnInit, OnDestroy {
   exportToExcel() {
     this.tenantContext.companyId$
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(companyId => {
+      .subscribe((companyId: string | null) => {
         if (companyId) {
           this.store.dispatch(
             JournalActions.exportJournal({

@@ -1,58 +1,2 @@
-import { journalReducer } from './journal.reducer';
-import { initialJournalState } from './journal.state';
-import * as JournalActions from './journal.actions';
-import { Ecriture, JournalStats } from '../../../core/models/ecriture.model';
-
-describe('JournalReducer', () => {
-  const mockEntry: Ecriture = {
-    id: 'entry-1',
-    entrepriseId: 'tenant-1',
-    journalId: 'ACH',
-    date: '2024-01-10',
-    libelle: 'Test',
-    valide: false,
-    lignes: []
-  };
-
-  const mockStats: JournalStats = {
-    totalEntries: 1,
-    totalDebit: 1000,
-    totalCredit: 1000,
-    isBalanced: true
-  };
-
-  it('should return initial state', () => {
-    const state = journalReducer(undefined, { type: 'UNKNOWN' });
-    expect(state).toEqual(initialJournalState);
-  });
-
-  it('should handle loadJournal', () => {
-    const state = journalReducer(
-      initialJournalState,
-      JournalActions.loadJournal({ entrepriseId: 'tenant-1' })
-    );
-    expect(state.loading).toBe(true);
-    expect(state.error).toBeNull();
-  });
-
-  it('should handle journalLoaded', () => {
-    const entries = [mockEntry];
-    const state = journalReducer(
-      { ...initialJournalState, loading: true },
-      JournalActions.journalLoaded({ entries })
-    );
-    expect(state.entries).toEqual(entries);
-    expect(state.filteredEntries).toEqual(entries);
-    expect(state.loading).toBe(false);
-  });
-
-  it('should handle journalFiltered', () => {
-    const entries = [mockEntry];
-    const state = journalReducer(
-      initialJournalState,
-      JournalActions.journalFiltered({ entries, stats: mockStats })
-    );
-    expect(state.filteredEntries).toEqual(entries);
-    expect(state.stats).toEqual(mockStats);
-  });
-});
+import { Ecriture, JournalStats } from '@core';
+import { journalReducer } from './journal.reducer';import { initialJournalState } from './journal.state';import * as JournalActions from './journal.actions';;describe('JournalReducer', () => {  const mockEntry: Ecriture = {    id: 'entry-1',    entrepriseId: 'tenant-1',    journalId: 'ACH',    date: '2024-01-10',    libelle: 'Test',    valide: false,    lignes: []  };  const mockStats: JournalStats = {    totalEntries: 1,    totalDebit: 1000,    totalCredit: 1000,    isBalanced: true  };  it('should return initial state', () => {    const state = journalReducer(undefined, { type: 'UNKNOWN' });    expect(state).toEqual(initialJournalState);  });  it('should handle loadJournal', () => {    const state = journalReducer(      initialJournalState,      JournalActions.loadJournal({ entrepriseId: 'tenant-1' })    );    expect(state.loading).toBe(true);    expect(state.error).toBeNull();  });  it('should handle journalLoaded', () => {    const entries = [mockEntry];    const state = journalReducer(      { ...initialJournalState, loading: true },      JournalActions.journalLoaded({ entries })    );    expect(state.entries).toEqual(entries);    expect(state.filteredEntries).toEqual(entries);    expect(state.loading).toBe(false);  });  it('should handle journalFiltered', () => {    const entries = [mockEntry];    const state = journalReducer(      initialJournalState,      JournalActions.journalFiltered({ entries, stats: mockStats })    );    expect(state.filteredEntries).toEqual(entries);    expect(state.stats).toEqual(mockStats);  });});

@@ -2,11 +2,10 @@ import { Component, OnInit, inject, signal, computed, effect } from '@angular/co
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { LettrageService, LettrageLine } from '../../services/lettrage.service';
-import { AccountService as CoreAccountService } from '../../../../core/services/account.service';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { AccountService as CoreAccountService, TenantContextService } from '@core';
 import { PlanComptableService } from '../../services/plan-comptable.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { IconComponent } from '../../../../shared/components/icon/icon';
+import { IconComponent } from '@shared';
 import { of, switchMap } from 'rxjs';
 
 @Component({

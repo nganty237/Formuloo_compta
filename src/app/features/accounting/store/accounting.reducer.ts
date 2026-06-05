@@ -37,7 +37,7 @@ export const accountingReducer = createReducer(
     entries: state.entries.map((e) => (e.id === entry.id ? entry : e))
   })),
 
-  on(AccountingActions.deleteEntry, (state, { entryId }) => ({
+  on(AccountingActions.deleteAccountingEntry, (state, { entryId }) => ({
     ...state,
     entries: state.entries.filter((e) => e.id !== entryId)
   })),

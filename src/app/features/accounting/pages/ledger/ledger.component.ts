@@ -2,10 +2,9 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { TenantContextService } from '@core';
 import { LedgerService, LedgerResult, LigneLedger } from '../../services/ledger.service';
-import { ButtonComponent } from '../../../../shared/components/button/button';
-import { SpinnerComponent } from '../../../../shared/components/spinner/spinner';
+import { ButtonComponent, SpinnerComponent } from '@shared';
 import { PlanComptableService } from '../../services/plan-comptable.service';
 import { distinctUntilChanged, filter, finalize, of, switchMap, timeout, catchError } from 'rxjs';
 

@@ -52,7 +52,7 @@ export const journalReducer = createReducer(
   })),
 
   // Delete entry
-  on(JournalActions.deleteEntry, (state) => ({
+  on(JournalActions.deleteJournalEntry, (state) => ({
     ...state,
     loading: true
   })),

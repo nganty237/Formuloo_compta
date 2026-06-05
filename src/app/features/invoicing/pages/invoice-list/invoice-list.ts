@@ -1,11 +1,9 @@
 import { Component, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Facture } from '../../../../core/models/facture.model';
-import { IconComponent } from '../../../../shared/components/icon/icon';
-import { TenantContextService } from '../../../../core/services/tenant-context.service';
+import { Facture, TenantContextService, AuthService } from '@core';
+import { IconComponent } from '@shared';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { AuthService } from '../../../../core/services/auth.service';
 import { InvoicingService } from '../../services/invoicing.service';
 import { switchMap, of } from 'rxjs';
 

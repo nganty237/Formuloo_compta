@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { ButtonComponent } from '../../../../shared/components/button/button';
+import { ButtonComponent, IconComponent } from '@shared';
+import { AuthService } from '@core';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -22,8 +24,11 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Connexion :', this.loginForm.value);
-      this.router.navigate(['/tenant/ENT-001/dashboard']);
+      const { email, password } = this.loginForm.value;
+      if (email && password) {
+        this.authService.login(email, password);
+        this.router.navigate(['/tenant/ENT-001/dashboard']);
+      }
     }
   }
 

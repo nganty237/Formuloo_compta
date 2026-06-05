@@ -1,19 +1,16 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ProfileDropdownComponent } from '../../../shared/components/profile-dropdown/profile-dropdown';
-import { TenantContextService } from '../../../core/services/tenant-context.service';
-import { ButtonComponent } from '../../../shared/components/button/button';
-import { IconComponent } from '../../../shared/components/icon/icon';
-import { CompanyService } from '../../../core/services/company.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { PlanComptableService } from '../../../features/accounting/services/plan-comptable.service';
+import { ProfileDropdownComponent, ButtonComponent, IconComponent, HasRoleDirective } from '@shared';
+import { TenantContextService, CompanyService, AuthService } from '@core';
+import { PlanComptableService } from '@features/accounting';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, map, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, ProfileDropdownComponent, ButtonComponent, IconComponent, RouterModule],
+  imports: [CommonModule, ProfileDropdownComponent, ButtonComponent, IconComponent, RouterModule, HasRoleDirective],
   templateUrl: './header.html',
 })
 export class HeaderComponent implements OnInit {
@@ -28,13 +25,29 @@ export class HeaderComponent implements OnInit {
   isProfileMenuOpen = signal<boolean>(false);
   currentUser = toSignal(this.authService.currentUser$);
 
+  // Entreprises filtrées par tenant de l'utilisateur courant
+  filteredCompanies = toSignal(
+    this.authService.currentUser$.pipe(
+      switchMap(user => {
+        if (!user) {
+          return of([]);
+        }
+        // Retourner les entreprises filtrées du tenant de l'utilisateur
+        return this.companyService.getCompanies().pipe(
+          map(companies => companies.filter(c => c.tenantId === user.tenantId))
+        );
+      }),
+      startWith([])
+    )
+  );
+
   selectedTenantId = '';
   selectedCompanyId = '';
 
   ngOnInit() {
     // Récupérer l'ID de l'entreprise depuis l'URL
     const urlId = this.route.snapshot.paramMap.get('id') || this.route.parent?.snapshot.paramMap.get('id');
-    
+
     if (urlId) {
       this.selectedCompanyId = urlId;
       // On cherche l'entreprise pour initialiser le contexte
@@ -66,17 +79,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  onRoleChange(newRole: string) {
-    this.authService.updateRole(newRole as any);
-  }
-
   toggleProfileMenu(event: Event): void {
-    event.stopPropagation(); 
+    event.stopPropagation();
     this.isProfileMenuOpen.update(prev => !prev);
   }
 
   handleLogout(): void {
     this.isProfileMenuOpen.set(false);
+    this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
 }
