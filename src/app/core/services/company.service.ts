@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map, shareReplay, tap } from 'rxjs';
 import { Entreprise } from '../models/entreprise.model';
 import {  environment  } from '@env/environment';
+import { AuthService } from './auth.service';
 
 export interface CompanyWithTaxInfo extends Entreprise {
   pays?: string;
@@ -14,6 +15,7 @@ export interface CompanyWithTaxInfo extends Entreprise {
 })
 export class CompanyService {
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
   private apiUrl = `${environment.apiUrl}/entreprises`;
 
   // Liste des entreprises
@@ -29,7 +31,11 @@ export class CompanyService {
   );
 
   constructor() {
-    this.loadCompanies();
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.loadCompanies();
+      }
+    });
   }
 
   private loadCompanies(): void {
@@ -64,7 +70,7 @@ export class CompanyService {
   addCompany(company: Omit<CompanyWithTaxInfo, 'id' | 'tenantId'>): void {
     const newCompany: Partial<CompanyWithTaxInfo> = {
       ...company,
-      tenantId: 'tenant-1' // Par défaut rattaché au cabinet de test
+      tenantId: 'tenant-1'
     };
 
     this.http.post<CompanyWithTaxInfo>(this.apiUrl, newCompany).subscribe(savedCompany => {

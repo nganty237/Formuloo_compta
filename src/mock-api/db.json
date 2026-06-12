@@ -165,7 +165,8 @@
       "numero": "421",
       "intitule": "Personnel, salaires dus",
       "classe": 4,
-      "type": "PASSIF"
+      "type": "PASSIF",
+      "actif": true
     },
     {
       "id": "cpt-431",
