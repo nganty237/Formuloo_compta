@@ -94,6 +94,6 @@ export class DashboardContainerComponent {
   }
 
   onFilterChange(filters: { dateDebut: string, dateFin: string }): void {
-    // Logique de filtrage à implémenter dans la façade si nécessaire
+    // Logique de filtrage à implémenter dans la façade
   }
 }

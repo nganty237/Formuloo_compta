@@ -8,7 +8,6 @@ import { IconComponent, ButtonComponent } from '@shared';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent, ButtonComponent],
   template: `
-    <!-- Hero Section -->
     <section class="relative pt-20 pb-32 overflow-hidden bg-slate-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-4xl mx-auto">
@@ -29,10 +28,8 @@ import { IconComponent, ButtonComponent } from '@shared';
           </div>
         </div>
       </div>
-      <!-- Decorative element -->
-      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
     </section>
-    <!-- Roles Section -->
+
     <section id="roles" class="py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -40,7 +37,6 @@ import { IconComponent, ButtonComponent } from '@shared';
           <p class="text-slate-500 max-w-2xl mx-auto font-medium">Parce que chaque acteur a des besoins spécifiques, nous avons conçu des outils sur-mesure.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- Cabinet Card -->
           <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group">
             <div class="bg-blue-100 text-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-600 group-hover:text-white transition-colors">
               <app-icon name="building" size="lg"></app-icon>
@@ -55,7 +51,6 @@ import { IconComponent, ButtonComponent } from '@shared';
             </ul>
             <a routerLink="/auth/register/type" [queryParams]="{role: 'cabinet'}" class="text-blue-600 font-bold hover:underline">Découvrir l'offre Cabinet &rarr;</a>
           </div>
-          <!-- Enterprise Card -->
           <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group">
             <div class="bg-green-100 text-green-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-green-600 group-hover:text-white transition-colors">
               <app-icon name="users" size="lg"></app-icon>
@@ -70,7 +65,6 @@ import { IconComponent, ButtonComponent } from '@shared';
             </ul>
             <a routerLink="/auth/register/type" [queryParams]="{role: 'client'}" class="text-blue-600 font-bold hover:underline">Découvrir l'offre PME &rarr;</a>
           </div>
-          <!-- Freelance Card -->
           <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group">
             <div class="bg-amber-100 text-amber-600 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-amber-600 group-hover:text-white transition-colors">
               <app-icon name="briefcase" size="lg"></app-icon>

@@ -1,2 +1,196 @@
 import { CompanyService, CompanyWithTaxInfo } from '@core';
-import { Component, inject, signal } from '@angular/core';import { CommonModule } from '@angular/common';import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';;import {  IconComponent  } from '@shared';@Component({  selector: 'app-companies-list',  standalone: true,  imports: [CommonModule, ReactiveFormsModule, IconComponent],  template: `    <div class="max-w-7xl mx-auto space-y-6">      <!-- En-tête -->      <div class="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">        <div>          <h1 class="text-2xl font-bold text-slate-800">Dossiers Clients</h1>          <p class="text-slate-500 text-sm mt-1">Gérez les entreprises rattachées à votre cabinet comptable</p>        </div>        <button           (click)="showCreateForm.set(!showCreateForm())"          class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-colors shadow-sm cursor-pointer">          <app-icon [name]="showCreateForm() ? 'x' : 'plus'" size="sm"></app-icon>          <span>{{ showCreateForm() ? 'Masquer' : 'Ajouter une entreprise' }}</span>        </button>      </div>      <!-- Formulaire d'ajout d'entreprise -->      @if (showCreateForm()) {        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">          <h2 class="text-lg font-bold text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2">            <app-icon name="building" className="text-blue-600"></app-icon>            Nouvelle Entreprise Cliente          </h2>          <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-4">            <div class="form-group col-span-2 md:col-span-1">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Nom de l'entreprise *</label>              <input                 type="text"                 formControlName="nom"                 placeholder="Ex: Tech Solutions SAS"                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">              @if (hasError('nom')) {                <p class="text-xs text-red-600 mt-1 font-medium">Le nom est obligatoire.</p>              }            </div>            <div class="form-group">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Numéro d'Identification Fiscale (NIF / NINEA) *</label>              <input                 type="text"                 formControlName="ninea"                 placeholder="Ex: 1234567-SN"                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">              @if (hasError('ninea')) {                <p class="text-xs text-red-600 mt-1 font-medium">L'identifiant fiscal (NINEA/NIF) est obligatoire.</p>              }            </div>            <div class="form-group">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Régistre du Commerce (RCCM)</label>              <input                 type="text"                 formControlName="rccm"                 placeholder="Ex: SN-DKR-2023-B-12"                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">            </div>            <div class="form-group">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Pays *</label>              <select                 formControlName="pays"                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm bg-white cursor-pointer">                <option value="Sénégal">Sénégal</option>                <option value="Côte d'Ivoire">Côte d'Ivoire</option>                <option value="Cameroun">Cameroun</option>                <option value="Gabon">Gabon</option>                <option value="Burkina Faso">Burkina Faso</option>                <option value="Togo">Togo</option>              </select>            </div>            <div class="form-group">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Devise *</label>              <select                 formControlName="devise"                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm bg-white cursor-pointer">                <option value="XOF">Franc CFA (XOF)</option>                <option value="XAF">Franc CFA (XAF)</option>                <option value="EUR">Euro (EUR)</option>                <option value="USD">Dollar US (USD)</option>              </select>            </div>            <div class="form-group col-span-2">              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Adresse *</label>              <input                 type="text"                 formControlName="adresse"                 placeholder="Ex: Rue 12, Dakar, Sénégal"                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">              @if (hasError('adresse')) {                <p class="text-xs text-red-600 mt-1 font-medium">L'adresse est obligatoire.</p>              }            </div>            <div class="col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-100">              <button                 type="button"                 (click)="showCreateForm.set(false)"                class="px-4 py-2 border border-slate-300 rounded-lg font-medium text-slate-700 hover:bg-slate-50 transition-colors text-sm cursor-pointer">                Annuler              </button>              <button                 type="submit"                 [disabled]="companyForm.invalid"                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg font-medium transition-colors text-sm shadow-sm cursor-pointer">                Enregistrer le dossier              </button>            </div>          </form>        </div>      @}      <!-- Tableau des entreprises existantes -->      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">        <table class="w-full text-left border-collapse">          <thead>            <tr class="bg-slate-50 border-b border-slate-200 text-sm font-semibold text-slate-600">              <th class="p-4">Entreprise</th>              <th class="p-4">NIF / NINEA</th>              <th class="p-4">Région (Pays)</th>              <th class="p-4">Devise comptable</th>              <th class="p-4">Adresse</th>            </tr>          </thead>          <tbody>            @for (company of companyService.companies(); track company.id) {              <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">                <td class="p-4 font-semibold text-slate-800">                  <div class="flex items-center gap-3">                    <div class="h-8 w-8 rounded bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">                      {{ company.nom.substring(0, 2).toUpperCase() }}                    </div>                    <span>{{ company.nom }}</span>                  </div>                </td>                <td class="p-4 text-slate-600 font-mono text-sm">{{ company.ninea }}</td>                <td class="p-4 text-slate-600">{{ company.pays }}</td>                <td class="p-4">                  <span class="bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded text-xs font-bold font-mono">                    {{ company.devise }}                  </span>                </td>                <td class="p-4 text-slate-500 text-sm">{{ company.adresse }}</td>              </tr>            } @empty {              <tr>                <td colspan="5" class="p-8 text-center text-slate-400">Aucune entreprise configurée.</td>              </tr>            }          </tbody>        </table>      </div>    </div>  `})export class CompaniesListComponent {  public companyService = inject(CompanyService);  private fb = inject(FormBuilder);  showCreateForm = signal<boolean>(false);  companyForm = this.fb.group({    nom: ['', Validators.required],    ninea: ['', Validators.required],    rccm: [''],    pays: ['Sénégal', Validators.required],    devise: ['XOF', Validators.required],    adresse: ['', Validators.required]  });  hasError(controlName: string): boolean {    const control = this.companyForm.get(controlName);    return !!(control && control.invalid && (control.dirty || control.touched));  }  onSubmit(): void {    if (this.companyForm.invalid) return;    const val = this.companyForm.getRawValue();    this.companyService.addCompany({      nom: val.nom || '',      ninea: val.ninea || '',      rccm: val.rccm || '',      pays: val.pays || 'Sénégal',      devise: val.devise || 'XOF',      adresse: val.adresse || ''    });    this.companyForm.reset({      nom: '',      ninea: '',      rccm: '',      pays: 'Sénégal',      devise: 'XOF',      adresse: ''    });    this.showCreateForm.set(false);  }}
+import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+;
+import {  IconComponent  } from '@shared';
+@Component({
+  selector: 'app-companies-list',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, IconComponent],
+  template: `
+    <div class="max-w-7xl mx-auto space-y-6">
+      <!-- En-tête -->
+      <div class="flex justify-between items-center bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-800">Dossiers Clients</h1>
+          <p class="text-slate-500 text-sm mt-1">Gérez les entreprises rattachées à votre cabinet comptable</p>
+        </div>
+        <button 
+          (click)="showCreateForm.set(!showCreateForm())"
+          class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg font-medium transition-colors shadow-sm cursor-pointer">
+          <app-icon [name]="showCreateForm() ? 'x' : 'plus'" size="sm"></app-icon>
+          <span>{{ showCreateForm() ? 'Masquer' : 'Ajouter une entreprise' }}</span>
+        </button>
+      </div>
+      <!-- Formulaire d'ajout d'entreprise -->
+      @if (showCreateForm()) {
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+          <h2 class="text-lg font-bold text-slate-800 border-b border-slate-100 pb-3 flex items-center gap-2">
+            <app-icon name="building" className="text-blue-600"></app-icon>
+            Nouvelle Entreprise Cliente
+          </h2>
+          <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="form-group col-span-2 md:col-span-1">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Nom de l'entreprise *</label>
+              <input 
+                type="text" 
+                formControlName="nom" 
+                placeholder="Ex: Tech Solutions SAS" 
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">
+              @if (hasError('nom')) {
+                <p class="text-xs text-red-600 mt-1 font-medium">Le nom est obligatoire.</p>
+              }
+            </div>
+            <div class="form-group">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Numéro d'Identification Fiscale (NIF / NINEA) *</label>
+              <input 
+                type="text" 
+                formControlName="ninea" 
+                placeholder="Ex: 1234567-SN" 
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">
+              @if (hasError('ninea')) {
+                <p class="text-xs text-red-600 mt-1 font-medium">L'identifiant fiscal (NINEA/NIF) est obligatoire.</p>
+              }
+            </div>
+            <div class="form-group">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Régistre du Commerce (RCCM)</label>
+              <input 
+                type="text" 
+                formControlName="rccm" 
+                placeholder="Ex: SN-DKR-2023-B-12" 
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">
+            </div>
+            <div class="form-group">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Pays *</label>
+              <select 
+                formControlName="pays"
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm bg-white cursor-pointer">
+                <option value="Cameroun">Cameroun</option>
+                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                <option value="Sénégal">Sénégal</option>
+                <option value="Gabon">Gabon</option>
+                <option value="Burkina Faso">Burkina Faso</option>
+                <option value="Togo">Togo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Devise *</label>
+              <select 
+                formControlName="devise"
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm bg-white cursor-pointer">
+                <option value="XOF">Franc CFA (XOF)</option>
+                <option value="XAF">Franc CFA (XAF)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="USD">Dollar US (USD)</option>
+              </select>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="block text-sm font-semibold text-slate-700 mb-1.5">Adresse *</label>
+              <input 
+                type="text" 
+                formControlName="adresse" 
+                placeholder="Ex: Rue 12, Douala, Cameroun" 
+                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all font-medium text-sm">
+              @if (hasError('adresse')) {
+                <p class="text-xs text-red-600 mt-1 font-medium">L'adresse est obligatoire.</p>
+              }
+            </div>
+            <div class="col-span-2 flex justify-end gap-3 pt-3 border-t border-slate-100">
+              <button 
+                type="button" 
+                (click)="showCreateForm.set(false)"
+                class="px-4 py-2 border border-slate-300 rounded-lg font-medium text-slate-700 hover:bg-slate-50 transition-colors text-sm cursor-pointer">
+                Annuler
+              </button>
+              <button 
+                type="submit" 
+                [disabled]="companyForm.invalid"
+                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg font-medium transition-colors text-sm shadow-sm cursor-pointer">
+                Enregistrer le dossier
+              </button>
+            </div>
+          </form>
+        </div>
+      @}
+      <!-- Tableau des entreprises existantes -->
+      <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-slate-200 text-sm font-semibold text-slate-600">
+              <th class="p-4">Entreprise</th>
+              <th class="p-4">NIF / NINEA</th>
+              <th class="p-4">Région (Pays)</th>
+              <th class="p-4">Devise comptable</th>
+              <th class="p-4">Adresse</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (company of companyService.companies(); track company.id) {
+              <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                <td class="p-4 font-semibold text-slate-800">
+                  <div class="flex items-center gap-3">
+                    <div class="h-8 w-8 rounded bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs">
+                      {{ company.nom.substring(0, 2).toUpperCase() }}
+                    </div>
+                    <span>{{ company.nom }}</span>
+                  </div>
+                </td>
+                <td class="p-4 text-slate-600 font-mono text-sm">{{ company.ninea }}</td>
+                <td class="p-4 text-slate-600">{{ company.pays }}</td>
+                <td class="p-4">
+                  <span class="bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded text-xs font-bold font-mono">
+                    {{ company.devise }}
+                  </span>
+                </td>
+                <td class="p-4 text-slate-500 text-sm">{{ company.adresse }}</td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="p-8 text-center text-slate-400">Aucune entreprise configurée.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `
+})
+export class CompaniesListComponent {
+  public companyService = inject(CompanyService);
+  private fb = inject(FormBuilder);
+  showCreateForm = signal<boolean>(false);
+  companyForm = this.fb.group({
+    nom: ['', Validators.required],
+    ninea: ['', Validators.required],
+    rccm: [''],
+    pays: ['Cameroun', Validators.required],
+    devise: ['XOF', Validators.required],
+    adresse: ['', Validators.required]
+  });
+  hasError(controlName: string): boolean {
+    const control = this.companyForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
+  }
+  onSubmit(): void {
+    if (this.companyForm.invalid) return;
+    const val = this.companyForm.getRawValue();
+    this.companyService.addCompany({
+      nom: val.nom || '',
+      ninea: val.ninea || '',
+      rccm: val.rccm || '',
+      pays: val.pays || 'Sénégal',
+      devise: val.devise || 'XOF',
+      adresse: val.adresse || ''
+    });
+    this.companyForm.reset({
+      nom: '',
+      ninea: '',
+      rccm: '',
+      pays: 'Sénégal',
+      devise: 'XOF',
+      adresse: ''
+    });
+    this.showCreateForm.set(false);
+  }
+}
