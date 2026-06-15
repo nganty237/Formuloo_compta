@@ -1,8 +1,8 @@
-import { CompanyService, CompanyWithTaxInfo } from '@core';
-import { Component, inject, signal } from '@angular/core';
+import { CompanyService, CompanyWithTaxInfo, AuthService } from '@core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-;
+import { toSignal } from '@angular/core/rxjs-interop';
 import {  IconComponent  } from '@shared';
 @Component({
   selector: 'app-companies-list',
@@ -126,7 +126,7 @@ import {  IconComponent  } from '@shared';
             </tr>
           </thead>
           <tbody>
-            @for (company of companyService.companies(); track company.id) {
+            @for (company of filteredCompanies(); track company.id) {
               <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
                 <td class="p-4 font-semibold text-slate-800">
                   <div class="flex items-center gap-3">
@@ -158,7 +158,19 @@ import {  IconComponent  } from '@shared';
 })
 export class CompaniesListComponent {
   public companyService = inject(CompanyService);
+  private authService = inject(AuthService);
   private fb = inject(FormBuilder);
+
+  currentUser = toSignal(this.authService.currentUser$);
+
+  filteredCompanies = computed(() => {
+    const user = this.currentUser();
+    const list = this.companyService.companies();
+    if (!user) return [];
+    if (user.role === 'SUPER_ADMIN') return list;
+    return list.filter(c => c.tenantId === user.tenantId);
+  });
+
   showCreateForm = signal<boolean>(false);
   companyForm = this.fb.group({
     nom: ['', Validators.required],
