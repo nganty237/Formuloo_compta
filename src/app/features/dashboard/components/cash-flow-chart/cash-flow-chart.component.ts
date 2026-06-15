@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartData, ChartType, ChartOptions } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 import { CashFlowPoint } from '../../models/dashboard.model';
 
 @Component({
@@ -83,9 +83,20 @@ export class CashFlowChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && this.data && this.data.length > 0) {
-      this.lineChartData.labels = this.data.map(p => p.month);
-      this.lineChartData.datasets[0].data = this.data.map(p => p.inflows);
-      this.lineChartData.datasets[1].data = this.data.map(p => p.outflows);
+      const labels: string[] = [];
+      const inflows: number[] = [];
+      const outflows: number[] = [];
+
+      for (let i = 0; i < this.data.length; i++) {
+        const p = this.data[i];
+        labels.push(p.month);
+        inflows.push(p.inflows);
+        outflows.push(p.outflows);
+      }
+
+      this.lineChartData.labels = labels;
+      this.lineChartData.datasets[0].data = inflows;
+      this.lineChartData.datasets[1].data = outflows;
       
       this.lineChartData = { ...this.lineChartData };
     }

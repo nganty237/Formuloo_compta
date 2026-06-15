@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KPI } from '../../models/dashboard.model';
-import {  IconComponent  } from '@shared';
+import { IconComponent } from '@shared';
 
 @Component({
   selector: 'app-kpi-card',
@@ -10,7 +10,6 @@ import {  IconComponent  } from '@shared';
   imports: [CommonModule, IconComponent],
   template: `
     <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm flex flex-col justify-between h-full transition-all hover:shadow-md">
-
       <div class="flex items-start justify-between gap-4">
         <div class="flex-1 overflow-hidden">
           <span class="text-xs font-medium text-slate-500 uppercase tracking-wider block mb-1 truncate">
@@ -25,18 +24,6 @@ import {  IconComponent  } from '@shared';
           <app-icon [name]="iconName" size="lg"></app-icon>
         </div>
       </div>
-
-      @if (validTrend) {
-        <div class="mt-4 pt-4 border-t border-slate-100">
-          <span [class]="trendClass" class="inline-flex items-center text-xs font-medium px-2 py-0.5 rounded-md">
-            <app-icon
-                 name="trending-down"
-                 size="sm"
-                 [className]="'mr-1 ' + trendIconClass"></app-icon>
-            {{ trendLabel }}
-          </span>
-        </div>
-      }
     </div>
   `
 })
@@ -45,10 +32,6 @@ export class KpiCardComponent implements OnChanges {
 
   iconBgClass = '';
   iconName = '';
-  validTrend = false;
-  trendClass = '';
-  trendIconClass = '';
-  trendLabel = '';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data']) {
@@ -57,13 +40,8 @@ export class KpiCardComponent implements OnChanges {
   }
 
   private computeVisuals(): void {
-    this.validTrend = this.data.trend === 'up' || this.data.trend === 'down';
-    this.trendIconClass = this.data.trend === 'up' ? 'rotate-180' : '';
-    this.trendLabel = this.data.trend === 'up' ? 'Hausse' : 'Baisse';
-    
     this.iconName = this.computeIconName();
     this.iconBgClass = this.computeIconBgClass();
-    this.trendClass = this.computeTrendClass();
   }
 
   private computeIconName(): string {
@@ -89,17 +67,5 @@ export class KpiCardComponent implements OnChanges {
       return 'bg-rose-50 text-rose-600';
     }
     return 'bg-slate-50 text-slate-600';
-  }
-
-  private computeTrendClass(): string {
-    const isUp = this.data.trend === 'up';
-    const title = this.data.title.toLowerCase();
-
-    // Une hausse de charge est négative pour l'entreprise (couleur rouge)
-    if (title.includes('charge') || title.includes('dépense') || title.includes('décaissement')) {
-      return isUp ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700';
-    }
-    // Pour le reste (CA, Trésorerie), une hausse est positive (couleur verte)
-    return isUp ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700';
   }
 }

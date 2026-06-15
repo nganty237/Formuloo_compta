@@ -228,17 +228,18 @@ export class LettrageComponent implements OnInit {
     // Recharger les données quand le compte ou le tab change
     effect(() => {
       this.refreshData();
-    }, { allowSignalWrites: true });
-  }
+    });
 
-  ngOnInit() {
     // Sélectionner le premier compte par défaut si disponible
     effect(() => {
       const accs = this.accounts();
       if (accs.length > 0 && !this.compteControl.value) {
         this.compteControl.setValue(accs[0].id);
       }
-    }, { allowSignalWrites: true });
+    });
+  }
+
+  ngOnInit() {
   }
 
   refreshData() {
