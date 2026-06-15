@@ -17,3 +17,4 @@ export * from './services/auth.service';
 export * from './services/company.service';
 export * from './services/mock-data.service';
 export * from './services/tenant-context.service';
+export * from './services/performance-telemetry.service';
