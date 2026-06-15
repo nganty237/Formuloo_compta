@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
@@ -7,6 +7,7 @@ import { AccountingMovementPoint } from '../../models/dashboard.model';
 @Component({
   selector: 'app-accounting-movements-chart',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, BaseChartDirective],
   template: `
     <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm h-full">

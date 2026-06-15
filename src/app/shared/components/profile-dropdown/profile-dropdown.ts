@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ButtonComponent } from '../button/button';
 import { IconComponent } from '../icon/icon';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-profile-dropdown',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, RouterModule, ButtonComponent, IconComponent],
   templateUrl: './profile-dropdown.html',
 })

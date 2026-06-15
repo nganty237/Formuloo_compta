@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -17,6 +17,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
 @Component({
   selector: 'app-dashboard-container',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     KpiCardComponent,
@@ -53,26 +54,50 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <app-cash-flow-chart 
-            [data]="(facade.cashFlow$ | async) || []">
-          </app-cash-flow-chart>
+          @defer (on viewport) {
+            <app-cash-flow-chart 
+              [data]="(facade.cashFlow$ | async) || []">
+            </app-cash-flow-chart>
+          } @placeholder {
+            <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm h-[340px] flex items-center justify-center">
+              <div class="animate-pulse w-full h-full bg-slate-50 rounded-lg"></div>
+            </div>
+          }
 
-          <app-accounting-movements-chart
-            [data]="(facade.accountingMovements$ | async) || []">
-          </app-accounting-movements-chart>
+          @defer (on viewport) {
+            <app-accounting-movements-chart
+              [data]="(facade.accountingMovements$ | async) || []">
+            </app-accounting-movements-chart>
+          } @placeholder {
+            <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm h-[340px] flex items-center justify-center">
+              <div class="animate-pulse w-full h-full bg-slate-50 rounded-lg"></div>
+            </div>
+          }
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <app-expense-structure-chart 
-            [data]="(facade.expenseStructure$ | async) || []">
-          </app-expense-structure-chart>
+          @defer (on viewport) {
+            <app-expense-structure-chart 
+              [data]="(facade.expenseStructure$ | async) || []">
+            </app-expense-structure-chart>
+          } @placeholder {
+            <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm h-[340px] flex items-center justify-center">
+              <div class="animate-pulse w-full h-full bg-slate-50 rounded-lg"></div>
+            </div>
+          }
         </div>
 
         <div class="grid grid-cols-1">
-          <app-invoice-aging-table 
-            [data]="(facade.invoiceAging$ | async) || []"
-            [isLoading]="false">
-          </app-invoice-aging-table>
+          @defer (on viewport) {
+            <app-invoice-aging-table 
+              [data]="(facade.invoiceAging$ | async) || []"
+              [isLoading]="false">
+            </app-invoice-aging-table>
+          } @placeholder {
+            <div class="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm h-[200px] flex items-center justify-center">
+              <div class="animate-pulse w-full h-full bg-slate-50 rounded-lg"></div>
+            </div>
+          }
         </div>
       }
     </div>
