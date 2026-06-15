@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KPI } from '../../models/dashboard.model';
 import {  IconComponent  } from '@shared';
@@ -6,6 +6,7 @@ import {  IconComponent  } from '@shared';
 @Component({
   selector: 'app-kpi-card',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, IconComponent],
   template: `
     <div class="bg-white p-5 rounded-lg border border-slate-200/80 shadow-sm flex flex-col justify-between h-full transition-all hover:shadow-md">
@@ -20,44 +21,52 @@ import {  IconComponent  } from '@shared';
           </h3>
         </div>
 
-        <div [class]="getIconBgClass()" class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-md">
-          <app-icon [name]="getIconName()" size="lg"></app-icon>
+        <div [class]="iconBgClass" class="flex-shrink-0 flex h-10 w-10 items-center justify-center rounded-md">
+          <app-icon [name]="iconName" size="lg"></app-icon>
         </div>
       </div>
 
-      @if (isValidTrend()) {
+      @if (validTrend) {
         <div class="mt-4 pt-4 border-t border-slate-100">
-          <span [class]="getTrendClass()" class="inline-flex items-center text-xs font-medium px-2 py-0.5 rounded-md">
+          <span [class]="trendClass" class="inline-flex items-center text-xs font-medium px-2 py-0.5 rounded-md">
             <app-icon
                  name="trending-down"
                  size="sm"
-                 [className]="'mr-1 ' + (getTrendValue() < 0 ? 'rotate-180' : '')"></app-icon>
-            {{ Math.abs(getTrendValue()) }}%
+                 [className]="'mr-1 ' + trendIconClass"></app-icon>
+            {{ trendLabel }}
           </span>
         </div>
       }
     </div>
   `
 })
-export class KpiCardComponent {
+export class KpiCardComponent implements OnChanges {
   @Input({ required: true }) data!: KPI;
 
-  protected Math = Math;
+  iconBgClass = '';
+  iconName = '';
+  validTrend = false;
+  trendClass = '';
+  trendIconClass = '';
+  trendLabel = '';
 
-  /**
-   * Vérifie si la tendance existe et est bien un nombre exploitable (évite le NaN)
-   */
-  isValidTrend(): boolean {
-    return this.data.trend !== undefined &&
-           this.data.trend !== null &&
-           !isNaN(Number(this.data.trend));
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data']) {
+      this.computeVisuals();
+    }
   }
 
-  getTrendValue(): number {
-    return Number(this.data.trend);
+  private computeVisuals(): void {
+    this.validTrend = this.data.trend === 'up' || this.data.trend === 'down';
+    this.trendIconClass = this.data.trend === 'up' ? 'rotate-180' : '';
+    this.trendLabel = this.data.trend === 'up' ? 'Hausse' : 'Baisse';
+    
+    this.iconName = this.computeIconName();
+    this.iconBgClass = this.computeIconBgClass();
+    this.trendClass = this.computeTrendClass();
   }
 
-  getIconName(): string {
+  private computeIconName(): string {
     const legacyIconMap: Record<string, string> = {
       payments: 'banknote',
       account_balance_wallet: 'wallet',
@@ -68,7 +77,7 @@ export class KpiCardComponent {
     return legacyIconMap[this.data.icon ?? ''] ?? this.data.icon ?? 'chart-column';
   }
 
-  getIconBgClass(): string {
+  private computeIconBgClass(): string {
     const title = this.data.title.toLowerCase();
     if (title.includes('chiffre') || title.includes('ca') || title.includes('ventes')) {
       return 'bg-emerald-50 text-emerald-600';
@@ -82,16 +91,15 @@ export class KpiCardComponent {
     return 'bg-slate-50 text-slate-600';
   }
 
-  getTrendClass(): string {
-    const trendValue = this.getTrendValue();
-    const isPositive = trendValue >= 0;
+  private computeTrendClass(): string {
+    const isUp = this.data.trend === 'up';
     const title = this.data.title.toLowerCase();
 
     // Une hausse de charge est négative pour l'entreprise (couleur rouge)
     if (title.includes('charge') || title.includes('dépense') || title.includes('décaissement')) {
-      return isPositive ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700';
+      return isUp ? 'bg-rose-50 text-rose-700' : 'bg-emerald-50 text-emerald-700';
     }
     // Pour le reste (CA, Trésorerie), une hausse est positive (couleur verte)
-    return isPositive ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700';
+    return isUp ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700';
   }
 }

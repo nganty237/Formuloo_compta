@@ -14,7 +14,7 @@
         class="bg-white border border-t-0 border-slate-200 p-8 space-y-8">
 
     @if (validationErrors.length > 0) {
-      <div @slideIn class="p-4 rounded-lg border-l-4 border-red-500 bg-red-50 space-y-2">
+      <div animate.enter="invoice-slide-in" class="p-4 rounded-lg border-l-4 border-red-500 bg-red-50 space-y-2">
         <div class="flex items-start gap-3">
           <app-icon name="triangle-alert" className="text-red-600 flex-shrink-0 mt-0.5"></app-icon>
           <div class="flex-1">
@@ -33,7 +33,7 @@
     }
 
     @if (validationWarnings.length > 0) {
-      <div @slideIn class="p-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 space-y-2">
+      <div animate.enter="invoice-slide-in" class="p-4 rounded-lg border-l-4 border-amber-500 bg-amber-50 space-y-2">
         <div class="flex items-start gap-3">
           <app-icon name="circle-alert" className="text-amber-600 flex-shrink-0 mt-0.5"></app-icon>
           <div class="flex-1">

@@ -36,7 +36,7 @@ import {
   LucidePaperclip,
   LucidePiggyBank,
   LucidePlus,
-  LucidePlusCircle,
+  LucideCirclePlus,
   LucidePrinter,
   LucideReceipt,
   LucideReceiptText,
@@ -53,7 +53,7 @@ import {
   LucideUsers,
   LucideWallet,
   LucideX,
-  LucideXCircle,
+  LucideCircleX,
   provideLucideIcons,
 } from '@lucide/angular';
 
@@ -96,7 +96,7 @@ export const provideAppLucideIcons = () =>
     LucidePaperclip,
     LucidePiggyBank,
     LucidePlus,
-    LucidePlusCircle,
+    LucideCirclePlus,
     LucidePrinter,
     LucideReceipt,
     LucideReceiptText,
@@ -113,5 +113,5 @@ export const provideAppLucideIcons = () =>
     LucideUsers,
     LucideWallet,
     LucideX,
-    LucideXCircle,
+    LucideCircleX,
   );

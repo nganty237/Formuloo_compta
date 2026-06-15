@@ -2,10 +2,12 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent, IconComponent } from '@shared';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-filters',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule, ButtonComponent, IconComponent],
   template: `
     <div class="bg-white p-4 rounded-xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-end gap-4">

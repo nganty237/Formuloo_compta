@@ -6,7 +6,8 @@ import {
   KPI, 
   CashFlowPoint, 
   ExpenseCategory, 
-  InvoiceAging 
+  InvoiceAging,
+  DashboardData
 } from '../models/dashboard.model';
 
 @Injectable({
@@ -35,28 +36,23 @@ export class DashboardFacade {
    * @param annee Fiscal year
    */
   loadDashboard(entrepriseId: string, annee: number = new Date().getFullYear()): void {
+    // Reset subjects to avoid stale data flashes
+    this.kpisSubject.next([]);
+    this.cashFlowSubject.next([]);
+    this.accountingMovementsSubject.next([]);
+    this.expenseStructureSubject.next([]);
+    this.invoiceAgingSubject.next([]);
+    
     this.loadingSubject.next(true);
 
-    combineLatest({
-      kpis: this.apiService.getKPIs(entrepriseId),
-      cashFlow: this.apiService.getCashFlow(entrepriseId, annee),
-      accountingMovements: this.apiService.getAccountingMovements(entrepriseId, annee),
-      expenseStructure: this.apiService.getExpenseStructure(entrepriseId),
-      invoiceAging: this.apiService.getInvoiceAging(entrepriseId)
-    })
+    this.apiService.loadDashboardData(entrepriseId, annee)
     .pipe(
-      tap(({ kpis, cashFlow, accountingMovements, expenseStructure, invoiceAging }: { 
-        kpis: KPI[], 
-        cashFlow: CashFlowPoint[], 
-        accountingMovements: AccountingMovementPoint[], 
-        expenseStructure: ExpenseCategory[], 
-        invoiceAging: InvoiceAging[] 
-      }) => {
-        this.kpisSubject.next(kpis);
-        this.cashFlowSubject.next(cashFlow);
-        this.accountingMovementsSubject.next(accountingMovements);
-        this.expenseStructureSubject.next(expenseStructure);
-        this.invoiceAgingSubject.next(invoiceAging);
+      tap((data: DashboardData) => {
+        this.kpisSubject.next(data.kpis);
+        this.cashFlowSubject.next(data.cashFlow);
+        this.accountingMovementsSubject.next(data.accountingMovements);
+        this.expenseStructureSubject.next(data.expenseStructure);
+        this.invoiceAgingSubject.next(data.invoiceAging);
       }),
       finalize(() => this.loadingSubject.next(false))
     )

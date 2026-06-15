@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { ModalComponent, ButtonComponent, IconComponent } from '@shared';
 import { TenantContextService, Facture } from '@core';
 import { InvoicingService } from '../../services/invoicing.service';
@@ -36,14 +35,23 @@ export type InvoiceFormData = Omit<Facture, 'id'>;
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, ModalComponent, ButtonComponent, IconComponent, RouterLink],
   templateUrl: './invoice-form.html',
-  animations: [
-    trigger('slideIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('200ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+  styles: [`
+    .invoice-slide-in {
+      animation: invoice-slide-in 200ms ease-out;
+    }
+
+    @keyframes invoice-slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `]
 })
 export class InvoiceFormComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
