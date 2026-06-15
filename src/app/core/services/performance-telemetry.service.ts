@@ -10,20 +10,16 @@ export class PerformanceTelemetryService {
   }
 
   private initTelemetry(): void {
-    // La télémétrie s'exécute uniquement côté client (dans le navigateur)
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
     console.log('%c🚀 [Performance Telemetry] Service initialisé et à l\'écoute...', 'color: #10b981; font-weight: bold;');
 
-    // 1. Observer les Long Tasks (Tâches bloquantes > 50ms sur le CPU)
     this.observeLongTasks();
 
-    // 2. Observer le Largest Contentful Paint (LCP - Vitesse de chargement visuel principal)
     this.observeLCP();
 
-    // 3. Observer les Layout Shifts (CLS - Stabilité visuelle)
     this.observeCLS();
   }
 
