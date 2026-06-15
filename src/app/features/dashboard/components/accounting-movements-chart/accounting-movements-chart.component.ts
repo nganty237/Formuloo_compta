@@ -82,10 +82,21 @@ export class AccountingMovementsChartComponent implements OnChanges {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] && this.data) {
-      this.lineChartData.labels = this.data.map(p => p.month);
-      this.lineChartData.datasets[0].data = this.data.map(p => p.debit);
-      this.lineChartData.datasets[1].data = this.data.map(p => p.credit);
+    if (changes['data'] && this.data && this.data.length > 0) {
+      const labels: string[] = [];
+      const debits: number[] = [];
+      const credits: number[] = [];
+
+      for (let i = 0; i < this.data.length; i++) {
+        const p = this.data[i];
+        labels.push(p.month);
+        debits.push(p.debit);
+        credits.push(p.credit);
+      }
+
+      this.lineChartData.labels = labels;
+      this.lineChartData.datasets[0].data = debits;
+      this.lineChartData.datasets[1].data = credits;
 
       this.lineChartData = { ...this.lineChartData };
     }

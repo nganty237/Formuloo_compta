@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartData } from 'chart.js';
 import { ExpenseCategory } from '../../models/dashboard.model';
 
 @Component({
@@ -58,9 +58,18 @@ export class ExpenseStructureChartComponent implements OnChanges {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['data'] && this.data) {
-      this.doughnutChartData.labels = this.data.map(c => c.category);
-      this.doughnutChartData.datasets[0].data = this.data.map(c => c.amount);
+    if (changes['data'] && this.data && this.data.length > 0) {
+      const labels: string[] = [];
+      const amounts: number[] = [];
+
+      for (let i = 0; i < this.data.length; i++) {
+        const c = this.data[i];
+        labels.push(c.category);
+        amounts.push(c.amount);
+      }
+
+      this.doughnutChartData.labels = labels;
+      this.doughnutChartData.datasets[0].data = amounts;
       this.doughnutChartData = { ...this.doughnutChartData };
     }
   }

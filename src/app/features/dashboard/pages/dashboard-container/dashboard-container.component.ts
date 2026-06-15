@@ -54,7 +54,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          @defer (on viewport) {
+          @defer (on viewport; prefetch on idle) {
             <app-cash-flow-chart 
               [data]="(facade.cashFlow$ | async) || []">
             </app-cash-flow-chart>
@@ -64,7 +64,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
             </div>
           }
 
-          @defer (on viewport) {
+          @defer (on viewport; prefetch on idle) {
             <app-accounting-movements-chart
               [data]="(facade.accountingMovements$ | async) || []">
             </app-accounting-movements-chart>
@@ -76,7 +76,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          @defer (on viewport) {
+          @defer (on viewport; prefetch on idle) {
             <app-expense-structure-chart 
               [data]="(facade.expenseStructure$ | async) || []">
             </app-expense-structure-chart>
@@ -88,7 +88,7 @@ import { DashboardFiltersComponent } from '../../components/dashboard-filters/da
         </div>
 
         <div class="grid grid-cols-1">
-          @defer (on viewport) {
+          @defer (on viewport; prefetch on idle) {
             <app-invoice-aging-table 
               [data]="(facade.invoiceAging$ | async) || []"
               [isLoading]="false">
