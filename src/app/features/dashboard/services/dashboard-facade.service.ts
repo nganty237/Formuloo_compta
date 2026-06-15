@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, combineLatest, finalize, tap } from 'rxjs';
 import { DashboardApiService } from './dashboard-api.service';
+import { PerformanceTelemetryService } from '@core';
 import { 
   AccountingMovementPoint,
   KPI, 
@@ -15,6 +16,7 @@ import {
 })
 export class DashboardFacade {
   private apiService = inject(DashboardApiService);
+  private telemetry = inject(PerformanceTelemetryService);
 
   private kpisSubject = new BehaviorSubject<KPI[]>([]);
   private cashFlowSubject = new BehaviorSubject<CashFlowPoint[]>([]);
@@ -44,6 +46,7 @@ export class DashboardFacade {
     this.invoiceAgingSubject.next([]);
     
     this.loadingSubject.next(true);
+    this.telemetry.startMeasure('LoadDashboardData');
 
     this.apiService.loadDashboardData(entrepriseId, annee)
     .pipe(
@@ -54,7 +57,10 @@ export class DashboardFacade {
         this.expenseStructureSubject.next(data.expenseStructure);
         this.invoiceAgingSubject.next(data.invoiceAging);
       }),
-      finalize(() => this.loadingSubject.next(false))
+      finalize(() => {
+        this.loadingSubject.next(false);
+        this.telemetry.endMeasure('LoadDashboardData');
+      })
     )
     .subscribe();
   }
