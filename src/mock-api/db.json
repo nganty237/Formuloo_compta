@@ -33,6 +33,118 @@
       "pays": "Sénégal",
       "devise": "XOF",
       "planTarifaire": "PRO"
+    },
+    {
+      "id": "7XlDtcAoBQ8",
+      "nom": "ANICET marius Nganty bikele",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "TOR6ykGinE8",
+      "nom": "ANICET marius Nganty bikele",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "qPVlMrVhiO8",
+      "nom": "ANICET marius Nganty bikele",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "lvBa0Kbim-s",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "AyJHpf-gAUg",
+      "nom": "compta ",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "SUMynqBxAXM",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "ZY9a05Gk3K4",
+      "nom": "compta ",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "e5EgqIxxWz4",
+      "nom": "ConsultingCompta sarl ",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "Um116MNSHkM",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "5-rizyzAepI",
+      "nom": "ConsultingCompta sarl ",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "CaDI-yUTDyQ",
+      "nom": "MBOA",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "-sx885N308s",
+      "nom": "MBOA",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "UfiLaQjYPjM",
+      "nom": "MBOA",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "yvpSYxHU5Po",
+      "nom": "Dybala",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "E2ppeMH7YqI",
+      "nom": "Dybala",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
+    },
+    {
+      "id": "_LWKyz_VO9M",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF",
+      "planTarifaire": "FREE"
     }
   ],
   "users": [
@@ -59,6 +171,138 @@
       "tenantId": null,
       "email": "admin@formuloo.com",
       "role": "SUPER_ADMIN"
+    },
+    {
+      "id": "YbX0EInTubE",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "tenantId": "tenant-93782"
+    },
+    {
+      "id": "efL7cZ-EbsI",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "CLIENT",
+      "tenantId": "tenant-5664"
+    },
+    {
+      "id": "P2H3eNkgtsE",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "COMPTABLE",
+      "tenantId": "tenant-807623"
+    },
+    {
+      "id": "dkIfAOWbo9A",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "COMPTABLE",
+      "tenantId": "tenant-565353"
+    },
+    {
+      "id": "Z1pMir50mdg",
+      "name": "dybala",
+      "email": "dybalaanicet@gmail.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "tenantId": "tenant-43439"
+    },
+    {
+      "id": "PIb9kYKDRUE",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "COMPTABLE",
+      "tenantId": "tenant-918220"
+    },
+    {
+      "id": "KEbVzBolJwU",
+      "name": "dybala",
+      "email": "dybalaanicet@gmail.com",
+      "password": "12345678",
+      "role": "COMPTABLE",
+      "tenantId": "tenant-359226"
+    },
+    {
+      "id": "axDFJWzpPno",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "tenantId": "tenant-750661"
+    },
+    {
+      "id": "RJGu-Q5zHF0",
+      "name": "Gabriel Nganty bikele",
+      "email": "dybalamhd27@gmail.com",
+      "password": "12345678",
+      "role": "CLIENT",
+      "tenantId": "tenant-205376"
+    },
+    {
+      "id": "EBzQm0eZtUo",
+      "name": "ANICET marius Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "12345678",
+      "role": "ADMIN",
+      "tenantId": "tenant-696822"
+    },
+    {
+      "id": "metUdvHmQ30",
+      "name": "Gabriel Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "1234567890",
+      "role": "CLIENT",
+      "tenantId": "tenant-696822",
+      "companyId": "BKIFrSXr6Rc"
+    },
+    {
+      "id": "MbQb7Anl8ag",
+      "name": "Gabriel Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "1234567890",
+      "role": "CLIENT",
+      "tenantId": "tenant-696822",
+      "companyId": "BKIFrSXr6Rc"
+    },
+    {
+      "id": "yCWFEJtUvTE",
+      "name": "Gabriel Nganty bikele",
+      "email": "surflinkayos@gmail.com",
+      "password": "qwertyuiop",
+      "role": "CLIENT",
+      "tenantId": "tenant-696822",
+      "companyId": "BKIFrSXr6Rc"
+    },
+    {
+      "id": "1-5sSMkUHQc",
+      "name": "Gabriel Nganty bikele",
+      "email": "surflinkayos237@gmail.com",
+      "password": "qwerty237",
+      "role": "ADMIN",
+      "tenantId": "tenant-268540"
+    },
+    {
+      "id": "39Debg09tCQ",
+      "name": "Gabriel Nganty",
+      "email": "cavelier237@gmail.com",
+      "password": "20001984",
+      "role": "CLIENT",
+      "tenantId": "tenant-268540",
+      "companyId": "iR2jEy7OI1s"
+    },
+    {
+      "id": "dRi7kWuATHs",
+      "name": "Gabriel Nganty bikele",
+      "email": "surflinkay@gmail.com",
+      "password": "qwertyuiop",
+      "role": "CLIENT",
+      "tenantId": "tenant-635275"
     }
   ],
   "entreprises": [
@@ -91,6 +335,101 @@
       "adresse": "Almadies, camer",
       "pays": "Sénégal",
       "devise": "XOF"
+    },
+    {
+      "nom": "AgroTech",
+      "ninea": "1234567-CAM",
+      "rccm": "SN-CAM237",
+      "pays": "Cameroun",
+      "devise": "XAF",
+      "adresse": "Douala",
+      "tenantId": "tenant-1",
+      "id": "hVzOG8M9UEk"
+    },
+    {
+      "id": "rlktjvj9z2g",
+      "tenantId": "tenant-93782",
+      "nom": "Ma Première Entreprise",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "id": "kGLKHK5UQEE",
+      "tenantId": "tenant-5664",
+      "nom": "Ma Première Entreprise",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "id": "vv8Fi3UVnQk",
+      "tenantId": "tenant-807623",
+      "nom": "Ma Première Entreprise",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "id": "khZJj2_BEyo",
+      "tenantId": "tenant-565353",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "id": "yAaQInm4GDY",
+      "tenantId": "tenant-43439",
+      "nom": "compta ",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "id": "wTKsc5_R0Pg",
+      "tenantId": "tenant-918220",
+      "nom": "TechAgro",
+      "pays": "Non défini",
+      "devise": "XOF"
+    },
+    {
+      "nom": "AgroTech",
+      "ninea": "12345678-CAM",
+      "rccm": "CAM-237",
+      "pays": "Cameroun",
+      "devise": "XAF",
+      "adresse": "DOUALA",
+      "tenantId": "tenant-359226",
+      "id": "feqZVk05ngw"
+    },
+    {
+      "nom": "AgroTech",
+      "emailContact": "dybalaanicet237@gmail.com",
+      "ninea": "12345678-CAM",
+      "rccm": "CAM-DL-237",
+      "pays": "Cameroun",
+      "devise": "XAF",
+      "adresse": "DOUALA",
+      "tenantId": "tenant-750661",
+      "id": "YifAeciYT04"
+    },
+    {
+      "nom": "MBOA",
+      "emailContact": "surflinkayos@gmail.com",
+      "ninea": "237-CAM",
+      "rccm": "CAM-237",
+      "pays": "Cameroun",
+      "devise": "XAF",
+      "adresse": "anicetmarius",
+      "tenantId": "tenant-696822",
+      "id": "BKIFrSXr6Rc"
+    },
+    {
+      "nom": "cavelier",
+      "emailContact": "cavelier237@gmail.com",
+      "ninea": "1234567890-CAM",
+      "rccm": "CAM-DL-237",
+      "pays": "Cameroun",
+      "devise": "XAF",
+      "adresse": "DOUALA",
+      "tenantId": "tenant-268540",
+      "id": "iR2jEy7OI1s"
     }
   ],
   "comptes": [
@@ -579,6 +918,1707 @@
       "classe": 7,
       "type": "PRODUIT",
       "id": "cGi7uxmNQ8I"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "ZKa7s0KO5jM"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "7jJZu8pBEpg"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "R3_WugPXIrI"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "l03M75BhsDs"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "kRu9MuBNgkE"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "pleeCROHppc"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "Zg-h_e0S57o"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "ocqhnNOQ2eA"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "IiFvcYL9gII"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "873zjeL_M3I"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "dlrt4ph6III"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "Jqmwq1kreDk"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "LG6AFIYaijw"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "pmmEKcvUmFY"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "i5Q1GZCyrhM"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "P1lmtJ7Dkms"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "O4SmwQN1e5I"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "CCrf12QWotY"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "vA_PjCsgQ9o"
+    },
+    {
+      "entrepriseId": "hVzOG8M9UEk",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "A6Rm6tm6LTM"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "-Kt_n3FcIqc"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "krT5Ebw9B6s"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "x9euli1_IeY"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "ALp3KmGmQoU"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "BMktXQDb_qg"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "RHkScG1ViIs"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "YKKLNrnvQgE"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "abo5piz459c"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "6rjm0DlPBCc"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "hOHV58SESEs",
+      "actif": true
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "3TwkBdWNFAQ"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "cf1EiAJ3KCw"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "Mfcs2dAW2vg"
+    },
+    {
+      "entrepriseId": "rlktjvj9z2g",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "eusHfCODIJU"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "wmQhVfGJY_A"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "2xHc2Cq99Cg"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "ckxQlibq5Qg"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "nVgK34U3MDk"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "cEX75Q-JyQc"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "7AguEiM2fpE"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "7d8ftm4PC1o"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "WhfLk_lKmD4"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "YJwmGsfdKvA"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "7iVYJkELYIM"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "5oDU_vHgTAs"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "OhlhGopRUFQ"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "ZO6n8O1_rRQ"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "-BtEdp5hbC8"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "xfSfoKJ_jOs"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "rMGLhrPez-o"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "bZPPbfSgzq4"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "zz1I39p2Dzs"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "CbvlrwWxCeg"
+    },
+    {
+      "entrepriseId": "vv8Fi3UVnQk",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "8-2LQY8rgfo"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "bL_MeXRnIaI"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "iMl5CfHUdH0"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "539Fdj5QAKY"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "qkmDASMAa-w"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "FNwo-HVqVUI"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "g4mfZkBlkzE"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "NftjIZrgCuc"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "7VNz8SVyjXI"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "kamnHBLJJZw"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "dXhc2if35dE"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "jxunP1RKPnc"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "vkg9qs2ewC4"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "hMv2c0Ge_Pg"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "WncbENQFjwM"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "bv5iP1gjx8Y"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "RIJYU9Ah9zs"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "XG9KnfRo_f4"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "rgd4FMxN9f8"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "bK5RoibEpao"
+    },
+    {
+      "entrepriseId": "khZJj2_BEyo",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "RNrHSu8Uwus"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "awPofmD3CvQ"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "-8sEiI8g6pg"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "zkN_ExW9i00"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "QyqDofI6rTA"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "4sD3uTRLS-o"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "QfizFVAuM-o"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "wL9TIgfulOA"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "StJ2Yx_CTns"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "SNZTReYaEws"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "gLU7Vlnnm00"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "pnSK-_8K44k"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "pR0UGPjaqBk"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "9G4PnRepPqo"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "QB5T_DhkHzk"
+    },
+    {
+      "entrepriseId": "yAaQInm4GDY",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "tY2KUfteJrM"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "S-wKoA5ZlZY"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "ZJXXSkyiGrc"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "NyCVdGzStz8"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "KF_dnhx4Puw"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "vE1hMTEmKsU"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "Yn4oOAINCs8"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "tB6SqWYQHas"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "FDU3Ony5pIw"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "7VtHZEjqVUc"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "ZylH0bfPlrw"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "cKEaFHKZ01Y"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "WuDi030-_I4"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "vucr03O0cW8"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "wO0uWylMBGw"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "8a3QsccSDt4"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "ZJgOX-8Kg18"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "4VXmiQwvfmI"
+    },
+    {
+      "entrepriseId": "ENT-892819",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "MLILB9XLKzY"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "BOPsLTPd9TE"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "YSI-m9mJwTc"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "5-IcDhh9pcw"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "Jp3c3egbfXI"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "rXPWmXoAJCQ"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "HKc7va-HMCs"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "yD_7gd1ctf4"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "06fe9oAlM04"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "_77-13YVNR4"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "zIR3w8G60KE"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "wPhxPQlEH94"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "uCOtZ7D3u0k"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "cdv9KiYjCFo"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "4zdhER78qU0"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "HTCwBweRkNQ"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "syucOOCDCB8"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "uPFCmaOLo_g"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "NCtJHiU4ktI"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "-TIzFYME1DE"
+    },
+    {
+      "entrepriseId": "wTKsc5_R0Pg",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "rG6-D_EU1GA"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "kZehsNZLF1E"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "1KrG4fwH7y8"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "WhCn1UkBWtc",
+      "actif": true
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "2lkx1x02guE"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "fftSU6gVT0A"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "NXMxXarnYfA"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "IeIBPVXoFPE"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "_lb1YqSeBao"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "ZU5JJLnod7c"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "QyzLwsZTNic"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "tIv651LdEz8"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "p-1XNPjDeMU"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "bPQb0RZsk-8"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "nh7TpRfADFM"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "YSHlrHbDs88"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "F9mNpujjJ_I"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "R3VwwVGRsCA"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "9PENxsJ4gec"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "Qc8e26XZkeA"
+    },
+    {
+      "entrepriseId": "feqZVk05ngw",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "OMWBNDVRQRY"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "6WZS3O05p40"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "kq1Zg8T0ZGM"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "kmdFUx8BsvI"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "cgNhFBpZ_Xg"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "4tlvDMyoMkY"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "_UehuGI8VYY"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "iRAG2yH6Z4o"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "guGtWDTv5H4"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "jtHqhbT6bgs"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "Z_TwDqfiaPY"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "sX9vgikcFIM"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "ou2wa7JnssE"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "CJUpU1ApTKM"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "xM0s5Fm6sR8"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "wZAmzN2kjvc"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "hSvqHDwFXbE"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "R-bfYYwWy50"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "oC7xOroyG4Q"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "KZrIP5xSJic"
+    },
+    {
+      "entrepriseId": "YifAeciYT04",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "uH9OAZ1BUsA"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "GamEJExM9ko"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "ljGtSgVEfHY"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "-CdyTLz4T-E"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "QRBnbjPQ3HA"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "-wRXNGbY8AA"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "LhZ3pXA7Dzg"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "y4PDBmZkDZI"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "z8pGByJTM0M"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "jJvA5BOrgpc"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "vF8r5mJWlp8"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "NXpgB78DGtM"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "1M01cnriO1Q"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "AtgEa6tRVyk"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "QMGhb_WI36s"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "uOXIdfhgnJg"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "hmDSUHKiWhE"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "xruI-ZBQIhQ"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "hTM2_3QaOTg"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "YGxeNB0p1PI"
+    },
+    {
+      "entrepriseId": "BKIFrSXr6Rc",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "npDPNqIkTvU"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "101",
+      "intitule": "Capital social",
+      "classe": 1,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "Ed4DaI-HS64"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "211",
+      "intitule": "Frais de recherche",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "JDXVFtIBBdk"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "162",
+      "intitule": "Emprunts obligataires",
+      "classe": 1,
+      "type": "PASSIF",
+      "id": "e-jSXYN2jC0"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "241",
+      "intitule": "Matériel et outillage",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "IM-mbrzbAxQ"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "244",
+      "intitule": "Matériel de bureau et informatique",
+      "classe": 2,
+      "type": "ACTIF",
+      "id": "hSAuCkXJhLY"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "311",
+      "intitule": "Marchandises",
+      "classe": 3,
+      "type": "ACTIF",
+      "id": "PqfBNJe5TKQ"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "401",
+      "intitule": "Fournisseurs dexploitation",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "djHObYTsYrA"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "411",
+      "intitule": "Clients",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "BYSVQ1mCl7o"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "421",
+      "intitule": "Personnel, salaires dus",
+      "classe": 4,
+      "type": "PASSIF",
+      "actif": true,
+      "id": "vfz-KRESmNs"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "431",
+      "intitule": "Sécurité sociale",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "WaSzxrBzbxM"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "443",
+      "intitule": "État, TVA facturée",
+      "classe": 4,
+      "type": "PASSIF",
+      "id": "RAaAFv0Mk3k"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "445",
+      "intitule": "État, TVA récupérable",
+      "classe": 4,
+      "type": "ACTIF",
+      "id": "PPH90E_2y0w"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "521",
+      "intitule": "Banques locales",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "6leyQ2S4Ba4"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "571",
+      "intitule": "Caisse",
+      "classe": 5,
+      "type": "ACTIF",
+      "id": "c9d2P6tAsaU"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "601",
+      "intitule": "Achats de marchandises",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "R_fyTGMdkuE"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "622",
+      "intitule": "Locations et charges locatives",
+      "classe": 6,
+      "type": "CHARGE",
+      "id": "fIrPP5VM0FQ"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "661",
+      "intitule": "Rémunérations du personnel",
+      "classe": 6,
+      "type": "CHARGE",
+      "actif": true,
+      "id": "BxTRE3eHJUk"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "701",
+      "intitule": "Ventes de marchandises",
+      "classe": 7,
+      "type": "PRODUIT",
+      "id": "14dvVG4HTmY"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "706",
+      "intitule": "Services vendus",
+      "classe": 7,
+      "type": "PRODUIT",
+      "actif": true,
+      "id": "CTLmCH0nadE"
+    },
+    {
+      "entrepriseId": "iR2jEy7OI1s",
+      "numero": "821",
+      "intitule": "Charges hors activités ordinaires",
+      "classe": 8,
+      "type": "CHARGE",
+      "id": "UHctWiCifqo"
     }
   ],
   "journaux": [
@@ -2726,6 +4766,16 @@
       "libelle": "FACTURE N° FAC-202606-02216",
       "valide": true,
       "createdAt": "2026-06-03T18:16:58.562Z",
+      "createdBy": "current-user"
+    },
+    {
+      "id": "sh2Qk8KhYRI",
+      "entrepriseId": "rlktjvj9z2g",
+      "journalId": "OD",
+      "date": "2026-06-16",
+      "libelle": "achat camion",
+      "valide": true,
+      "createdAt": "2026-06-16T05:53:56.688Z",
       "createdBy": "current-user"
     }
   ],
@@ -5690,6 +7740,20 @@
       "compteId": "cpt-443",
       "debit": 0,
       "credit": 18000
+    },
+    {
+      "id": "ahUgp4q2nWM",
+      "ecritureId": "sh2Qk8KhYRI",
+      "compteId": "YKKLNrnvQgE",
+      "debit": 500000,
+      "credit": 0
+    },
+    {
+      "id": "psOnWJoiZfs",
+      "ecritureId": "sh2Qk8KhYRI",
+      "compteId": "Mfcs2dAW2vg",
+      "debit": 0,
+      "credit": 500000
     }
   ],
   "clients": [

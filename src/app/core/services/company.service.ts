@@ -1,6 +1,6 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, shareReplay, tap } from 'rxjs';
+import { Observable, map, switchMap, of, tap, catchError } from 'rxjs';
 import { Entreprise } from '../models/entreprise.model';
 import {  environment  } from '@env/environment';
 import { AuthService } from './auth.service';
@@ -25,55 +25,73 @@ export class CompanyService {
   public companies = this.companiesList.asReadonly();
 
   // Observable pour attendre le chargement des entreprises (avec cache)
-  private companiesLoader$ = this.http.get<CompanyWithTaxInfo[]>(this.apiUrl).pipe(
-    tap(companies => this.companiesList.set(companies)),
-    shareReplay(1) // Cache la réponse pour eviter les requêtes multiples
-  );
+  private companiesLoader$ = (tenantId: string | null) => {
+    if (!tenantId) return of([]);
+    return this.http.get<CompanyWithTaxInfo[]>(`${this.apiUrl}?tenantId=${tenantId}`).pipe(
+      tap(companies => this.companiesList.set(companies))
+    );
+  }
 
   constructor() {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
-        this.loadCompanies();
+        this.loadCompanies(user.tenantId);
+      } else {
+        this.companiesList.set([]);
       }
     });
   }
 
-  private loadCompanies(): void {
-    this.companiesLoader$.subscribe(); // Lance le chargement et utilise le cache
+  private loadCompanies(tenantId: string | null): void {
+    this.companiesLoader$(tenantId).subscribe();
   }
 
   /**
-   * Récupère la liste des entreprises comme Observable
-   * Utile pour les guards qui doivent attendre le chargement
+   * Récupère la liste des entreprises pour un tenant spécifique
    */
-  getCompanies(): Observable<CompanyWithTaxInfo[]> {
-    return this.companiesLoader$;
+  getCompanies(tenantId?: string | null): Observable<CompanyWithTaxInfo[]> {
+    const tid = tenantId || this.authService.currentUserValue?.tenantId;
+    if (!tid) return of([]);
+    return this.http.get<CompanyWithTaxInfo[]>(`${this.apiUrl}?tenantId=${tid}`).pipe(
+        tap(companies => this.companiesList.set(companies))
+    );
   }
 
   /**
-   * Récupère une entreprise par son ID
+   * Récupère une entreprise par son ID (vérifie le cache local en priorité)
    */
   getCompanyById(id: string): Observable<CompanyWithTaxInfo | undefined> {
-    return this.http.get<CompanyWithTaxInfo>(`${this.apiUrl}/${id}`);
+    const cached = this.companiesList().find(c => c.id === id);
+    if (cached) return of(cached);
+    
+    return this.http.get<CompanyWithTaxInfo>(`${this.apiUrl}/${id}`).pipe(
+      catchError(() => of(undefined))
+    );
   }
 
   /**
-   * Filtre les entreprises par tenant
+   * Ajoute manuellement une entreprise au cache local (utile après création)
    */
-  getCompaniesByTenant(tenantId: string): CompanyWithTaxInfo[] {
-    return this.companies().filter(c => c.tenantId === tenantId);
+  addCompanyToCache(company: CompanyWithTaxInfo): void {
+    this.companiesList.update(list => {
+        const exists = list.some(c => c.id === company.id);
+        return exists ? list : [...list, company];
+    });
   }
 
   /**
    * Ajoute une nouvelle entreprise au dossier du cabinet
    */
   addCompany(company: Omit<CompanyWithTaxInfo, 'id' | 'tenantId'>): void {
+    const user = this.authService.currentUserValue;
+    if (!user || !user.tenantId) return;
+
     const newCompany: Partial<CompanyWithTaxInfo> = {
       ...company,
-      tenantId: 'tenant-1'
+      tenantId: user.tenantId
     };
 
-    this.http.post<CompanyWithTaxInfo>(this.apiUrl, newCompany).subscribe(savedCompany => {
+    this.http.post<CompanyWithTaxInfo>(this.apiUrl, newCompany as CompanyWithTaxInfo).subscribe(savedCompany => {
       this.companiesList.update(list => [...list, savedCompany]);
     });
   }

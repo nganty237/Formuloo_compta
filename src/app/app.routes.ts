@@ -24,6 +24,17 @@ export const routes: Routes = [
         loadComponent: () => import('./features/auth/pages/access-denied/access-denied.component').then(m => m.AccessDeniedComponent)
     },
     {
+        path: 'select-dossier',
+        canActivate: [authGuard],
+        loadComponent: () => import('./layout/auth-layout/auth-layout').then(m => m.AuthLayoutComponent),
+        children: [
+            {
+                path: '',
+                loadComponent: () => import('./features/companies/companies-list/companies-list').then(m => m.CompaniesListComponent)
+            }
+        ]
+    },
+    {
         path: 'tenant/:id',
         canActivate: [authGuard, tenantGuard],
         loadComponent: () => import('./layout/main-layout/main-layout').then(m => m.MainLayout),
