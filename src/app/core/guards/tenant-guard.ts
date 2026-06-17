@@ -31,15 +31,26 @@ export const tenantGuard: CanActivateFn = (route, state) => {
             return router.createUrlTree(['/auth/login']);
           }
 
-          // SECURITY: Ensure user belongs to the same tenant as the company, or has SUPER_ADMIN privileges
-          const isAllowed = user.role === 'SUPER_ADMIN' || company.tenantId === user.tenantId;
+          // SECURITY: 
+          // 1. SUPER_ADMIN has full access
+          // 2. CLIENT must match their specific companyId (strict mapping)
+          // 3. ADMIN/COMPTABLE must belong to the same tenant as the company
+          
+          let isAllowed = false;
+          if (user.role === 'SUPER_ADMIN') {
+              isAllowed = true;
+          } else if (user.role === 'CLIENT') {
+              isAllowed = company.id === user.companyId;
+          } else {
+              isAllowed = company.tenantId === user.tenantId;
+          }
 
           if (isAllowed) {
             tenantContext.selectCompany(company.id, company.nom, company.tenantId);
             return true;
           } else {
             // Log security violation for audit purposes
-            console.error(`[TenantGuard] Violation d'accès : L'utilisateur ${user.id} tente d'accéder à l'entreprise ${company.id} d'un autre tenant.`);
+            console.error(`[TenantGuard] Violation d'accès : L'utilisateur ${user.id} (${user.role}) tente d'accéder à l'entreprise ${company.id}.`);
             return router.createUrlTree(['/403']);
           }
         }),

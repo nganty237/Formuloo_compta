@@ -18,27 +18,52 @@ export class AccountService {
   // Sélecteur réactif de la liste complète des comptes (en lecture seule)
   public accounts = this.accountsList.asReadonly();
 
-  constructor() {
-    this.loadAccounts();
-  }
+  constructor() {}
 
   /**
-   * Charge les comptes depuis l'API
+   * Charge les comptes d'une entreprise spécifique
    */
-  private loadAccounts(): void {
-    this.http.get<CompteOHADA[]>(this.apiUrl).subscribe(accounts => {
-      this.accountsList.set(accounts.map(acc => ({
+  loadAccounts(companyId: string): void {
+    this.http.get<CompteOHADA[]>(`${this.apiUrl}?entrepriseId=${companyId}`).subscribe(accounts => {
+      const formattedAccounts = accounts.map(acc => ({
         ...acc,
         actif: acc.actif !== undefined ? acc.actif : true
-      })));
+      }));
+      
+      // On met à jour le cache en fusionnant ou en remplaçant
+      this.accountsList.update(current => {
+        const others = current.filter(a => a.entrepriseId !== companyId);
+        return [...others, ...formattedAccounts];
+      });
     });
   }
 
   /**
-   * Récupère les comptes d'une entreprise spécifique
+   * Récupère les comptes d'une entreprise spécifique (Observable)
    */
-  getAccountsForCompany(companyId: string): CompteOHADA[] {
-    return this.accountsList().filter(acc => acc.entrepriseId === companyId);
+  getAccountsForCompany$(companyId: string): Observable<CompteOHADA[]> {
+    return this.http.get<CompteOHADA[]>(`${this.apiUrl}?entrepriseId=${companyId}`).pipe(
+      tap(accounts => {
+        const formatted = accounts.map(acc => ({
+            ...acc,
+            actif: acc.actif !== undefined ? acc.actif : true
+        }));
+        this.accountsList.update(current => {
+            const others = current.filter(a => a.entrepriseId !== companyId);
+            return [...others, ...formatted];
+        });
+      })
+    );
+  }
+
+  /**
+   * Ajoute un compte et met à jour le cache
+   */
+  addAccountToCache(account: CompteOHADA): void {
+    this.accountsList.update(current => {
+        const exists = current.some(a => a.id === account.id);
+        return exists ? current : [...current, account];
+    });
   }
 
   /**

@@ -33,9 +33,7 @@ export class HeaderComponent implements OnInit {
           return of([]);
         }
         // Retourner les entreprises filtrées du tenant de l'utilisateur
-        return this.companyService.getCompanies().pipe(
-          map(companies => companies.filter(c => c.tenantId === user.tenantId))
-        );
+        return this.companyService.getCompanies(user.tenantId);
       }),
       startWith([])
     )

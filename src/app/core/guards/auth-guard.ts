@@ -17,21 +17,42 @@ export const authGuard: CanActivateFn = (route, state) => {
     switchMap(user => {
       if (user) {
         if (onlyGuests) {
-          // Redirect authenticated users to their primary dashboard instead of guest pages
-          return companyService.getCompanies().pipe(
-            map(companies => {
-              const userCompanies = companies.filter(c => c.tenantId === user.tenantId);
+          // Si c'est un client rattaché, direct dashboard
+          if (user.role === 'CLIENT' && user.companyId) {
+              return of(router.createUrlTree([`/tenant/${user.companyId}/dashboard`]));
+          }
 
+          // Pour les autres ou client non rattaché, filtrage habituel
+          return companyService.getCompanies(user.tenantId).pipe(
+            map(userCompanies => {
               if (userCompanies.length > 0) {
-                return router.createUrlTree([`/tenant/${userCompanies[0].id}/dashboard`]);
+                // Si client, on prend son dossier spécifique
+                const targetId = user.role === 'CLIENT' ? user.companyId : userCompanies[0].id;
+                return router.createUrlTree([`/tenant/${targetId || userCompanies[0].id}/dashboard`]);
               } else {
-                // Fallback for edge case where a user exists without an associated company
-                console.warn('[AuthGuard] Aucune entreprise trouvée pour le tenant', user.tenantId);
-                return router.createUrlTree(['/auth/login']);
+                return router.createUrlTree(['/select-dossier']);
               }
             })
           );
         }
+        
+        // Si connecté mais sur une page non-guest, vérifier si le client doit être redirigé vers son dossier
+        const isSelectionPage = state.url.includes('/select-dossier');
+        if (isSelectionPage && user.role === 'CLIENT' && user.companyId) {
+            return of(router.createUrlTree([`/tenant/${user.companyId}/dashboard`]));
+        }
+        
+        if (!isSelectionPage) {
+            return companyService.getCompanies(user.tenantId).pipe(
+                map(userCompanies => {
+                    if (userCompanies.length === 0) {
+                        return router.createUrlTree(['/select-dossier']);
+                    }
+                    return true;
+                })
+            );
+        }
+        
         return of(true);
       } else {
         if (onlyGuests) {

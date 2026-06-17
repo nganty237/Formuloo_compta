@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, Validati
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import {  ButtonComponent  } from '@shared';
 import { OnboardingService, OnboardingRole } from '../../services/onboarding.service';
-import {  AuthService  } from '@core';
+import {  AuthService, CompanyService  } from '@core';
 
 // Custom Validator : Vérifie que le mot de passe et sa confirmation sont identiques
 export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -31,6 +31,7 @@ export class SignupComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private onboardingService = inject(OnboardingService);
   private authService = inject(AuthService);
+  private companyService = inject(CompanyService);
 
   // Exposer le signal du service pour le template
   selectedRole = this.onboardingService.selectedRole;
@@ -102,8 +103,20 @@ export class SignupComponent implements OnInit {
       const role = this.selectedRole();
       if (!role) return;
 
-      this.authService.register(this.signupForm.value, role);
-      this.router.navigate(['/tenant/ENT-001/dashboard']);
+      this.authService.register(this.signupForm.value, role).subscribe({
+        next: ({ user }) => {
+            // Si le rapprochement automatique a fonctionné au signup (CLIENT lié)
+            if (user.role === 'CLIENT' && user.companyId) {
+                this.router.navigate(['/tenant', user.companyId, 'dashboard']);
+            } else {
+                // Pour les comptables ou clients non encore liés
+                this.router.navigate(['/select-dossier']);
+            }
+        },
+        error: (err) => {
+            console.error('Erreur lors de l\'inscription', err);
+        }
+      });
     } else {
       this.signupForm.markAllAsTouched();
     }
